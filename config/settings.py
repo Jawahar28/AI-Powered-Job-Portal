@@ -82,9 +82,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mySQL',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'job_portal',
-        ''
+        'USER' : 'root',
+        'PASSWORD': 'Jawahar@28MySQL',
+        'HOST': 'localhost',
+        'PORT' : '3306',
     }
 }
 
