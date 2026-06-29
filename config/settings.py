@@ -85,7 +85,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'job_portal',
         'USER' : 'root',
-        'PASSWORD': 'Jawahar@28MySQL',
+        'PASSWORD': 'Jawahar@MySQL28',
         'HOST': 'localhost',
         'PORT' : '3306',
     }
