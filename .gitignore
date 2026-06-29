@@ -1,0 +1,10 @@
+# Virtual Environments
+env
+
+# Databases
+db.sqlite3
+
+# Virtual Envi related Libraries
+venv/
+__pycache__/
+*.pyc
