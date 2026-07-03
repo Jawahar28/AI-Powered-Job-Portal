@@ -15,11 +15,16 @@ class Company(models.Model):
 
 class Job(models.Model):
 
+    company = models.ForeignKey(Company, id)
+    title = models.CharField(max_length=100)
+    
     class Status(models.TextChoices):
         OPEN = "O", "Open"
         CLOSED = "C", "Closed"
         DRAFT = "D", "Draft"
-    title = models.CharField(max_length=100)
+
+    
     status = models.CharField(
         max_length=1, choices=Status.choices, default=Status.OPEN
     )
+    
