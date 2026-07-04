@@ -15,7 +15,7 @@ class Company(models.Model):
 
 class Job(models.Model):
 
-    company = models.ForeignKey(Company, id)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     
     class Status(models.TextChoices):
@@ -27,4 +27,7 @@ class Job(models.Model):
     status = models.CharField(
         max_length=1, choices=Status.choices, default=Status.OPEN
     )
+
+    def __str__(self):
+        return self.title
     
