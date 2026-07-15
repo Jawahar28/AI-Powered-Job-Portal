@@ -1,13 +1,29 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>AI Job Portal</title>
-    </head>
-    <body>
-        <h1>Welcome to AI-Job Portal</h1>
+<head>
+    <title>AI Job Portal</title>
+</head>
+<body>
 
-        <h2>Backend Developer</h2>
-        <h2>Python Developer</h2>
-        <h2>Django Developer</h2>
-    </body>
+    <h1>🚀 AI Job Portal</h1>
+
+    <hr>
+
+    {% for job in jobs %}
+
+        <h2>{{ job.title }}</h2>
+
+        <p><strong>Company:</strong> {{ job.company.name }}</p>
+
+        {% if job.company %}
+            <p> Company Available </p>
+        {% endif %}
+
+        <hr>
+    {% empty %}
+        <h2> No Jobs Available </h2>
+
+    {% endfor %}
+
+</body>
 </html>
