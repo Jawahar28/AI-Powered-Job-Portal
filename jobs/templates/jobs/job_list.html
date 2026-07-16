@@ -1,17 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>AI Job Portal</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-    <h1>🚀 AI Job Portal</h1>
+{% block content %}
 
-    <hr>
 
     {% for job in jobs %}
+        <hr>
 
-        <h2>{{ job.title }}</h2>
+        <h2>{{ job.title|title }}</h2>
 
         <p><strong>Company:</strong> {{ job.company.name }}</p>
 
@@ -19,11 +14,12 @@
             <p> Company Available </p>
         {% endif %}
 
-        <hr>
-    {% empty %}
+</hr>
+        {% empty %}
         <h2> No Jobs Available </h2>
+    
+
 
     {% endfor %}
 
-</body>
-</html>
+{% endblock %}
