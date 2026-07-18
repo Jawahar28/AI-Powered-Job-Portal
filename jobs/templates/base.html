@@ -5,25 +5,35 @@
     <head>
         <title> AI Job Portal </title>
 
-        <link rel="stylesheet" href = "{% static 'jobs/style.css' %}">
+        <!-- Bootstrap CSS -->
+        <link 
+            href = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+            rel="stylesheet">
+
+        <!-- Our Own CSS -->
+        <link 
+            rel="stylesheet" 
+            href = "{% static 'jobs/style.css' %}">
+
         
     </head>
     <body>
-        <h1> 🚀 AI Job Portal </h1>
-
-        <hr>
+        <nav class="navbar navbar-dark bg-dark">
+            <div class = "container">
+                <span class = "navbar-brand mb-0 h1">
+                    AI Job Portal
+                </span>
+            </div>
+        </nav>
 
         {% block content %}
 
         {% endblock %}
         
-    </hr>
-
     <hr>
     <footer>
         © 2026 AI Job Portal
     </footer>
-</hr>
 
 </body>
 </html>

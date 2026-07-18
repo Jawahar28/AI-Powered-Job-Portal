@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="text-center">
+
+        <h1>Find Your Dream AI Job</h1>
+
+        <p class="lead">
+            Explore AI, Machine Learning, Data Science and Software Engineering jobs.
+        </p>
+
+        <a href="{% url 'job_list' %}" class="btn btn-primary btn-lg">
+            Browse Jobs
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

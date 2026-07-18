@@ -2,24 +2,48 @@
 
 {% block content %}
 
+<div class="container mt-5">
+
+    <h1 class="mb-4 text-center">
+        Available Jobs
+    </h1>
 
     {% for job in jobs %}
-        <hr>
 
-        <h2>{{ job.title|title }}</h2>
+    <div class="card mb-4 shadow-sm">
 
-        <p><strong>Company:</strong> {{ job.company.name }}</p>
+        <div class="card-body">
 
-        {% if job.company %}
-            <p> Company Available </p>
-        {% endif %}
+            <h3 class="card-title">
+                {{ job.title }}
+            </h3>
 
-</hr>
-        {% empty %}
-        <h2> No Jobs Available </h2>
-    
+            <h6 class="card-subtitle mb-3 text-muted">
+                {{ job.company.name }}
+            </h6>
 
+            {% if job.company %}
+                <p class="card-text">
+                    ✅ Company Available
+                </p>
+            {% endif %}
+
+            <a href="#" class="btn btn-primary">
+                View Details
+            </a>
+
+        </div>
+
+    </div>
+
+    {% empty %}
+
+        <div class="alert alert-warning">
+            No jobs available.
+        </div>
 
     {% endfor %}
+
+</div>
 
 {% endblock %}

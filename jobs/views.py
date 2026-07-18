@@ -3,6 +3,10 @@ from django.http import HttpResponse
 from .models import Job
 
 # Create your views here.
+def home(request):
+    return render(request, 'jobs/home.html')
+
+
 def job_list(request):
     # return HttpResponse("Welcome to AI-Powered Job Portal")
     jobs = Job.objects.all()
