@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content%}
+
+<div class="container mt-5">
+
+    <div class="card">
+
+        <h2 class="card-title">
+            {{ job.title }}
+        </h2>
+
+        <h5 class "text-muted">
+            {{ job.company.name }}
+        </h5>
+
+        <hr>
+
+        <p>
+            <strong>Status:</strong>
+
+            {% if job.status == "O" %}
+                <span class="badge bg-success">
+                    {{ job.get_status_display }}
+                </span>
+
+            {% elif job.status == "C" %}
+                <span class="badge bg-danger">
+                    {{ job.get_status_display }}
+                </span>
+
+            {% else %}
+                <span class="badge bg-warning text-dark">
+                    {{ job.get_status_display }}
+                </span>
+
+            {% endif %}
+        </p>
+
+        <hr>
+
+        <p>
+            {{ job.description }}
+        </p>
+
+        <a href = "{% url 'job_list' %}" class="btn btn-secondary">
+            ← Back to Jobs
+        </a>
+    </div>
+</div>
+
+{% endblock %}
