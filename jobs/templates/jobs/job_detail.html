@@ -39,13 +39,57 @@
 
         <hr>
 
+        <div class="row mt-4">
+
+            <div class="col-md-6">
+                <p>
+                    <strong>📍 Location:</strong><br>
+                    {{ job.location }}
+                </p>
+            </div>
+
+            <div class="col-md-6">
+                <p>
+                    <strong>💰 Salary:</strong><br>
+                    ₹{{ job.salary }}
+                </p>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <p>
+                    <strong>💼 Job Type:</strong><br>
+                    {{ job.get_job_type_display }}
+                </p>
+            </div>
+
+            <div class="col-md-6">
+                <p>
+                    <strong>📅 Posted:</strong><br>
+                    {{ job.posted_at|date:'F d, Y' }}
+                </p>
+            </div>
+
+        </div>
+
         <p>
             {{ job.description }}
         </p>
 
-        <a href = "{% url 'job_list' %}" class="btn btn-secondary">
-            ← Back to Jobs
-        </a>
+        <div class = "mt-4 d-flex gap-2">
+            <a href="#"
+                class = "btn btn-success">
+                Apply Now
+            </a>
+
+            <a href = "{% url 'job_list' %}"
+                class = "btn btn-secondary">
+                Back To Jobs
+            </a>
+        </div>
     </div>
 </div>
 
