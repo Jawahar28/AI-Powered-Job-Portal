@@ -10,7 +10,7 @@
             {{ job.title }}
         </h2>
 
-        <h5 class "text-muted">
+        <h5 class = "text-muted">
             {{ job.company.name }}
         </h5>
 
@@ -80,8 +80,8 @@
         </p>
 
         <div class = "mt-4 d-flex gap-2">
-            <a href="#"
-                class = "btn btn-success">
+            <a href="{% url 'apply_job' job.id %}"
+                class="btn btn-success">
                 Apply Now
             </a>
 

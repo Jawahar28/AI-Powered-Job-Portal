@@ -23,7 +23,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('job-portal/', include("jobs.urls")),
+    path('', include("jobs.urls")),
+    path('', include("applications.urls")),
 ]
 
 # MEDIA URL accessing

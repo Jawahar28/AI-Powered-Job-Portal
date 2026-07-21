@@ -5,7 +5,7 @@ class ApplicationForm(forms.ModelForm):
     class Meta:
         model = Application
 
-        feilds = [
+        fields = [
             "applicant_name",
             "applicant_email",
             "resume",
