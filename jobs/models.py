@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 
 # Create your models here.
+
 class Company(models.Model):
     name = models.CharField(max_length= 100)
 
@@ -13,8 +14,6 @@ class Company(models.Model):
         ordering = ['name']
         verbose_name = "Company"
         verbose_name_plural = "Companies"
-
-from django.utils import timezone
 
 class Job(models.Model):
 
@@ -53,3 +52,4 @@ class Job(models.Model):
 
     def __str__(self):
         return self.title
+    

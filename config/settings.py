@@ -134,6 +134,10 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# MEDIA URLS
+MEDIA_URL = "/media/" #URL used by the browser
+MEDIA_ROOT = BASE_DIR / "media" # Physical location on disk
+
 
 # ADMIN PANEL: 
 # USERNAME: django123
