@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from jobs.models import Job
 from .forms import ApplicationForm
+from .models import Application
 
 
 def apply_job(request, job_id):
@@ -27,3 +28,14 @@ def apply_job(request, job_id):
             "job": job,
         },
     )
+
+def my_applications(request):
+    applications = Application.objects.all().order_by('-applied_at')
+
+    return render(request, 
+                  "applications/my_applications.html",
+                  {
+
+                      'applications' : applications,
+                  },
+                )

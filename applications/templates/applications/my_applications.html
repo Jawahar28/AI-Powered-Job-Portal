@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}
+My Applications
+{%  endblock %}
+
+{% block content %}
+<div class = "container mt-5">
+    <h2> My Applications </h2>
+
+    <hr>
+
+    {% for application in applications %}
+
+        <div class="card mb-3 shadow-sm">
+
+            <div class="card-body">
+
+                <h4 class="card-title">
+                    {{ application.job.title }}
+                </h4>
+
+                <h6 class="text-muted">
+                    {{ application.job.company }}
+                </h6>
+
+                <p>
+                    <strong>Location:</strong>
+                    {{ application.job.location }}
+                </p>
+
+                <p>
+                    <strong>Salary:</strong>
+                    ₹{{ application.job.salary }}
+                </p>
+
+                <p>
+                    <strong>Status:</strong>
+
+                    <span class="badge {{ application.badge-class }}">
+                        {{ application.get_status_display }}
+                    </span>
+
+                </p>
+
+                <p>
+                    <strong>Applied On:</strong>
+
+                    {{ application.applied_at }}
+                </p>
+
+                <a
+                    href="{% url 'job_detail' application.job.id %}"
+                    class="btn btn-outline-primary"
+                >
+                    View Job
+                </a>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="alert alert-info">
+
+            You haven't applied for any jobs yet.
+
+        </div>
+
+        {% endfor %}
+</div>
+
+{% endblock  %}
