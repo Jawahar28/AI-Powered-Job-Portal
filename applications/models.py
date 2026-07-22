@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from jobs.models import Job, Company
+from django.contrib.auth.models import User
 
 # Create your models here.
 STATUS_CHOICES = [
@@ -11,17 +12,23 @@ STATUS_CHOICES = [
     ("H", "Hired"),
 ]
 class Application(models.Model):
+    user  = models.ForeignKey(User, on_delete=models.CASCADE, related_name='applications', null=True, blank=True)
+
     job = models.ForeignKey(Job, on_delete=models.CASCADE, related_name='applications')
+
+
     applicant_name = models.CharField(max_length=255)
     applicant_email = models.EmailField()
     resume = models.FileField(upload_to='resumes/')
     cover_letter = models.TextField(blank=True)
     applied_at = models.DateTimeField(default=timezone.now)
+
     status = models.CharField(
         max_length = 5,
         choices=STATUS_CHOICES,
         default="A"
     )
+
 
     @property
     def badge_class(self):
