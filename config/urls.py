@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("jobs.urls")),
     path('', include("applications.urls")),
+    path('', include("accounts.urls")),
 ]
 
 # MEDIA URL accessing
