@@ -138,6 +138,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = "/media/" #URL used by the browser
 MEDIA_ROOT = BASE_DIR / "media" # Physical location on disk
 
+# LOGIN URL
+LOGIN_URL = "login"
+
 
 # ADMIN PANEL: 
 # USERNAME: django123

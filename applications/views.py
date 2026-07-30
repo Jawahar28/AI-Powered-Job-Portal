@@ -4,6 +4,13 @@ from .forms import ApplicationForm
 from .models import Application
 from django.contrib.auth.decorators import login_required
 
+
+@login_required
+def applicant_dashboard(request):
+    applications = request.user.applications.all().order_by("-applied_at")
+
+    return render(request, "applications/dashboard.html", {"applications" : applications})
+
 @login_required
 def apply_job(request, job_id):
     job = get_object_or_404(Job, id=job_id)
@@ -35,6 +42,7 @@ def apply_job(request, job_id):
         },
     )
 
+@login_required
 def my_applications(request):
     applications = request.user.applications.all().order_by('-applied_at')
 
