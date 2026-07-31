@@ -12,3 +12,9 @@ __pycache__/
 # Media Files
 media/
 resumes
+
+static/
+css
+
+images/
+auth
