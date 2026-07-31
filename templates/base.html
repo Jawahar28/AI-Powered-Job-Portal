@@ -1,39 +1,82 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html>
-    <head>
-        <title> JobCode </title>
+<html lang="en">
 
-        <!-- Bootstrap CSS -->
-        <link 
-            href = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
-            rel="stylesheet">
+<head>
 
-        <!-- Our Own CSS -->
-        <link 
-            rel="stylesheet" 
-            href = "{% static 'jobs/style.css' %}">
+    <meta charset="UTF-8">
 
-        
-    </head>
-    <body>
-        <nav class="navbar navbar-dark bg-dark">
-            <div class = "container">
-                <span class = "navbar-brand mb-0 h1">
-                    JOBCode
-                </span>
-            </div>
-        </nav>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        {% block content %}
-
+    <title>
+        {% block title %}
+            JOBCode
         {% endblock %}
-        
-    <hr>
-    <footer>
-        © 2026 JOBCode
-    </footer>
+    </title>
+
+    <!-- Google Font -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        rel="stylesheet">
+
+    <!-- Global CSS -->
+
+    <link
+        rel="stylesheet"
+        href="{% static 'jobs/style.css' %}">
+
+    {% block extra_css %}
+    {% endblock %}
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+
+    <div class="container">
+
+        <a class="navbar-brand fw-bold" href="{% url 'home' %}">
+            JOB<span class="text-warning">Code</span>
+        </a>
+
+    </div>
+
+</nav>
+
+{% block content %}
+{% endblock %}
+
+<footer class="text-center py-4 mt-5 border-top">
+
+    <small class="text-muted">
+
+        © 2026 JOBCode • AI Powered Recruitment Platform
+
+    </small>
+
+</footer>
+
+<!-- Bootstrap JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+{% block extra_js %}
+{% endblock %}
 
 </body>
+
 </html>

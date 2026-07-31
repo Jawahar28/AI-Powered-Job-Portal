@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}
 Login
@@ -6,18 +7,107 @@ Login
 
 {% block content %}
 
-<div class ="container mt-5" style="max-width:500px;">
-    <h2> Login </h2>
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
 
-    <form method ="POST">
-        {% csrf_token %}
-        
-        {{ form.as_p }}
+<div class="auth-container">
 
-        <button class="btn btn-primary w-100">
-            Login
-        </button>
-    </form>
+    <div class="auth-card">
+
+        <!-- Left Section -->
+
+        <div class="auth-left">
+
+            <div class="brand">
+                JOB<span>Code</span>
+            </div>
+
+            <h2>Welcome Back 👋</h2>
+
+            <p>
+                Login to continue your journey and discover
+                exciting opportunities with our AI-powered
+                recruitment platform.
+            </p>
+
+            <ul class="feature-list">
+                <li>✓ AI Resume Analysis</li>
+                <li>✓ Smart Job Matching</li>
+                <li>✓ ATS Score & Insights</li>
+                <li>✓ Track Your Applications</li>
+            </ul>
+
+            <img
+                src="{% static 'images/auth/auth-hero.svg' %}"
+                alt="Authentication Illustration"
+                class="hero-img"
+            >
+
+        </div>
+
+        <!-- Right Section -->
+
+        <div class="auth-right">
+
+            <div class="form-box">
+
+                <h2>Login</h2>
+
+                <p>
+                    Enter your credentials to continue.
+                </p>
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {{ form.non_field_errors }}
+                        </div>
+                    {% endif %}
+
+                    <div class="form-group">
+
+                        <label>Email / Username</label>
+
+                        {{ form.username }}
+
+                        {{ form.username.errors }}
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Password</label>
+
+                        {{ form.password }}
+
+                        {{ form.password.errors }}
+
+                    </div>
+
+                    <button type="submit" class="auth-btn">
+                        Login
+                    </button>
+
+                </form>
+
+                <div class="bottom-text">
+
+                    Don't have an account?
+
+                    <a href="{% url 'register' %}">
+                        Create Account
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
 
 {% endblock %}
