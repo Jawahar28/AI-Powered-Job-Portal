@@ -21,7 +21,7 @@ def register(request):
 def login_view(request):
     if request.method == 'POST':
         form = LoginForm(
-            request, data=request.user
+            request, data=request.POST
         )
 
         if form.is_valid():

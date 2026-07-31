@@ -1,23 +1,258 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+JOBCode | Find Your Dream Job
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'jobs/home.css' %}">
+{% endblock %}
 
 {% block content %}
 
-<div class="container mt-5">
+<section class="hero-section">
 
-    <div class="text-center">
+    <div class="container">
 
-        <h1>Find Your Dream AI Job</h1>
+        <div class="row align-items-center">
 
-        <p class="lead">
-            Explore AI, Machine Learning, Data Science and Software Engineering jobs.
-        </p>
+            <div class="col-lg-6">
 
-        <a href="{% url 'job_list' %}" class="btn btn-primary btn-lg">
-            Browse Jobs
-        </a>
+                <span class="hero-tag">
+
+                    🚀 AI Powered Recruitment Platform
+
+                </span>
+
+                <h1>
+
+                    Find Your
+
+                    <span>Dream Career</span>
+
+                    With AI
+
+                </h1>
+
+                <p>
+
+                    JOBCode helps you discover jobs,
+                    improve your resume,
+                    increase your ATS score,
+                    and get hired faster.
+
+                </p>
+
+                <div class="hero-search">
+
+                    <input
+                        type="text"
+                        placeholder="Search Python, Django, AI Jobs">
+
+                    <button>
+
+                        <i class="bi bi-search"></i>
+
+                        Search
+
+                    </button>
+
+                </div>
+
+                <div class="popular-skills">
+
+                    <span>Python</span>
+
+                    <span>Django</span>
+
+                    <span>Backend</span>
+
+                    <span>React</span>
+
+                    <span>AI</span>
+
+                    <span>Machine Learning</span>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-6 text-center">
+
+                <img
+
+                    src="{% static 'jobs/hero.svg' %}"
+
+                    class="hero-image"
+
+                    alt="Hero">
+
+            </div>
+
+        </div>
 
     </div>
 
-</div>
+</section>
+
+<section class="companies">
+
+    <div class="container">
+
+        <h2 class="section-title">
+
+            Trusted by Top Companies
+
+        </h2>
+
+        <p class="section-subtitle">
+
+            Helping candidates connect with leading technology companies.
+
+        </p>
+
+        <div class="company-grid">
+
+            <div class="company-card">
+
+                <i class="bi bi-google"></i>
+
+                <h4>Google</h4>
+
+            </div>
+
+            <div class="company-card">
+
+                <i class="bi bi-microsoft"></i>
+
+                <h4>Microsoft</h4>
+
+            </div>
+
+            <div class="company-card">
+
+                <i class="bi bi-amazon"></i>
+
+                <h4>Amazon</h4>
+
+            </div>
+
+            <div class="company-card">
+
+                <i class="bi bi-cpu"></i>
+
+                <h4>OpenAI</h4>
+
+            </div>
+
+            <div class="company-card">
+
+                <i class="bi bi-play-circle"></i>
+
+                <h4>Netflix</h4>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="stats">
+
+    <div class="container">
+
+        <div class="row text-center">
+
+            <div class="col-md-4">
+
+                <h2>{{ job_count }}+</h2>
+                
+                <p>Active Jobs</p>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <h2>{{ company_count }}+</h2>
+
+                <p>Companies</p>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <h2>{{ candidate_count }}+</h2>
+
+                <p>Candidates</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="py-5 bg-white">
+
+    <div class="container">
+
+        <h2 class="text-center mb-5">
+            Latest Opportunities
+        </h2>
+
+        <div class="row">
+
+            {% for job in latest_jobs %}
+
+            <div class="col-lg-4 mb-4">
+
+                <div class="card shadow-sm h-100 border-0">
+
+                    <div class="card-body">
+
+                        <h4>{{ job.title }}</h4>
+
+                        <p class="text-muted">
+                            {{ job.company.name }}
+                        </p>
+
+                        <p>
+                            📍 {{ job.location }}
+                        </p>
+
+                        <p>
+                            💰 ₹{{ job.salary }}
+                        </p>
+
+                        <a
+                            href="{% url 'job_detail' job.id %}"
+                            class="btn btn-primary">
+
+                            View Details
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <p>No jobs available.</p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
 
 {% endblock %}

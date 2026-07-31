@@ -45,13 +45,94 @@
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
 
     <div class="container">
 
-        <a class="navbar-brand fw-bold" href="{% url 'home' %}">
+        <!-- Logo -->
+
+        <a class="navbar-brand fw-bold fs-3" href="{% url 'home' %}">
             JOB<span class="text-warning">Code</span>
         </a>
+
+        <!-- Mobile Toggle -->
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <!-- Navbar Links -->
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+
+            <ul class="navbar-nav ms-auto align-items-center">
+
+                {% if user.is_authenticated %}
+
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="{% url 'job_list' %}">
+                            Jobs
+                        </a>
+                    </li>
+
+                    <li class="nav-item me-2">
+
+                        <a class="nav-link" href="{% url 'my_applications' %}">
+                            My Applications
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item me-2">
+
+                        <span class="nav-link">
+                            👋 {{ request.user.username }}
+                        </span>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a class="btn btn-outline-light rounded-pill px-4"
+                           href="{% url 'logout' %}">
+                            Logout
+                        </a>
+
+                    </li>
+
+                {% else %}
+
+                    <li class="nav-item me-2">
+
+                        <a class="nav-link" href="{% url 'login' %}">
+                            Login
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a class="btn btn-warning rounded-pill px-4"
+                           href="{% url 'register' %}">
+                            Get Started
+                        </a>
+
+                    </li>
+
+                {% endif %}
+
+            </ul>
+
+        </div>
 
     </div>
 

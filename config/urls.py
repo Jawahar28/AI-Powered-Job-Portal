@@ -20,12 +20,14 @@ from django.urls import path, include
 # MEDIA URLS
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import RedirectView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include("jobs.urls")),
-    path('', include("applications.urls")),
-    path('', include("accounts.urls")),
+    path("", RedirectView.as_view(pattern_name="login", permanent=False)),
+    path("", include("jobs.urls")),
+    path("", include("applications.urls")),
+    path("", include("accounts.urls")),
+    path("admin/", admin.site.urls),
 ]
 
 # MEDIA URL accessing
