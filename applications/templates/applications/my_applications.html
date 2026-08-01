@@ -1,74 +1,145 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}
 My Applications
-{%  endblock %}
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'applications/my_applications.css' %}">
+{% endblock %}
 
 {% block content %}
-<div class = "container mt-5">
-    <h2> My Applications </h2>
 
-    <hr>
+<section class="applications-header">
 
-    {% for application in applications %}
+    <div class="container">
 
-        <div class="card mb-3 shadow-sm">
+        <h1>📂 My Applications</h1>
 
-            <div class="card-body">
+        <p>
+            Track all the jobs you've applied for in one place.
+        </p>
 
-                <h4 class="card-title">
-                    {{ application.job.title }}
-                </h4>
+    </div>
 
-                <h6 class="text-muted">
-                    {{ application.job.company }}
-                </h6>
+</section>
 
-                <p>
-                    <strong>Location:</strong>
-                    {{ application.job.location }}
-                </p>
 
-                <p>
-                    <strong>Salary:</strong>
-                    ₹{{ application.job.salary }}
-                </p>
+<section class="applications-section">
 
-                <p>
-                    <strong>Status:</strong>
+<div class="container">
 
-                    <span class="badge {{ application.badge_class }}">
-                        {{ application.get_status_display }}
-                    </span>
+{% for application in applications %}
 
-                </p>
+<div class="application-card">
 
-                <p>
-                    <strong>Applied On:</strong>
+<div class="application-top">
 
-                    {{ application.applied_at }}
-                </p>
+<div>
 
-                <a
-                    href="{% url 'job_detail' application.job.id %}"
-                    class="btn btn-outline-primary"
-                >
-                    View Job
-                </a>
+<h3>
 
-            </div>
+{{ application.job.title }}
 
-        </div>
+</h3>
 
-        {% empty %}
+<h5>
 
-        <div class="alert alert-info">
+{{ application.job.company.name }}
 
-            You haven't applied for any jobs yet.
+</h5>
 
-        </div>
-
-        {% endfor %}
 </div>
 
-{% endblock  %}
+<span class="status-badge {{ application.badge_class }}">
+
+{{ application.get_status_display }}
+
+</span>
+
+</div>
+
+
+<div class="application-info">
+
+<span>
+
+📍 {{ application.job.location }}
+
+</span>
+
+<span>
+
+💰 ₹{{ application.job.salary }}
+
+</span>
+
+<span>
+
+💼 {{ application.job.get_job_type_display }}
+
+</span>
+
+</div>
+
+
+<div class="application-footer">
+
+<small>
+
+Applied on
+
+{{ application.applied_at|date:"F d, Y" }}
+
+</small>
+
+<a
+href="{% url 'job_detail' application.job.id %}"
+class="view-btn">
+
+View Job →
+
+</a>
+
+</div>
+
+</div>
+
+{% empty %}
+
+<div class="empty-state">
+
+<img
+src="{% static 'jobs/hero.svg' %}"
+alt="No Applications">
+
+<h2>
+
+No Applications Yet
+
+</h2>
+
+<p>
+
+Looks like you haven't applied to any jobs.
+
+</p>
+
+<a
+href="{% url 'job_list' %}"
+class="browse-btn">
+
+Browse Jobs
+
+</a>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</section>
+
+{% endblock %}
