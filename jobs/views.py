@@ -18,6 +18,21 @@ def home(request):
         "candidate_count": User.objects.count(),
     }
 
+    if request.user.is_authenticated:
+
+        applications = request.user.applications.select_related(
+            "job",
+            "job__company"
+        ).order_by("-applied_at")
+
+        context.update({
+            "application_count": applications.count(),
+            "recent_applications": applications[:5],
+            "saved_jobs": 0,          # We'll replace later
+            "interviews": 0,          # We'll replace later
+            "profile_completion": 70, # We'll calculate later
+        })
+
     return render(request, "jobs/home.html", context)
 
 

@@ -11,6 +11,171 @@ JOBCode | Find Your Dream Job
 
 {% block content %}
 
+{% if user.is_authenticated %}
+
+<section class="candidate-dashboard">
+
+    <div class="container">
+
+        <div class="dashboard-top">
+
+            <!-- Left Card -->
+
+            <div class="dashboard-left">
+
+                <h2>
+                    Welcome back,
+                    {{ request.user.first_name|default:request.user.username }} 👋
+                </h2>
+
+                <p>
+                    Here's a quick overview of your job search.
+                </p>
+
+                <a href="{% url 'my_applications' %}" class="dashboard-link">
+
+                    View Applications →
+
+                </a>
+
+                <div class="dashboard-stats">
+
+                    <div class="dashboard-card">
+
+                        <div class="stat-icon">
+                            📂
+                        </div>
+
+                        <h3>{{ application_count }}</h3>
+
+                        <span>Applications</span>
+
+                    </div>
+
+                    <div class="dashboard-card">
+
+                        <div class="stat-icon">
+                            ❤️
+                        </div>
+
+                        <h3>{{ saved_jobs }}</h3>
+
+                        <span>Saved Jobs</span>
+
+                    </div>
+
+                    <div class="dashboard-card">
+
+                        <div class="stat-icon">
+                            🎯
+                        </div>
+
+                        <h3>{{ interviews }}</h3>
+
+                        <span>Interviews</span>
+
+                    </div>
+
+                    <div class="dashboard-card">
+
+                        <div class="stat-icon">
+                            👤
+                        </div>
+
+                        <h3>{{ profile_completion }}%</h3>
+
+                        <span>Profile Complete</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Right Card -->
+
+            <div class="dashboard-right">
+
+                <h3>
+
+                    Recent Applications
+
+                </h3>
+
+                {% for application in recent_applications %}
+
+                <div class="application-item">
+
+                    <div>
+
+                        <h5>
+
+                            {{ application.job.title }}
+
+                        </h5>
+
+                        <small>
+
+                            {{ application.job.company.name }}
+
+                        </small>
+
+                    </div>
+
+                    <a
+                        href="{% url 'job_detail' application.job.id %}"
+                        class="view-link">
+
+                        View →
+
+                    </a>
+
+                </div>
+
+                {% empty %}
+
+                <div class="empty-applications">
+
+                    <div class="empty-icon">
+
+                        📄
+
+                    </div>
+
+                    <h5>
+
+                        No Applications Yet
+
+                    </h5>
+
+                    <p>
+
+                        Start applying to jobs.
+
+                    </p>
+
+                    <a
+                        href="{% url 'job_list' %}"
+                        class="btn btn-primary">
+
+                        Browse Jobs
+
+                    </a>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endif %}
+
 <section class="hero-section">
 
     <div class="container">
