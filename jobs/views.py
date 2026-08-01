@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Job, Company
 from django.contrib.auth.models import User
+from django.db.models import Q
 
 # Create your views here.
 def home(request):
@@ -22,21 +23,40 @@ def home(request):
 
 def job_list(request):
     # return HttpResponse("Welcome to AI-Powered Job Portal")
-    jobs = Job.objects.all()
+    query = request.GET.get("q")
 
-    return render(request,
-                "jobs/job_list.html",
-                {
-                    'jobs': jobs
-                }
-            )
+    jobs = Job.objects.select_related("company").all()
 
-def job_detail(request,id):
+    if query:
+        jobs = jobs.filter(
+            Q(title__icontains=query) |
+            Q(company__name__icontains=query) |
+            Q(location__icontains=query)
+        )
+
+    context = {
+            "jobs" : jobs,
+            "query" : query,
+    }
+    return render(request, "jobs/job_list.html", context)
+
+
+def job_detail(request, id):
     job = get_object_or_404(Job, id=id)
 
-    return render(request,
-            "jobs/job_detail.html",
-                {
-                    'job': job
-                }    
-            )
+    related_jobs = (
+        Job.objects.filter(
+            company=job.company,
+            status=Job.Status.OPEN
+        )
+        .exclude(id=job.id)[:3]
+    )
+
+    return render(
+        request,
+        "jobs/job_detail.html",
+        {
+            "job": job,
+            "related_jobs": related_jobs,
+        },
+    )
