@@ -7,9 +7,34 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def applicant_dashboard(request):
-    applications = request.user.applications.all().order_by("-applied_at")
 
-    return render(request, "applications/dashboard.html", {"applications" : applications})
+    applications = (
+        request.user.applications
+        .select_related("job", "job__company")
+        .order_by("-applied_at")
+    )
+
+    context = {
+
+        "applications": applications[:5],
+
+        "application_count": applications.count(),
+
+        # We'll replace these with real models later
+        "saved_jobs": 0,
+
+        "interviews": 0,
+
+        "profile_completion": 70,
+
+    }
+
+    return render(
+        request,
+        "applications/dashboard.html",
+        context,
+    )
+
 
 @login_required
 def apply_job(request, job_id):

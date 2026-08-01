@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Candidate Dashboard
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'applications/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="dashboard-hero">
+
+    <div class="container">
+
+        <h1>
+            Welcome Back, {{ request.user.first_name|default:request.user.username }} 👋
+        </h1>
+
+        <p>
+            Track your applications and discover new opportunities.
+        </p>
+
+    </div>
+
+</section>
+
+<section class="dashboard-section">
+
+<div class="container">
+
+<div class="stats-grid">
+
+<div class="stat-card">
+
+<h2>{{ application_count }}</h2>
+
+<p>Applications</p>
+
+</div>
+
+<div class="stat-card">
+
+<h2>{{ saved_jobs }}</h2>
+
+<p>Saved Jobs</p>
+
+</div>
+
+<div class="stat-card">
+
+<h2>{{ interviews }}</h2>
+
+<p>Interviews</p>
+
+</div>
+
+<div class="stat-card">
+
+<h2>{{ profile_completion }}%</h2>
+
+<p>Profile Complete</p>
+
+</div>
+
+</div>
+
+<h2 class="section-title">
+
+Recent Applications
+
+</h2>
+
+{% for application in applications %}
+
+<div class="application-row">
+
+<div>
+
+<h4>{{ application.job.title }}</h4>
+
+<p>{{ application.job.company.name }}</p>
+
+</div>
+
+<div>
+
+<span class="status {{ application.badge_class }}">
+
+{{ application.get_status_display }}
+
+</span>
+
+</div>
+
+<div>
+
+<a href="{% url 'job_detail' application.job.id %}">
+
+View →
+
+</a>
+
+</div>
+
+</div>
+
+{% empty %}
+
+<div class="empty-card">
+
+<h3>No Applications Yet</h3>
+
+<p>
+
+Start applying to jobs to see them here.
+
+</p>
+
+<a
+href="{% url 'job_list' %}"
+class="browse-btn">
+
+Browse Jobs
+
+</a>
+
+</div>
+
+{% endfor %}
+
+<div class="quick-actions">
+
+<h2 class="section-title">
+
+Quick Actions
+
+</h2>
+
+<div class="action-grid">
+
+<a href="{% url 'job_list' %}" class="action-card">
+
+🔍
+
+<h4>
+
+Browse Jobs
+
+</h4>
+
+</a>
+
+<a href="{% url 'my_applications' %}" class="action-card">
+
+📂
+
+<h4>
+
+My Applications
+
+</h4>
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}
