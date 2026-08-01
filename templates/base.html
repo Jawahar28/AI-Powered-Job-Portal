@@ -92,20 +92,44 @@
 
                     </li>
 
+                    <li class="nav-item me-3">
+
+                        <a class="nav-link" href="{% url 'saved_jobs' %}">
+
+                            <i class="bi bi-bookmark-heart"></i>
+
+                            Saved Jobs
+
+                        </a>
+
+                    </li>
+
                     <li class="nav-item me-2">
 
                         <span class="nav-link">
-                            👋 {{ request.user.username }}
+                            👋<i class="bi bi-person-circle"></i>
+
+                                {{ request.user.first_name|default:request.user.username }}
                         </span>
 
                     </li>
 
                     <li class="nav-item">
 
-                        <a class="btn btn-outline-light rounded-pill px-4"
-                           href="{% url 'logout' %}">
-                            Logout
-                        </a>
+                        <form method="post"
+                            action="{% url 'logout' %}"
+                            class="d-inline">
+
+                            {% csrf_token %}
+
+                            <button
+                                class="btn btn-outline-light rounded-pill px-4">
+
+                                Logout
+
+                            </button>
+
+                        </form>
 
                     </li>
 

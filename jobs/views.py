@@ -1,8 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
-from .models import Job, Company
+from .models import Job, Company, SavedJob
 from django.contrib.auth.models import User
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def home(request):
@@ -73,5 +74,32 @@ def job_detail(request, id):
         {
             "job": job,
             "related_jobs": related_jobs,
+        },
+    )
+
+
+@login_required
+def save_job(request, id):
+
+    job = get_object_or_404(Job, id=id)
+
+    SavedJob.objects.get_or_create(
+        user=request.user,
+        job=job
+    )
+
+    return redirect("job_detail", id=id)
+
+
+@login_required
+def saved_jobs(request):
+
+    saved_jobs = request.user.saved_jobs.select_related("job", "job__company")
+
+    return render(
+        request,
+        "jobs/saved_jobs.html",
+        {
+            "saved_jobs": saved_jobs,
         },
     )
