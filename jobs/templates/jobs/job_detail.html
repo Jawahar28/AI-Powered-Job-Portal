@@ -1,96 +1,164 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block content%}
+{% block title %}
+{{ job.title }}
+{% endblock %}
 
-<div class="container mt-5">
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'jobs/job_detail.css' %}">
+{% endblock %}
 
-    <div class="card">
+{% block content %}
 
-        <h2 class="card-title">
-            {{ job.title }}
-        </h2>
+<section class="job-banner">
 
-        <h5 class = "text-muted">
-            {{ job.company.name }}
-        </h5>
+    <div class="container">
 
-        <hr>
+        <h1>{{ job.title }}</h1>
 
-        <p>
-            <strong>Status:</strong>
+        <h4>{{ job.company.name }}</h4>
 
-            {% if job.status == "O" %}
-                <span class="badge bg-success">
-                    {{ job.get_status_display }}
-                </span>
+        <div class="job-info">
 
-            {% elif job.status == "C" %}
-                <span class="badge bg-danger">
-                    {{ job.get_status_display }}
-                </span>
+            <span>💰 ₹{{ job.salary }}</span>
 
-            {% else %}
-                <span class="badge bg-warning text-dark">
-                    {{ job.get_status_display }}
-                </span>
+            <span>📍 {{ job.location }}</span>
 
-            {% endif %}
-        </p>
+            <span>💼 {{ job.get_job_type_display }}</span>
 
-        <hr>
+            <span>
 
-        <div class="row mt-4">
+                {% if job.status == "O" %}
+                    🟢 Open
+                {% else %}
+                    🔴 Closed
+                {% endif %}
 
-            <div class="col-md-6">
-                <p>
-                    <strong>📍 Location:</strong><br>
-                    {{ job.location }}
-                </p>
-            </div>
-
-            <div class="col-md-6">
-                <p>
-                    <strong>💰 Salary:</strong><br>
-                    ₹{{ job.salary }}
-                </p>
-            </div>
+            </span>
 
         </div>
 
-        <div class="row">
+        <small>
 
-            <div class="col-md-6">
-                <p>
-                    <strong>💼 Job Type:</strong><br>
-                    {{ job.get_job_type_display }}
-                </p>
-            </div>
+            Posted on {{ job.posted_at|date:"F d, Y" }}
 
-            <div class="col-md-6">
-                <p>
-                    <strong>📅 Posted:</strong><br>
-                    {{ job.posted_at|date:'F d, Y' }}
-                </p>
-            </div>
+        </small>
 
-        </div>
-
-        <p>
-            {{ job.description }}
-        </p>
-
-        <div class = "mt-4 d-flex gap-2">
-            <a href="{% url 'apply_job' job.id %}"
-                class="btn btn-success">
-                Apply Now
-            </a>
-
-            <a href = "{% url 'job_list' %}"
-                class = "btn btn-secondary">
-                Back To Jobs
-            </a>
-        </div>
     </div>
+
+</section>
+
+
+<section class="job-content">
+
+<div class="container">
+
+<div class="row">
+
+<div class="col-lg-8">
+
+<div class="content-card">
+
+<h2>Job Description</h2>
+
+<p>
+
+{{ job.description|linebreaks }}
+
+</p>
+
 </div>
+
+</div>
+
+
+<div class="col-lg-4">
+
+<div class="apply-card">
+
+<h3>Ready to Apply?</h3>
+
+<p>
+
+Take the next step in your career.
+
+</p>
+
+<a
+href="{% url 'apply_job' job.id %}"
+class="apply-btn">
+
+Apply Now
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="related-section">
+
+<div class="container">
+
+<h2>
+
+Related Jobs
+
+</h2>
+
+<div class="row">
+
+{% for item in related_jobs %}
+
+<div class="col-lg-4">
+
+<div class="related-card">
+
+<h4>
+
+{{ item.title }}
+
+</h4>
+
+<p>
+
+{{ item.company.name }}
+
+</p>
+
+<a
+href="{% url 'job_detail' item.id %}">
+
+View →
+
+</a>
+
+</div>
+
+</div>
+
+{% empty %}
+
+<p>
+
+No related jobs available.
+
+</p>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+</section>
 
 {% endblock %}
