@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+My Profile
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h1>Candidate Profile</h1>
+
+    <hr>
+
+    <h3>{{ request.user.get_full_name|default:request.user.username }}</h3>
+
+    <p><strong>Email:</strong> {{ request.user.email }}</p>
+
+    <p><strong>Phone:</strong> {{ profile.phone|default:"Not added" }}</p>
+
+    <p><strong>Location:</strong> {{ profile.location|default:"Not added" }}</p>
+
+    <p><strong>Headline:</strong> {{ profile.headline|default:"Not added" }}</p>
+
+    <p><strong>Skills:</strong> {{ profile.skills|default:"Not added" }}</p>
+
+    <p><strong>Experience:</strong> {{ profile.experience|default:"Not added" }}</p>
+
+    <p><strong>Education:</strong> {{ profile.education|default:"Not added" }}</p>
+
+</div>
+
+{% endblock %}

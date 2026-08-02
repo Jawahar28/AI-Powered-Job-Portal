@@ -1,4 +1,5 @@
 from django import forms
+from .models import CandidateProfile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
@@ -73,3 +74,31 @@ class LoginForm(AuthenticationForm):
             }
         )
     )
+
+from django import forms
+from .models import CandidateProfile
+
+
+class CandidateProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = CandidateProfile
+
+        fields = [
+            "profile_picture",
+            "phone",
+            "location",
+            "headline",
+            "bio",
+            "skills",
+            "experience",
+            "education",
+            "github",
+            "linkedin",
+            "resume",
+        ]
+
+        widgets = {
+            "bio": forms.Textarea(attrs={"rows": 4}),
+            "skills": forms.Textarea(attrs={"rows": 3}),
+        }
