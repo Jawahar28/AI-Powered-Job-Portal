@@ -21,20 +21,80 @@ Available Jobs
             Browse the latest AI, Python, Backend and Software Engineering jobs.
         </p>
 
-        <form method="GET" class="search-box">
+        <form method="GET" class="search-panel">
 
-            <input
-                type="text"
-                name="q"
-                value="{{ query|default:'' }}"
-                placeholder="Search jobs, companies or locations...">
+    <div class="row g-3 align-items-center">
 
-            <button type="submit">
-                🔍 Search
+        <!-- Search -->
+
+        <div class="col-lg-5">
+            <div class="search-input">
+                <input
+                    type="text"
+                    class="form-control"
+                    name="q"
+                    value="{{ query|default:'' }}"
+                    placeholder="Search jobs, companies...">
+
+            </div>
+
+        </div>
+
+        <!-- Location -->
+
+        <div class="col-lg-3">
+            <select class="form-select" name="location">
+
+                <option value="">All Locations</option>
+
+                <option value="Hyderabad" {% if location == "Hyderabad" %}selected{% endif %}>Hyderabad</option>
+
+                <option value="Bangalore" {% if location == "Bangalore" %}selected{% endif %}>Bangalore</option>
+
+                <option value="Chennai" {% if location == "Chennai" %}selected{% endif %}>Chennai</option>
+
+                <option value="Pune" {% if location == "Pune" %}selected{% endif %}>Pune</option>
+
+                <option value="Remote" {% if location == "Remote" %}selected{% endif %}>Remote</option>
+
+            </select>
+
+        </div>
+
+        <!-- Job Type -->
+
+        <div class="col-lg-2">
+            <select class="form-select" name="job_type">
+
+                <option value="">All Job Types</option>
+
+                <option value="FT" {% if job_type == "FT" %}selected{% endif %}>Full Time</option>
+
+                <option value="PT" {% if job_type == "PT" %}selected{% endif %}>Part Time</option>
+
+                <option value="IN" {% if job_type == "IN" %}selected{% endif %}>Internship</option>
+
+            </select>
+
+        </div>
+
+        <!-- Button -->
+
+        <div class="col-lg-2 d-grid">
+
+            <button class="btn btn-warning btn-lg">
+
+                <i class="bi bi-search"></i>
+
+                Search
+
             </button>
 
-        </form>
+        </div>
 
+    </div>
+
+    </form>
     </div>
 
 </section>
@@ -45,6 +105,25 @@ Available Jobs
 <div class="container">
 
 {% if jobs %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+
+        <h4>
+
+            {{ jobs|length }} Jobs Found
+
+        </h4>
+
+        <p class="text-muted mb-0">
+
+            Find the perfect opportunity for your career.
+
+        </p>
+
+    </div>
+
+</div>
 
 <div class="jobs-grid">
 

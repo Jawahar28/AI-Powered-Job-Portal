@@ -209,13 +209,14 @@ JOBCode | Find Your Dream Job
 
                 </p>
 
-                <div class="hero-search">
+                <form method="GET" action="{% url 'job_list' %}" class="hero-search">
 
                     <input
                         type="text"
+                        name="q"
                         placeholder="Search Python, Django, AI Jobs">
 
-                    <button>
+                    <button type="submit">
 
                         <i class="bi bi-search"></i>
 
@@ -223,22 +224,16 @@ JOBCode | Find Your Dream Job
 
                     </button>
 
-                </div>
+                </form>
 
                 <div class="popular-skills">
 
-                    <span>Python</span>
-
-                    <span>Django</span>
-
-                    <span>Backend</span>
-
-                    <span>React</span>
-
-                    <span>AI</span>
-
-                    <span>Machine Learning</span>
-
+                    <a href="{% url 'job_list' %}?q=Python">Python</a>
+                    <a href="{% url 'job_list' %}?q=Django">Django</a>
+                    <a href="{% url 'job_list' %}?q=Backend">Backend</a>
+                    <a href="{% url 'job_list' %}?q=AI">AI</a>
+                    <a href="{% url 'job_list' %}?q=AI">AI</a>
+                    <a href="{% url 'job_list' %}?q=Machine Learning">Machine Learning</a>
                 </div>
 
             </div>

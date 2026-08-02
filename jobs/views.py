@@ -41,6 +41,11 @@ def job_list(request):
     # return HttpResponse("Welcome to AI-Powered Job Portal")
     query = request.GET.get("q")
 
+    location= request.GET.get("location")
+
+    job_type = request.GET.get("job_type")
+
+
     jobs = Job.objects.select_related("company").all()
 
     if query:
@@ -50,9 +55,18 @@ def job_list(request):
             Q(location__icontains=query)
         )
 
+    if location:
+        jobs = jobs.filter(location__icontains=location)
+
+    if job_type:
+        jobs = jobs.filter(job_type=job_type)
+
+    
     context = {
             "jobs" : jobs,
             "query" : query,
+            "location": location,
+            "job_type": job_type,
     }
     return render(request, "jobs/job_list.html", context)
 
