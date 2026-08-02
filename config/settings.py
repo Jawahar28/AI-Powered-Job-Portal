@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django_bootstrap5',
 
     # Created Apps
-    'accounts',
+    'accounts.apps.AccountsConfig',
     'jobs',
     'applications',
 
