@@ -1,4 +1,10 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{% static 'accounts/candidate/profile.css' %}">
+{% endblock %}
 
 {% block title %}
 My Profile
@@ -6,28 +12,86 @@ My Profile
 
 {% block content %}
 
-<div class="container mt-5">
+<section class="profile-hero">
 
-    <h1>Candidate Profile</h1>
+    <div class="container">
 
-    <hr>
+        <div class="profile-card">
 
-    <h3>{{ request.user.get_full_name|default:request.user.username }}</h3>
+            <div class="profile-avatar">
 
-    <p><strong>Email:</strong> {{ request.user.email }}</p>
+                {% if profile.profile_picture %}
 
-    <p><strong>Phone:</strong> {{ profile.phone|default:"Not added" }}</p>
+                    <img
+                        src="{{ profile.profile_picture.url }}"
+                        alt="Profile Picture"
+                        class="profile-image">
 
-    <p><strong>Location:</strong> {{ profile.location|default:"Not added" }}</p>
+                {% else %}
 
-    <p><strong>Headline:</strong> {{ profile.headline|default:"Not added" }}</p>
+                    <div class="avatar-placeholder">
 
-    <p><strong>Skills:</strong> {{ profile.skills|default:"Not added" }}</p>
+                        {{ request.user.username|first|upper }}
 
-    <p><strong>Experience:</strong> {{ profile.experience|default:"Not added" }}</p>
+                    </div>
 
-    <p><strong>Education:</strong> {{ profile.education|default:"Not added" }}</p>
+                {% endif %}
 
-</div>
+            </div>
+
+            <h1>
+
+                {{ request.user.get_full_name|default:request.user.username }}
+
+            </h1>
+
+            <p class="headline">
+
+                {{ profile.headline|default:"Backend Python Developer" }}
+
+            </p>
+
+            <p class="location">
+
+                📍 {{ profile.location|default:"Location not added" }}
+
+            </p>
+
+            <div class="profile-buttons">
+
+                <a href="{% url 'edit_profile' %}" class="edit-btn">
+
+                    Edit Profile
+
+                </a>
+
+                {% if profile.resume %}
+
+                    <a
+                        href="{{ profile.resume.url }}"
+                        class="resume-btn"
+                        target="_blank">
+
+                        View Resume
+
+                    </a>
+
+                    {% else %}
+
+                    <a href="#" class="resume-btn disabled">
+
+                        No Resume
+
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
 {% endblock %}
