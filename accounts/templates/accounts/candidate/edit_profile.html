@@ -12,155 +12,332 @@ Edit Profile
 
 {% block content %}
 
+<section class="edit-hero">
+
+    <div class="container text-center">
+
+        <h1>Edit Your Profile</h1>
+
+        <p>
+            Keep your information updated so recruiters can easily discover you.
+        </p>
+
+    </div>
+
+</section>
+
 <section class="edit-profile-section">
 
     <div class="container">
 
         <div class="edit-card">
 
-            <h2>Edit Your Profile</h2>
-
-            <form method="POST" enctype="multipart/form-data" novalidate>
+            <form method="POST"
+                  enctype="multipart/form-data"
+                  novalidate>
 
                 {% csrf_token %}
 
                 {% if form.errors %}
 
-                <div class="alert alert-danger">
+                    <div class="alert alert-danger">
 
-                    Please correct the errors below.
+                        Please correct the errors below.
 
-                </div>
+                    </div>
 
                 {% endif %}
 
                 <div class="row g-4">
 
-                    <!-- Profile Picture -->
+                    <!-- ==========================
+                         Profile Picture
+                    =========================== -->
 
-                    <div class="col-12">
+                    <div class="col-12 text-center mb-4">
 
-                        <label class="form-label">Profile Picture</label>
+                        {% if profile.profile_picture %}
+
+                            <img
+                                src="{{ profile.profile_picture.url }}"
+                                class="profile-preview"
+                                alt="Profile Picture">
+
+                        {% else %}
+
+                            <div class="avatar-placeholder">
+
+                                {{ request.user.username|first|upper }}
+
+                            </div>
+
+                        {% endif %}
+
+                        <label class="form-label mt-4">
+
+                            Change Profile Picture
+
+                        </label>
 
                         {{ form.profile_picture }}
 
                     </div>
 
-                    <!-- Phone -->
+                    <!-- ==========================
+                         Basic Information
+                    =========================== -->
 
                     <div class="col-md-6">
 
-                        <label class="form-label">Phone</label>
+                        <label class="form-label">
+
+                            First Name
+
+                        </label>
+
+                        {{ user_form.first_name }}
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+
+                            Last Name
+
+                        </label>
+
+                        {{ user_form.last_name }}
+
+                    </div>
+
+                    <div class="col-12">
+
+                        <label class="form-label">
+
+                            Email
+
+                        </label>
+
+                        {{ user_form.email }}
+
+                    </div>
+
+                    <!-- ==========================
+                         Personal Information
+                    =========================== -->
+
+                    <div class="col-12">
+
+                        <h4 class="section-title">
+
+                            Personal Information
+
+                        </h4>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+
+                            Phone
+
+                        </label>
 
                         {{ form.phone }}
 
                     </div>
 
-                    <!-- Location -->
-
                     <div class="col-md-6">
 
-                        <label class="form-label">Location</label>
+                        <label class="form-label">
+
+                            Location
+
+                        </label>
 
                         {{ form.location }}
 
                     </div>
 
-                    <!-- Headline -->
-
                     <div class="col-12">
 
-                        <label class="form-label">Headline</label>
+                        <label class="form-label">
+
+                            Headline
+
+                        </label>
 
                         {{ form.headline }}
 
                     </div>
 
-                    <!-- Bio -->
+                    <!-- ==========================
+                         Professional Information
+                    =========================== -->
 
                     <div class="col-12">
 
-                        <label class="form-label">About Me</label>
+                        <h4 class="section-title">
+
+                            Professional Information
+
+                        </h4>
+
+                    </div>
+
+                    <div class="col-12">
+
+                        <label class="form-label">
+
+                            About Me
+
+                        </label>
 
                         {{ form.bio }}
 
                     </div>
 
-                    <!-- Skills -->
-
                     <div class="col-12">
 
-                        <label class="form-label">Skills</label>
+                        <label class="form-label">
+
+                            Skills
+
+                        </label>
 
                         {{ form.skills }}
 
                     </div>
 
-                    <!-- Experience -->
-
                     <div class="col-md-6">
 
-                        <label class="form-label">Experience</label>
+                        <label class="form-label">
+
+                            Experience
+
+                        </label>
 
                         {{ form.experience }}
 
                     </div>
 
-                    <!-- Education -->
-
                     <div class="col-md-6">
 
-                        <label class="form-label">Education</label>
+                        <label class="form-label">
+
+                            Education
+
+                        </label>
 
                         {{ form.education }}
 
                     </div>
 
-                    <!-- GitHub -->
+                    <!-- ==========================
+                         Social Links
+                    =========================== -->
+
+                    <div class="col-12">
+
+                        <h4 class="section-title">
+
+                            Social Links
+
+                        </h4>
+
+                    </div>
 
                     <div class="col-md-6">
 
-                        <label class="form-label">GitHub</label>
+                        <label class="form-label">
+
+                            GitHub
+
+                        </label>
 
                         {{ form.github }}
 
                     </div>
 
-                    <!-- LinkedIn -->
-
                     <div class="col-md-6">
 
-                        <label class="form-label">LinkedIn</label>
+                        <label class="form-label">
+
+                            LinkedIn
+
+                        </label>
 
                         {{ form.linkedin }}
 
                     </div>
 
-                    <!-- Resume -->
+                    <!-- ==========================
+                         Resume
+                    =========================== -->
 
                     <div class="col-12">
 
-                        <label class="form-label">Resume</label>
+                        <h4 class="section-title">
 
-                        {{ form.resume }}
+                            Resume
+
+                        </h4>
 
                     </div>
 
-                    <div class="col-12 text-center mt-4">
+                    <div class="col-12">
 
-                        <button type="submit"
-                                class="btn btn-primary btn-lg px-5">
+                        {% if profile.resume %}
 
-                            Save Changes
+                            <p class="current-file mb-3">
 
-                        </button>
+                                📄 Current Resume:
 
-                        <a href="{% url 'profile' %}"
-                        class="btn btn-outline-secondary btn-lg ms-2">
+                                <a href="{{ profile.resume.url }}"
+                                   target="_blank">
 
-                            Cancel
+                                    View Resume
 
-                        </a>
+                                </a>
+
+                            </p>
+
+                        {% endif %}
+
+                        <div class="resume-upload">
+
+                            {{ form.resume }}
+
+                        </div>
+
+                    </div>
+
+                    <!-- ==========================
+                         Buttons
+                    =========================== -->
+
+                    <div class="col-12">
+
+                        <div class="action-buttons">
+
+                            <a href="{% url 'profile' %}"
+                               class="btn btn-outline-secondary">
+
+                                Cancel
+
+                            </a>
+
+                            <button
+                                type="submit"
+                                class="btn save-btn">
+
+                                Save Changes
+
+                            </button>
+
+                        </div>
 
                     </div>
 

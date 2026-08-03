@@ -76,7 +76,6 @@ class LoginForm(AuthenticationForm):
     )
 
 class CandidateProfileForm(forms.ModelForm):
-
     class Meta:
         model = CandidateProfile
 
@@ -112,3 +111,13 @@ class CandidateProfileForm(forms.ModelForm):
             "github": forms.URLInput(attrs={"class": "form-control"}),
             "linkedin": forms.URLInput(attrs={"class": "form-control"}),
         }
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+
+        fields = [
+            "first_name",
+            "last_name",
+            "email",
+        ]

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import RegisterForm, LoginForm, CandidateProfileForm
+from .forms import RegisterForm, LoginForm, CandidateProfileForm, UserUpdateForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 
@@ -86,14 +86,45 @@ def profile(request):
 def edit_profile(request):
     profile = request.user.profile
 
-    if request.method == 'POST':
-        form = CandidateProfileForm(request.POST, request.FILES, instance=profile)
+    if request.method == "POST":
 
-        if form.is_valid():
-            form.save()
+        user_form = UserUpdateForm(
+            request.POST,
+            instance=request.user
+        )
+
+        profile_form = CandidateProfileForm(
+            request.POST,
+            request.FILES,
+            instance=profile
+        )
+
+        if user_form.is_valid() and profile_form.is_valid():
+
+            user_form.save()
+            profile_form.save()
+
             return redirect("profile")
 
     else:
-        form = CandidateProfileForm(instance=profile)
 
-    return render(request, "accounts/candidate/edit_profile.html",{"form":form})
+        user_form = UserUpdateForm(
+            instance=request.user
+        )
+
+        profile_form = CandidateProfileForm(
+            instance=profile
+        )
+
+    context = {
+        "user_form": user_form,
+        "form": profile_form,
+        "profile": profile,
+    }
+
+    return render(
+        request,
+        "accounts/candidate/edit_profile.html",
+        context
+    )
+
