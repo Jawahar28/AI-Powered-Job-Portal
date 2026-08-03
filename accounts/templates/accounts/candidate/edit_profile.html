@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{% static 'css/candidate/edit_profile.css' %}">
+{% endblock %}
+
+{% block title %}
+Edit Profile
+{% endblock %}
+
+{% block content %}
+
+<section class="edit-profile-section">
+
+    <div class="container">
+
+        <div class="edit-card">
+
+            <h2>Edit Your Profile</h2>
+
+            <form method="POST" enctype="multipart/form-data" novalidate>
+
+                {% csrf_token %}
+
+                {% if form.errors %}
+
+                <div class="alert alert-danger">
+
+                    Please correct the errors below.
+
+                </div>
+
+                {% endif %}
+
+                <div class="row g-4">
+
+                    <!-- Profile Picture -->
+
+                    <div class="col-12">
+
+                        <label class="form-label">Profile Picture</label>
+
+                        {{ form.profile_picture }}
+
+                    </div>
+
+                    <!-- Phone -->
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">Phone</label>
+
+                        {{ form.phone }}
+
+                    </div>
+
+                    <!-- Location -->
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">Location</label>
+
+                        {{ form.location }}
+
+                    </div>
+
+                    <!-- Headline -->
+
+                    <div class="col-12">
+
+                        <label class="form-label">Headline</label>
+
+                        {{ form.headline }}
+
+                    </div>
+
+                    <!-- Bio -->
+
+                    <div class="col-12">
+
+                        <label class="form-label">About Me</label>
+
+                        {{ form.bio }}
+
+                    </div>
+
+                    <!-- Skills -->
+
+                    <div class="col-12">
+
+                        <label class="form-label">Skills</label>
+
+                        {{ form.skills }}
+
+                    </div>
+
+                    <!-- Experience -->
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">Experience</label>
+
+                        {{ form.experience }}
+
+                    </div>
+
+                    <!-- Education -->
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">Education</label>
+
+                        {{ form.education }}
+
+                    </div>
+
+                    <!-- GitHub -->
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">GitHub</label>
+
+                        {{ form.github }}
+
+                    </div>
+
+                    <!-- LinkedIn -->
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">LinkedIn</label>
+
+                        {{ form.linkedin }}
+
+                    </div>
+
+                    <!-- Resume -->
+
+                    <div class="col-12">
+
+                        <label class="form-label">Resume</label>
+
+                        {{ form.resume }}
+
+                    </div>
+
+                    <div class="col-12 text-center mt-4">
+
+                        <button type="submit"
+                                class="btn btn-primary btn-lg px-5">
+
+                            Save Changes
+
+                        </button>
+
+                        <a href="{% url 'profile' %}"
+                        class="btn btn-outline-secondary btn-lg ms-2">
+
+                            Cancel
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

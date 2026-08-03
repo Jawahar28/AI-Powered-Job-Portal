@@ -3,7 +3,7 @@
 
 {% block extra_css %}
 <link rel="stylesheet"
-      href="{% static 'accounts/candidate/profile.css' %}">
+      href="{% static 'css/candidate/profile.css' %}">
 {% endblock %}
 
 {% block title %}
@@ -12,65 +12,67 @@ My Profile
 
 {% block content %}
 
-<section class="profile-hero">
+<section class="profile-page">
 
-    <div class="container">
+    <section class="profile-hero">
 
-        <div class="profile-card">
+        <div class="container">
 
-            <div class="profile-avatar">
+            <div class="profile-card">
 
-                {% if profile.profile_picture %}
+                <div class="profile-avatar">
 
-                    <img
-                        src="{{ profile.profile_picture.url }}"
-                        alt="Profile Picture"
-                        class="profile-image">
+                    {% if profile.profile_picture %}
 
-                {% else %}
+                        <img
+                            src="{{ profile.profile_picture.url }}"
+                            alt="Profile Picture"
+                            class="profile-image">
 
-                    <div class="avatar-placeholder">
+                    {% else %}
 
-                        {{ request.user.username|first|upper }}
+                        <div class="avatar-placeholder">
 
-                    </div>
+                            {{ request.user.username|first|upper }}
 
-                {% endif %}
+                        </div>
 
-            </div>
+                    {% endif %}
 
-            <h1>
+                </div>
 
-                {{ request.user.get_full_name|default:request.user.username }}
+                <h1>
 
-            </h1>
+                    {{ request.user.get_full_name|default:request.user.username }}
 
-            <p class="headline">
+                </h1>
 
-                {{ profile.headline|default:"Backend Python Developer" }}
+                <p class="headline">
 
-            </p>
+                    {{ profile.headline|default:"Backend Python Developer" }}
 
-            <p class="location">
+                </p>
 
-                📍 {{ profile.location|default:"Location not added" }}
+                <p class="location">
 
-            </p>
+                    📍 {{ profile.location|default:"Location not added" }}
 
-            <div class="profile-buttons">
+                </p>
 
-                <a href="{% url 'edit_profile' %}" class="edit-btn">
+                <div class="profile-buttons">
 
-                    Edit Profile
+                    <a href="{% url 'edit_profile' %}" class="edit-btn">
 
-                </a>
+                        Edit Profile
 
-                {% if profile.resume %}
+                    </a>
+
+                    {% if profile.resume %}
 
                     <a
                         href="{{ profile.resume.url }}"
-                        class="resume-btn"
-                        target="_blank">
+                        target="_blank"
+                        class="resume-btn">
 
                         View Resume
 
@@ -84,13 +86,315 @@ My Profile
 
                     </a>
 
-                {% endif %}
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+    <section class="profile-content">
+
+    <div class="container">
+
+        <div class="row g-4">
+
+            <!-- Left Column -->
+
+            <div class="col-lg-8">
+
+                <!-- About -->
+
+                <div class="profile-box">
+
+                    <h3>About Me</h3>
+
+                    <p>
+
+                        {% if profile.bio %}
+
+                            {{ profile.bio }}
+
+                        {% else %}
+
+                            Passionate Python Backend Developer with interest in Django,
+                            REST APIs, AI-powered applications and scalable backend systems.
+
+                        {% endif %}
+
+                    </p>
+
+                </div>
+
+                <!-- Skills -->
+
+                <div class="profile-box mt-4">
+
+                    <h3>Skills</h3>
+
+                    <div class="skills-list">
+
+                            <span class="skill-badge">Python</span>
+
+                            <span class="skill-badge">Django</span>
+
+                            <span class="skill-badge">REST API</span>
+
+                            <span class="skill-badge">MySQL</span>
+
+                    </div>
+
+                </div>
+
+                <div class="profile-box mt-4">
+
+                    <h3>
+                        <i class="bi bi-mortarboard-fill"></i>
+                        Education
+                    </h3>
+
+                    {% if profile.education %}
+
+                        <p>{{ profile.education }}</p>
+
+                    {% else %}
+
+                        <p class="text-muted">
+
+                            No education details added yet.
+
+                        </p>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="profile-box mt-4">
+
+                    <h3>
+                        <i class="bi bi-briefcase-fill"></i>
+                        Experience
+                    </h3>
+
+                    {% if profile.experience %}
+
+                        <p>{{ profile.experience }}</p>
+
+                    {% else %}
+
+                        <p class="text-muted">
+
+                            Fresher
+
+                        </p>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            <!-- Right Column -->
+
+            <div class="col-lg-4">
+
+                <!-- Profile Completion -->
+
+                <div class="profile-box">
+
+                    <h3>Profile Completion</h3>
+
+                    <div class="progress mt-3">
+
+                        <div
+                            class="progress-bar"
+                            style="width:70%;">
+
+                            70%
+
+                        </div>
+
+                    </div>
+
+                    <ul class="completion-list mt-4">
+
+                        <li>
+                            {% if profile.headline %}
+                                ✔
+                            {% else %}
+                                ❌
+                            {% endif %}
+                            Headline
+                        </li>
+
+                        <li>
+                            {% if profile.bio %}
+                                ✔
+                            {% else %}
+                                ❌
+                            {% endif %}
+                            About
+                        </li>
+
+                        <li>
+                            {% if profile.skills %}
+                                ✔
+                            {% else %}
+                                ❌
+                            {% endif %}
+                            Skills
+                        </li>
+
+                        <li>
+                            {% if profile.resume %}
+                                ✔
+                            {% else %}
+                                ❌
+                            {% endif %}
+                            Resume
+                        </li>
+
+                        <li>
+                            {% if profile.github %}
+                                ✔
+                            {% else %}
+                                ❌
+                            {% endif %}
+                            GitHub
+                        </li>
+
+                        <li>
+                            {% if profile.linkedin %}
+                                ✔
+                            {% else %}
+                                ❌
+                            {% endif %}
+                            LinkedIn
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <!-- Contact -->
+
+                <div class="profile-box mt-4">
+
+                    <h3>Contact</h3>
+
+                    <p>📧 {{ request.user.email }}</p>
+
+                    <p>📱 {{ profile.phone|default:"Not Added" }}</p>
+
+                    <p>📍 {{ profile.location|default:"Not Added" }}</p>
+
+                </div>
+
+                <div class="profile-box mt-4">
+
+                    <h3>
+                        <i class="bi bi-file-earmark-pdf-fill"></i>
+                        Resume
+                    </h3>
+
+                    {% if profile.resume %}
+
+                        <a
+                            href="{{ profile.resume.url }}"
+                            class="btn btn-primary mt-2"
+                            target="_blank">
+
+                            View Resume
+
+                        </a>
+
+                    {% else %}
+
+                        <p class="text-muted">
+
+                            Resume not uploaded.
+
+                        </p>
+
+                    {% endif %}
+
+                </div>
+
+                <div class="profile-box mt-4">
+
+                    <h3>
+                        <i class="bi bi-share-fill"></i>
+                        Social Links
+                    </h3>
+
+                    <p>
+
+                        <strong>GitHub</strong><br>
+
+                        {% if profile.github %}
+
+                            <a
+                                href="{{ profile.github }}"
+                                target="_blank">
+
+                                {{ profile.github }}
+
+                            </a>
+
+                        {% else %}
+
+                            <span class="text-muted">
+
+                                Not Added
+
+                            </span>
+
+                        {% endif %}
+
+                    </p>
+
+                    <hr>
+
+                    <p>
+
+                        <strong>LinkedIn</strong><br>
+
+                        {% if profile.linkedin %}
+
+                            <a
+                                href="{{ profile.linkedin }}"
+                                target="_blank">
+
+                                {{ profile.linkedin }}
+
+                            </a>
+
+                        {% else %}
+
+                            <span class="text-muted">
+
+                                Not Added
+
+                            </span>
+
+                        {% endif %}
+
+                    </p>
+
+                </div>
 
             </div>
 
         </div>
 
     </div>
+
+</section>
 
 </section>
 

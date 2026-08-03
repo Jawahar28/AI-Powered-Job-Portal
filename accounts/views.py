@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import RegisterForm, LoginForm
+from .forms import RegisterForm, LoginForm, CandidateProfileForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 
@@ -74,8 +74,26 @@ def logout_view(request):
 
     return redirect("login")
 
+
+
 @login_required
 def profile(request):
     profile = request.user.profile
 
     return render(request, "accounts/candidate/profile.html", {"profile":profile},)
+
+@login_required
+def edit_profile(request):
+    profile = request.user.profile
+
+    if request.method == 'POST':
+        form = CandidateProfileForm(request.POST, request.FILES, instance=profile)
+
+        if form.is_valid():
+            form.save()
+            return redirect("profile")
+
+    else:
+        form = CandidateProfileForm(instance=profile)
+
+    return render(request, "accounts/candidate/edit_profile.html",{"form":form})

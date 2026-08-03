@@ -75,10 +75,6 @@ class LoginForm(AuthenticationForm):
         )
     )
 
-from django import forms
-from .models import CandidateProfile
-
-
 class CandidateProfileForm(forms.ModelForm):
 
     class Meta:
@@ -99,6 +95,20 @@ class CandidateProfileForm(forms.ModelForm):
         ]
 
         widgets = {
-            "bio": forms.Textarea(attrs={"rows": 4}),
-            "skills": forms.Textarea(attrs={"rows": 3}),
+            "phone": forms.TextInput(attrs={"class": "form-control"}),
+            "location": forms.TextInput(attrs={"class": "form-control"}),
+            "headline": forms.TextInput(attrs={"class": "form-control"}),
+            "bio": forms.Textarea(attrs={
+                "class": "form-control",
+                "rows": 5
+            }),
+            "skills": forms.Textarea(attrs={
+                "class": "form-control",
+                "rows": 3,
+                "placeholder": "Python, Django, REST API..."
+            }),
+            "experience": forms.TextInput(attrs={"class": "form-control"}),
+            "education": forms.TextInput(attrs={"class": "form-control"}),
+            "github": forms.URLInput(attrs={"class": "form-control"}),
+            "linkedin": forms.URLInput(attrs={"class": "form-control"}),
         }
