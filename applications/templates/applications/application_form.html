@@ -1,27 +1,304 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{% static 'css/candidate/apply_job.css' %}">
+{% endblock %}
 
 {% block title %}
-Apply for Job
+Apply for {{ job.title }}
 {% endblock %}
 
 {% block content %}
 
-<div class="container mt-5">
+<!-- ==========================================
+Hero Section
+========================================== -->
 
-    <h2>Apply for {{ job.title }}</h2>
+<section class="apply-hero">
 
-    <form method="POST" enctype="multipart/form-data">
+    <div class="container text-center">
 
-        {% csrf_token %}
+        <h1>
 
-        {{ form.as_p }}
+            Apply for {{ job.title }}
 
-        <button type="submit" class="btn btn-primary">
-            Apply
-        </button>
+        </h1>
 
-    </form>
+        <p>
 
-</div>
+            Submit your application and take the next step in your career.
+
+        </p>
+
+    </div>
+
+</section>
+
+<!-- ==========================================
+Application Form
+========================================== -->
+
+<section class="apply-section">
+
+    <div class="container">
+
+        <div class="apply-card">
+
+            <form method="POST"
+                  enctype="multipart/form-data"
+                  novalidate>
+
+                {% csrf_token %}
+
+                {% if form.errors %}
+
+                    <div class="alert alert-danger">
+
+                        Please correct the errors below.
+
+                    </div>
+
+                {% endif %}
+
+                <div class="row g-4">
+
+                    <!-- ==========================================
+                         Job Information
+                    =========================================== -->
+
+                    <div class="col-12">
+
+                        <div class="glass-section job-section">
+
+                            <h4 class="section-title">
+
+                                💼 Job Information
+
+                            </h4>
+
+                            <h3 class="job-title">
+
+                                {{ job.title }}
+
+                            </h3>
+
+                            <p class="company-name">
+
+                                {{ job.company.name }}
+
+                            </p>
+
+                            <div class="job-meta">
+
+                                <span>📍 {{ job.location }}</span>
+
+                                <span>💼 {{ job.job_type }}</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ==========================================
+                         Applicant
+                    =========================================== -->
+
+                    <div class="col-12">
+
+                        <div class="glass-section applicant-section">
+
+                            <h4 class="section-title">
+
+                                👤 Applicant Details
+
+                            </h4>
+
+                            <div class="row">
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+
+                                        Full Name
+
+                                    </label>
+
+                                    <div class="readonly-box">
+
+                                        {{ request.user.get_full_name|default:request.user.username }}
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+
+                                        Email Address
+
+                                    </label>
+
+                                    <div class="readonly-box">
+
+                                        {{ request.user.email }}
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ==========================================
+                         Resume
+                    =========================================== -->
+
+                    <div class="col-12">
+
+                        <div class="glass-section resume-section">
+
+                            <h4 class="section-title">
+
+                                📄 Resume
+
+                            </h4>
+
+                            {% if request.user.profile.resume %}
+
+                                <div class="resume-info">
+
+                                    <div>
+
+                                        <strong>
+
+                                            Current Resume
+
+                                        </strong>
+
+                                        <p>
+
+                                            {{ request.user.profile.resume.name|cut:"resumes/" }}
+
+                                        </p>
+
+                                    </div>
+
+                                    <a
+                                        href="{{ request.user.profile.resume.url }}"
+                                        target="_blank"
+                                        class="resume-view">
+
+                                        👁 View Resume
+
+                                    </a>
+
+                                </div>
+
+                                <hr>
+
+                                <label class="form-label">
+
+                                    Upload Another Resume (Optional)
+
+                                </label>
+
+                            {% else %}
+
+                                <div class="no-resume">
+
+                                    ⚠ No resume found in your profile.
+
+                                    Upload one below.
+
+                                </div>
+
+                            {% endif %}
+
+                            <div class="upload-card">
+
+                                {{ form.resume }}
+
+                                <small>
+
+                                    PDF, DOC, DOCX (Maximum 5MB)
+
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ==========================================
+                         Cover Letter
+                    =========================================== -->
+
+                    <div class="col-12">
+
+                        <div class="glass-section cover-section">
+
+                            <h4 class="section-title">
+
+                                ✍ Cover Letter
+
+                            </h4>
+
+                            <label class="form-label">
+
+                                Tell the recruiter why you're a good fit.
+
+                            </label>
+
+                            {{ form.cover_letter }}
+
+                        </div>
+
+                    </div>
+
+                    <!-- ==========================================
+                         Buttons
+                    =========================================== -->
+
+                    <div class="col-12">
+
+                        <div class="action-buttons">
+
+                            <a
+                                href="{% url 'job_detail' job.id %}"
+                                class="btn btn-outline-secondary">
+
+                                Cancel
+
+                            </a>
+
+                            <button
+                                type="submit"
+                                class="btn apply-btn">
+
+                                🚀 Apply Now
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
 
 {% endblock %}

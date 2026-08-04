@@ -19,7 +19,7 @@ class Application(models.Model):
 
     applicant_name = models.CharField(max_length=255)
     applicant_email = models.EmailField()
-    resume = models.FileField(upload_to='resumes/')
+    resume = models.FileField(upload_to='resumes/', blank=True, null=True,)
     cover_letter = models.TextField(blank=True)
     applied_at = models.DateTimeField(default=timezone.now)
 

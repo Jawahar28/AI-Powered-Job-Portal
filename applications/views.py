@@ -38,24 +38,49 @@ def applicant_dashboard(request):
 
 @login_required
 def apply_job(request, job_id):
+
     job = get_object_or_404(Job, id=job_id)
 
+    # Prevent duplicate applications
+    if Application.objects.filter(user=request.user,job=job).exists():
+        return redirect("job_detail", id=job.id)
+
     if request.method == "POST":
-        form = ApplicationForm(request.POST, request.FILES)
+
+        form = ApplicationForm(
+            request.POST,
+            request.FILES,
+        )
 
         if form.is_valid():
-            application = form.save(commit=False)
 
+            application = form.save(commit=False)
 
             application.job = job
             application.user = request.user
 
+            # Automatically fill applicant details
+            application.applicant_name = (
+                request.user.get_full_name()
+                or request.user.username
+            )
+
+            application.applicant_email = request.user.email
+
+            # Use profile resume if no new resume uploaded
+            if (
+                not application.resume
+                and hasattr(request.user, "profile")
+                and request.user.profile.resume
+            ):
+                application.resume = request.user.profile.resume
 
             application.save()
 
             return redirect("job_detail", id=job.id)
 
     else:
+
         form = ApplicationForm()
 
     return render(
