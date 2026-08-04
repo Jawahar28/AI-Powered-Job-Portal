@@ -87,6 +87,16 @@ Edit Profile
                          Basic Information
                     =========================== -->
 
+                    <div class="glass-section basic-section">
+
+                        <div class="col-12">
+
+                            <h4 class="section-title">
+                                👤 Basic Information
+                            </h4>
+
+                        </div>
+
                     <div class="col-md-6">
 
                         <label class="form-label">
@@ -122,11 +132,12 @@ Edit Profile
                         {{ user_form.email }}
 
                     </div>
+                </div>
 
                     <!-- ==========================
                          Personal Information
                     =========================== -->
-
+                    <div class="glass-section personal-section">
                     <div class="col-12">
 
                         <h4 class="section-title">
@@ -172,11 +183,13 @@ Edit Profile
                         {{ form.headline }}
 
                     </div>
+                </div>
+
 
                     <!-- ==========================
                          Professional Information
                     =========================== -->
-
+                    <div class="glass-section professional-section">
                     <div class="col-12">
 
                         <h4 class="section-title">
@@ -234,11 +247,12 @@ Edit Profile
                         {{ form.education }}
 
                     </div>
+                </div>
 
                     <!-- ==========================
                          Social Links
                     =========================== -->
-
+                    <div class="glass-section social-section">
                     <div class="col-12">
 
                         <h4 class="section-title">
@@ -272,6 +286,7 @@ Edit Profile
                         {{ form.linkedin }}
 
                     </div>
+                </div>
 
                     <!-- ==========================
                          Resume
@@ -279,36 +294,81 @@ Edit Profile
 
                     <div class="col-12">
 
-                        <h4 class="section-title">
+                        <div class="glass-section resume-section">
 
-                            Resume
+                            <h4 class="section-title">
 
-                        </h4>
+                                📄 Resume
 
-                    </div>
+                            </h4>
 
-                    <div class="col-12">
+                            {% if profile.resume %}
 
-                        {% if profile.resume %}
+                                <div class="resume-info">
 
-                            <p class="current-file mb-3">
+                                    <div class="resume-name">
 
-                                📄 Current Resume:
+                                        <h6>Current Resume</h6>
 
-                                <a href="{{ profile.resume.url }}"
-                                   target="_blank">
+                                        <span>
 
-                                    View Resume
+                                            {{ profile.resume.name|cut:"resumes/" }}
 
-                                </a>
+                                        </span>
 
-                            </p>
+                                    </div>
 
-                        {% endif %}
+                                    <div class="resume-actions">
 
-                        <div class="resume-upload">
+                                        <a
+                                            href="{{ profile.resume.url }}"
+                                            target="_blank"
+                                            class="resume-view">
 
-                            {{ form.resume }}
+                                            👁 View
+
+                                        </a>
+
+                                        <a
+                                            href="{{ profile.resume.url }}"
+                                            download
+                                            class="resume-download">
+
+                                            ⬇ Download
+
+                                        </a>
+
+                                    </div>
+
+                                </div>
+
+                            {% else %}
+
+                                <div class="no-resume">
+
+                                    No resume uploaded yet.
+
+                                </div>
+
+                            {% endif %}
+
+                            <div class="upload-card">
+
+                                <label class="upload-label">
+
+                                    📤 Upload New Resume
+
+                                </label>
+
+                                {{ form.resume }}
+
+                                <small>
+
+                                    PDF, DOC or DOCX • Maximum 5 MB
+
+                                </small>
+
+                            </div>
 
                         </div>
 
