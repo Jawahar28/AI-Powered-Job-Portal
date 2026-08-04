@@ -53,7 +53,7 @@ def job_list(request):
         jobs = jobs.filter(
             Q(title__icontains=query) |
             Q(company__name__icontains=query) |
-            Q(location__icontains=query)
+            Q(description__icontains=query)
         )
 
     if location:

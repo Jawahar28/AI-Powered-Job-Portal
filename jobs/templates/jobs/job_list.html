@@ -6,7 +6,7 @@ Available Jobs
 {% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'jobs/job_list.css' %}">
+<link rel="stylesheet" href="{% static 'css/jobs/job_list.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -15,86 +15,114 @@ Available Jobs
 
     <div class="container">
 
-        <h1>Find Your Next Opportunity</h1>
+        <div class="hero-content">
 
-        <p>
-            Browse the latest AI, Python, Backend and Software Engineering jobs.
-        </p>
+            <span class="hero-badge">
+                🚀 AI Powered Career Search
+            </span>
 
-        <form method="GET" class="search-panel">
+            <h1>
+                Find Your Next Opportunity
+            </h1>
 
-    <div class="row g-3 align-items-center">
+            <p>
+                Browse thousands of verified AI, Python, Backend and Software Engineering jobs from top companies.
+            </p>
 
-        <!-- Search -->
+            <form method="GET" class="search-panel">
 
-        <div class="col-lg-5">
-            <div class="search-input">
-                <input
-                    type="text"
-                    class="form-control"
-                    name="q"
-                    value="{{ query|default:'' }}"
-                    placeholder="Search jobs, companies...">
+                <div class="row g-3">
 
-            </div>
+                    <!-- Search -->
+
+                    <div class="col-lg-5">
+
+                        <div class="search-input">
+
+                            <i class="bi bi-search"></i>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="q"
+                                value="{{ query|default:'' }}"
+                                placeholder="Search jobs, companies or skills">
+
+                        </div>
+
+                    </div>
+
+                    <!-- Location -->
+
+                    <div class="col-lg-3">
+
+                        <div class="search-input">
+
+                            <i class="bi bi-geo-alt"></i>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="location"
+                                value="{{ location|default:'' }}"
+                                placeholder="Search location">
+
+                        </div>
+
+                    </div>
+
+                    <!-- Job Type -->
+
+                    <div class="col-lg-2">
+
+                        <select
+                            class="form-select"
+                            name="job_type">
+
+                            <option value="">
+                                💼 All Types
+                            </option>
+
+                            <option value="FT"
+                                {% if job_type == "FT" %}selected{% endif %}>
+                                Full Time
+                            </option>
+
+                            <option value="PT"
+                                {% if job_type == "PT" %}selected{% endif %}>
+                                Part Time
+                            </option>
+
+                            <option value="IN"
+                                {% if job_type == "IN" %}selected{% endif %}>
+                                Internship
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <!-- Search -->
+
+                    <div class="col-lg-2 d-grid">
+
+                        <button
+                            class="btn hero-search-btn">
+
+                            <i class="bi bi-search"></i>
+
+                            Search
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
 
         </div>
 
-        <!-- Location -->
-
-        <div class="col-lg-3">
-            <select class="form-select" name="location">
-
-                <option value="">All Locations</option>
-
-                <option value="Hyderabad" {% if location == "Hyderabad" %}selected{% endif %}>Hyderabad</option>
-
-                <option value="Bangalore" {% if location == "Bangalore" %}selected{% endif %}>Bangalore</option>
-
-                <option value="Chennai" {% if location == "Chennai" %}selected{% endif %}>Chennai</option>
-
-                <option value="Pune" {% if location == "Pune" %}selected{% endif %}>Pune</option>
-
-                <option value="Remote" {% if location == "Remote" %}selected{% endif %}>Remote</option>
-
-            </select>
-
-        </div>
-
-        <!-- Job Type -->
-
-        <div class="col-lg-2">
-            <select class="form-select" name="job_type">
-
-                <option value="">All Job Types</option>
-
-                <option value="FT" {% if job_type == "FT" %}selected{% endif %}>Full Time</option>
-
-                <option value="PT" {% if job_type == "PT" %}selected{% endif %}>Part Time</option>
-
-                <option value="IN" {% if job_type == "IN" %}selected{% endif %}>Internship</option>
-
-            </select>
-
-        </div>
-
-        <!-- Button -->
-
-        <div class="col-lg-2 d-grid">
-
-            <button class="btn btn-warning btn-lg">
-
-                <i class="bi bi-search"></i>
-
-                Search
-
-            </button>
-
-        </div>
-
-    </div>
-
-    </form>
     </div>
 
 </section>
