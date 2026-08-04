@@ -1,4 +1,12 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/candidate/saved_jobs.css' %}">
+
+{% endblock %}
 
 {% block title %}
 Saved Jobs
@@ -6,62 +14,137 @@ Saved Jobs
 
 {% block content %}
 
-<div class="container mt-5">
+<!-- ==========================
+     Hero
+========================== -->
 
-    <h2 class="mb-4">
+<section class="saved-hero">
 
-        ❤️ My Saved Jobs
+    <div class="container text-center">
 
-    </h2>
+        <h1>❤️ My Saved Jobs</h1>
 
-    {% for saved in saved_jobs %}
+        <p>
 
-    <div class="card shadow-sm mb-3">
+            Keep track of all the opportunities you're interested in.
 
-        <div class="card-body">
+        </p>
 
-            <h4>{{ saved.job.title }}</h4>
+    </div>
 
-            <p class="text-muted">
+</section>
+
+<!-- ==========================
+     Saved Jobs
+========================== -->
+
+<section class="saved-section">
+
+    <div class="container">
+
+        {% for saved in saved_jobs %}
+
+        <div class="saved-job-card">
+
+            <h2 class="job-title">
+
+                {{ saved.job.title }}
+
+            </h2>
+
+            <p class="company-name">
 
                 {{ saved.job.company.name }}
 
             </p>
 
+            <div class="job-meta">
+
+                <span>
+
+                    📍 {{ saved.job.location }}
+
+                </span>
+
+                <span>
+
+                    💰 ₹{{ saved.job.salary }}
+
+                </span>
+
+                <span>
+
+                    💼 {{ saved.job.get_job_type_display }}
+
+                </span>
+
+                <span class="status">
+
+                    {% if saved.job.status == "O" %}
+
+                        🟢 Open
+
+                    {% elif saved.job.status == "C" %}
+
+                        🔴 Closed
+
+                    {% else %}
+
+                        🟡 Draft
+
+                    {% endif %}
+
+                </span>
+
+            </div>
+
+            <div class="saved-job-actions">
+
+                <a href="{% url 'job_detail' saved.job.id %}"
+                   class="btn btn-primary">
+
+                    👁 View Job
+
+                </a>
+
+                <a href="{% url 'unsave_job' saved.job.id %}"
+                   class="btn btn-outline-danger">
+
+                    ❤️ Remove
+
+                </a>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty-state">
+
+            <h1>❤️</h1>
+
+            <h2>No Saved Jobs Yet</h2>
+
             <p>
 
-                📍 {{ saved.job.location }}
+                Start saving jobs to access them later.
 
             </p>
 
-            <p>
+            <a href="{% url 'job_list' %}"
+               class="btn btn-primary mt-3">
 
-                💰 ₹{{ saved.job.salary }}
-
-            </p>
-
-            <a
-                href="{% url 'job_detail' saved.job.id %}"
-                class="btn btn-primary">
-
-                View Job
+                Browse Jobs
 
             </a>
 
         </div>
 
-    </div>
-
-    {% empty %}
-
-    <div class="alert alert-info">
-
-        You haven't saved any jobs yet.
+        {% endfor %}
 
     </div>
 
-    {% endfor %}
-
-</div>
+</section>
 
 {% endblock %}

@@ -4,6 +4,7 @@ from .models import Job, Company, SavedJob
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 # Create your views here.
 def home(request):
@@ -117,3 +118,13 @@ def saved_jobs(request):
             "saved_jobs": saved_jobs,
         },
     )
+
+@login_required
+def unsave_job(request, id):
+    job = get_object_or_404(Job, id=id)
+
+    SavedJob.objects.filter(user=request.user, job=job).delete()
+
+    messages.success(request, "Job removed from your saved jobs.")
+
+    return redirect("saved_jobs")
