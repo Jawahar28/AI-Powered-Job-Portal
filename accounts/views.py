@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import RegisterForm, LoginForm, CandidateProfileForm, UserUpdateForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
-
+from .utils import extract_text_from_resume
 
 def register(request):
 
@@ -103,6 +103,16 @@ def edit_profile(request):
 
             user_form.save()
             profile_form.save()
+
+            if profile.resume:
+                resume_text = extract_text_from_resume(profile.resume)
+
+                profile.resume_text = resume_text
+
+                profile.save()
+
+                print(resume_text)
+
 
             return redirect("profile")
 

@@ -17,6 +17,7 @@ class CandidateProfile(models.Model):
     resume = models.FileField(upload_to='resumes/',blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    resume_text = models.TextField(blank=True)
 
     def __str__(self):
         return self.user.username
