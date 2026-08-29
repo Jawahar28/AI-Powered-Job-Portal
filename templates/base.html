@@ -1,6 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -10,15 +11,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>
+
         {% block title %}
             JOBCode
         {% endblock %}
+
     </title>
+
 
     <!-- Google Font -->
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
 
     <!-- Bootstrap CSS -->
 
@@ -26,22 +32,33 @@
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
         rel="stylesheet">
 
+
     <!-- Bootstrap Icons -->
 
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
         rel="stylesheet">
 
-    <!-- Global CSS -->
+
+    <!-- Global Base CSS -->
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/base.css' %}">
+
+
+    <!-- Global Project CSS -->
 
     <link
         rel="stylesheet"
         href="{% static 'jobs/style.css' %}">
 
+
     {% block extra_css %}
     {% endblock %}
 
 </head>
+
 
 <body>
 
@@ -54,6 +71,7 @@
         <a class="navbar-brand fw-bold fs-3" href="{% url 'home' %}">
             JOB<span class="text-warning">Code</span>
         </a>
+
 
         <!-- Mobile Toggle -->
 
@@ -70,6 +88,7 @@
 
         </button>
 
+
         <!-- Navbar Links -->
 
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -79,10 +98,13 @@
                 {% if user.is_authenticated %}
 
                     <li class="nav-item me-3">
+
                         <a class="nav-link" href="{% url 'job_list' %}">
                             Jobs
                         </a>
+
                     </li>
+
 
                     <li class="nav-item me-2">
 
@@ -92,48 +114,52 @@
 
                     </li>
 
+
                     <li class="nav-item me-2">
 
                         <a class="nav-link" href="{% url 'profile' %}">
-
                             Profile
-
                         </a>
 
                     </li>
+
 
                     <li class="nav-item me-3">
 
                         <a class="nav-link" href="{% url 'saved_jobs' %}">
 
                             <i class="bi bi-bookmark-heart"></i>
-
                             Saved Jobs
 
                         </a>
 
                     </li>
 
+
                     <li class="nav-item me-2">
 
                         <span class="nav-link">
-                            👋<i class="bi bi-person-circle"></i>
 
-                                {{ request.user.first_name|default:request.user.username }}
+                            👋
+                            <i class="bi bi-person-circle"></i>
+
+                            {{ request.user.first_name|default:request.user.username }}
+
                         </span>
 
                     </li>
 
+
                     <li class="nav-item">
 
-                        <form method="post"
+                        <form
+                            method="post"
                             action="{% url 'logout' %}"
                             class="d-inline">
 
                             {% csrf_token %}
 
-                            <button
-                                class="btn btn-outline-light rounded-pill px-4">
+                            <button class="btn btn-outline-light rounded-pill px-4">
 
                                 Logout
 
@@ -153,11 +179,15 @@
 
                     </li>
 
+
                     <li class="nav-item">
 
-                        <a class="btn btn-warning rounded-pill px-4"
-                           href="{% url 'register' %}">
+                        <a
+                            class="btn btn-warning rounded-pill px-4"
+                            href="{% url 'register' %}">
+
                             Get Started
+
                         </a>
 
                     </li>
@@ -172,15 +202,23 @@
 
 </nav>
 
-{% block content %}
-{% endblock %}
+
+<!-- Main Content -->
+
+<main>
+
+    {% block content %}
+    {% endblock %}
+
+</main>
+
+
+<!-- Footer -->
 
 <footer class="footer text-center py-4">
 
     <small>
-
         © 2026 JOBCode • AI Powered Recruitment Platform
-
     </small>
 
 </footer>
@@ -188,10 +226,14 @@
 
 <!-- Bootstrap JS -->
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js">
+</script>
+
 
 {% block extra_js %}
 {% endblock %}
+
 
 </body>
 
