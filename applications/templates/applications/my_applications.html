@@ -83,6 +83,91 @@ My Applications
 
 </div>
 
+<!-- AI Match Score -->
+
+<div class="ai-match-section">
+
+    <div class="ai-match-header">
+
+        <h5>
+            🤖 AI Match Score
+        </h5>
+
+        <span class="match-percentage">
+            {{ application.match_score }}%
+        </span>
+
+    </div>
+
+
+    <!-- Progress Bar -->
+
+    <div class="match-progress">
+
+        <div
+            class="match-progress-bar"
+            style="width: {{ application.match_score }}%;">
+
+        </div>
+
+    </div>
+
+
+    <!-- Matched Skills -->
+
+    {% if application.matched_skills %}
+
+    <div class="skills-match">
+
+        <small>Matched Skills</small>
+
+        <div class="ai-skills">
+
+            {% for skill in application.matched_skills %}
+
+            <span class="matched-skill">
+
+                ✓ {{ skill }}
+
+            </span>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- Missing Skills -->
+
+    {% if application.missing_skills %}
+
+    <div class="skills-match">
+
+        <small>Skills to Improve</small>
+
+        <div class="ai-skills">
+
+            {% for skill in application.missing_skills %}
+
+            <span class="missing-skill">
+
+                + {{ skill }}
+
+            </span>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
 
 <div class="application-footer">
 

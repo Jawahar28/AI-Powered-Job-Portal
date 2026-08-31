@@ -33,6 +33,8 @@ class Job(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
 
+    required_skills = models.TextField(blank=True, help_text="Separate skills using commas")
+
     location = models.CharField(max_length=100)
 
     salary = models.PositiveIntegerField()

@@ -4,6 +4,8 @@ from .forms import ApplicationForm
 from .models import Application
 from django.contrib.auth.decorators import login_required
 
+from accounts.utils import calculate_job_match
+
 
 @login_required
 def applicant_dashboard(request):
@@ -95,6 +97,24 @@ def apply_job(request, job_id):
 @login_required
 def my_applications(request):
     applications = request.user.applications.all().order_by('-applied_at')
+
+    profile = request.user.profile
+
+    candidate_skills = [
+        skill.strip()
+        for skill in profile.skills.split(",")
+        if skill.strip()
+    ]
+
+    for app in applications:
+        match_res = calculate_job_match(
+            candidate_skills,
+            app.job.description
+        )
+
+        app.match_score = match_res["match_score"]
+        app.matched_skills = match_res["matched_skills"]
+        app.missing_skills = match_res["missing_skills"]
 
     return render(request, 
                   "applications/my_applications.html",
