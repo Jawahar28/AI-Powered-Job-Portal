@@ -16,16 +16,16 @@ def get_recommended_jobs_for_user(user):
         if skill.strip()
     ]
 
-    # Jobs already applied by the user
     applied_job_ids = user.applications.values_list(
         "job_id",
         flat=True
     )
 
-    # Get jobs the user has not applied to
-    jobs = Job.objects.exclude(
-        id__in=applied_job_ids
-    ).select_related("company")
+    jobs = (
+        Job.objects
+        .exclude(id__in=applied_job_ids)
+        .select_related("company")
+    )
 
     recommended_jobs = []
 
@@ -33,21 +33,18 @@ def get_recommended_jobs_for_user(user):
 
         match_res = calculate_job_match(
             candidate_skills,
-            job.skills
+            job.description
         )
 
-        # Only recommend jobs with some match
         if match_res["match_score"] > 0:
 
+            # Add temporary attributes to the Job object
             job.match_score = match_res["match_score"]
-
             job.matched_skills = match_res["matched_skills"]
-
             job.missing_skills = match_res["missing_skills"]
 
             recommended_jobs.append(job)
 
-    # Highest match score first
     recommended_jobs.sort(
         key=lambda job: job.match_score,
         reverse=True
@@ -171,61 +168,18 @@ def my_applications(request):
         app.matched_skills = match_res["matched_skills"]
         app.missing_skills = match_res["missing_skills"]
 
-
-    # ==========================================
-    # Better Job Recommendations
-    # ==========================================
-
-    applied_job_ids = applications.values_list(
-        "job_id",
-        flat=True
+    # Get all recommendations using the same helper
+    recommendations = get_recommended_jobs_for_user(
+        request.user
     )
 
-    available_jobs = (
-        Job.objects
-        .exclude(id__in=applied_job_ids)
-        .select_related("company")
-    )
-
-    recommendations = []
-
-    for job in available_jobs:
-
-        match_res = calculate_job_match(
-            candidate_skills,
-            job.description
-        )
-
-        # Only recommend jobs where skills were detected
-        if match_res["match_score"] > 0:
-
-            recommendations.append({
-                "job": job,
-                "match_score": match_res["match_score"],
-                "matched_skills": match_res["matched_skills"],
-                "missing_skills": match_res["missing_skills"],
-            })
-
-
-    # Highest matching jobs first
-    recommendations.sort(
-        key=lambda x: x["match_score"],
-        reverse=True
-    )
-
-
-    # Show maximum 3 jobs
+    # Show only first 3
     recommended_jobs = recommendations[:3]
 
     context = {
-
         "applications": applications,
-
         "recommended_jobs": recommended_jobs,
-
-        # Show View All only if more than 3 exist
         "has_more_recommendations": len(recommendations) > 3,
-
     }
 
     return render(
@@ -237,7 +191,7 @@ def my_applications(request):
 @login_required
 def recommended_jobs(request):
 
-    recommended_jobs = get_recommended_jobs_for_user(
+    recommendations = get_recommended_jobs_for_user(
         request.user
     )
 
@@ -245,6 +199,6 @@ def recommended_jobs(request):
         request,
         "applications/recommended_jobs.html",
         {
-            "recommended_jobs": recommended_jobs,
+            "recommendations": recommendations,
         }
     )

@@ -5,12 +5,14 @@
 AI Recommended Jobs
 {% endblock %}
 
+
 {% block extra_css %}
 <link
     rel="stylesheet"
     href="{% static 'css/applications/recommended_jobs.css' %}"
 >
 {% endblock %}
+
 
 {% block content %}
 
@@ -45,7 +47,7 @@ AI Recommended Jobs
 
         <div class="row g-4">
 
-            {% for item in recommendations %}
+            {% for job in recommended_jobs %}
 
             <div class="col-lg-6">
 
@@ -58,20 +60,21 @@ AI Recommended Jobs
                         <div>
 
                             <h3>
-                                {{ item.job.title }}
+                                {{ job.title }}
                             </h3>
 
                             <h5>
-                                {{ item.job.company.name }}
+                                {{ job.company.name }}
                             </h5>
 
                         </div>
+
 
                         <!-- AI Match Score -->
 
                         <div class="recommendation-score">
 
-                            {{ item.match_score }}%
+                            {{ job.match_score }}%
 
                         </div>
 
@@ -83,15 +86,15 @@ AI Recommended Jobs
                     <div class="recommendation-info">
 
                         <span>
-                            📍 {{ item.job.location }}
+                            📍 {{ job.location }}
                         </span>
 
                         <span>
-                            💼 {{ item.job.get_job_type_display }}
+                            💼 {{ job.get_job_type_display }}
                         </span>
 
                         <span>
-                            💰 ₹{{ item.job.salary }}
+                            💰 ₹{{ job.salary }}
                         </span>
 
                     </div>
@@ -99,7 +102,7 @@ AI Recommended Jobs
 
                     <!-- Matched Skills -->
 
-                    {% if item.matched_skills %}
+                    {% if job.matched_skills %}
 
                     <div class="recommendation-skills">
 
@@ -107,9 +110,10 @@ AI Recommended Jobs
                             🤖 Why this job matches you
                         </small>
 
+
                         <div class="skills-container">
 
-                            {% for skill in item.matched_skills %}
+                            {% for skill in job.matched_skills %}
 
                             <span class="matched-skill">
 
@@ -129,7 +133,7 @@ AI Recommended Jobs
                     <!-- View Job -->
 
                     <a
-                        href="{% url 'job_detail' item.job.id %}"
+                        href="{% url 'job_detail' job.id %}"
                         class="recommendation-btn"
                     >
 
@@ -141,6 +145,7 @@ AI Recommended Jobs
 
             </div>
 
+
             {% empty %}
 
             <div class="col-12">
@@ -148,7 +153,7 @@ AI Recommended Jobs
                 <div class="no-recommendations">
 
                     <h2>
-                        No Recommendations Yet
+                        🎯 No Recommendations Yet
                     </h2>
 
                     <p>
