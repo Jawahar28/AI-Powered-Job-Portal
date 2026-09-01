@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+AI Recommended Jobs
+{% endblock %}
+
+{% block extra_css %}
+<link
+    rel="stylesheet"
+    href="{% static 'css/applications/recommended_jobs.css' %}"
+>
+{% endblock %}
+
+{% block content %}
+
+<!-- ==========================================
+     Header
+========================================== -->
+
+<section class="recommendations-header">
+
+    <div class="container">
+
+        <h1>
+            🤖 AI Recommended Jobs
+        </h1>
+
+        <p>
+            Jobs selected based on your skills and profile.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ==========================================
+     Recommended Jobs
+========================================== -->
+
+<section class="recommendations-section">
+
+    <div class="container">
+
+        <div class="row g-4">
+
+            {% for item in recommendations %}
+
+            <div class="col-lg-6">
+
+                <div class="recommendation-card">
+
+                    <!-- Job Title -->
+
+                    <div class="recommendation-top">
+
+                        <div>
+
+                            <h3>
+                                {{ item.job.title }}
+                            </h3>
+
+                            <h5>
+                                {{ item.job.company.name }}
+                            </h5>
+
+                        </div>
+
+                        <!-- AI Match Score -->
+
+                        <div class="recommendation-score">
+
+                            {{ item.match_score }}%
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Job Information -->
+
+                    <div class="recommendation-info">
+
+                        <span>
+                            📍 {{ item.job.location }}
+                        </span>
+
+                        <span>
+                            💼 {{ item.job.get_job_type_display }}
+                        </span>
+
+                        <span>
+                            💰 ₹{{ item.job.salary }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- Matched Skills -->
+
+                    {% if item.matched_skills %}
+
+                    <div class="recommendation-skills">
+
+                        <small>
+                            🤖 Why this job matches you
+                        </small>
+
+                        <div class="skills-container">
+
+                            {% for skill in item.matched_skills %}
+
+                            <span class="matched-skill">
+
+                                ✓ {{ skill }}
+
+                            </span>
+
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <!-- View Job -->
+
+                    <a
+                        href="{% url 'job_detail' item.job.id %}"
+                        class="recommendation-btn"
+                    >
+
+                        View Job →
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="col-12">
+
+                <div class="no-recommendations">
+
+                    <h2>
+                        No Recommendations Yet
+                    </h2>
+
+                    <p>
+                        We couldn't find any new jobs matching
+                        your profile right now.
+                    </p>
+
+                    <a
+                        href="{% url 'job_list' %}"
+                        class="browse-btn"
+                    >
+
+                        Browse All Jobs
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

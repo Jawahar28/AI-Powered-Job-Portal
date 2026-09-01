@@ -4,7 +4,7 @@ from .forms import ApplicationForm
 from .models import Application
 from django.contrib.auth.decorators import login_required
 
-from accounts.utils import calculate_job_match
+from accounts.utils import calculate_job_match, generate_resume_feedback, get_job_recommendations
 
 
 @login_required
@@ -96,7 +96,12 @@ def apply_job(request, job_id):
 
 @login_required
 def my_applications(request):
-    applications = request.user.applications.all().order_by('-applied_at')
+
+    applications = (
+        request.user.applications
+        .select_related("job", "job__company")
+        .order_by("-applied_at")
+    )
 
     profile = request.user.profile
 
@@ -107,19 +112,68 @@ def my_applications(request):
     ]
 
     for app in applications:
+
+        # Calculate skill match
         match_res = calculate_job_match(
             candidate_skills,
-            app.job.description
+            app.job.skills
         )
 
         app.match_score = match_res["match_score"]
         app.matched_skills = match_res["matched_skills"]
         app.missing_skills = match_res["missing_skills"]
 
-    return render(request, 
-                  "applications/my_applications.html",
-                  {
+        # Generate AI feedback
+        app.ai_feedback = generate_resume_feedback(
+            app.match_score,
+            app.matched_skills,
+            app.missing_skills
+        )
 
-                      'applications' : applications,
-                  },
-                )
+    return render(
+        request,
+        "applications/my_applications.html",
+        {
+            "applications": applications,
+        },
+    )
+
+@login_required
+def recommended_jobs(request):
+
+    profile = request.user.profile
+
+    # Get candidate skills
+    candidate_skills = [
+        skill.strip()
+        for skill in profile.skills.split(",")
+        if skill.strip()
+    ]
+
+    # Get IDs of jobs already applied to
+    applied_job_ids = request.user.applications.values_list(
+        "job_id",
+        flat=True
+    )
+
+    # Get available jobs that user has NOT applied to
+    available_jobs = (
+        Job.objects
+        .exclude(id__in=applied_job_ids)
+        .filter(status=Job.Status.OPEN)
+        .select_related("company")
+    )
+
+    # Generate AI recommendations
+    recommendations = get_job_recommendations(
+        candidate_skills,
+        available_jobs
+    )
+
+    return render(
+        request,
+        "applications/recommended_jobs.html",
+        {
+            "recommendations": recommendations,
+        }
+    )

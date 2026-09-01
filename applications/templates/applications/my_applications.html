@@ -111,6 +111,14 @@ My Applications
                 </div>
                 {% endif %}
 
+                <!-- AI Feedback -->
+                <div class="ai-feedback">
+                    <h6>💡 AI Feedback</h6>
+                    <p>
+                        {{ application.ai_feedback }}
+                    </p>
+                </div>
+
                 <!-- Missing Skills -->
                 {% if application.missing_skills %}
                 <div class="skills-match">
