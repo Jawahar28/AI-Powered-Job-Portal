@@ -303,7 +303,7 @@ def get_job_recommendations(candidate_skills, jobs):
     recommendations = []
 
     for job in jobs:
-        match_res = calculate_job_match(candidate_skills, job.skills)
+        match_res = calculate_job_match(candidate_skills, job.description)
 
         recommendations.append( {
             "job" : job,

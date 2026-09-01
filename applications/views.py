@@ -6,6 +6,54 @@ from django.contrib.auth.decorators import login_required
 
 from accounts.utils import calculate_job_match, generate_resume_feedback, get_job_recommendations
 
+def get_recommended_jobs_for_user(user):
+
+    profile = user.profile
+
+    candidate_skills = [
+        skill.strip()
+        for skill in profile.skills.split(",")
+        if skill.strip()
+    ]
+
+    # Jobs already applied by the user
+    applied_job_ids = user.applications.values_list(
+        "job_id",
+        flat=True
+    )
+
+    # Get jobs the user has not applied to
+    jobs = Job.objects.exclude(
+        id__in=applied_job_ids
+    ).select_related("company")
+
+    recommended_jobs = []
+
+    for job in jobs:
+
+        match_res = calculate_job_match(
+            candidate_skills,
+            job.skills
+        )
+
+        # Only recommend jobs with some match
+        if match_res["match_score"] > 0:
+
+            job.match_score = match_res["match_score"]
+
+            job.matched_skills = match_res["matched_skills"]
+
+            job.missing_skills = match_res["missing_skills"]
+
+            recommended_jobs.append(job)
+
+    # Highest match score first
+    recommended_jobs.sort(
+        key=lambda job: job.match_score,
+        reverse=True
+    )
+
+    return recommended_jobs
 
 @login_required
 def applicant_dashboard(request):
@@ -111,69 +159,92 @@ def my_applications(request):
         if skill.strip()
     ]
 
+    # AI Match Score for Applied Jobs
     for app in applications:
 
-        # Calculate skill match
         match_res = calculate_job_match(
             candidate_skills,
-            app.job.skills
+            app.job.description
         )
 
         app.match_score = match_res["match_score"]
         app.matched_skills = match_res["matched_skills"]
         app.missing_skills = match_res["missing_skills"]
 
-        # Generate AI feedback
-        app.ai_feedback = generate_resume_feedback(
-            app.match_score,
-            app.matched_skills,
-            app.missing_skills
+
+    # ==========================================
+    # Better Job Recommendations
+    # ==========================================
+
+    applied_job_ids = applications.values_list(
+        "job_id",
+        flat=True
+    )
+
+    available_jobs = (
+        Job.objects
+        .exclude(id__in=applied_job_ids)
+        .select_related("company")
+    )
+
+    recommendations = []
+
+    for job in available_jobs:
+
+        match_res = calculate_job_match(
+            candidate_skills,
+            job.description
         )
+
+        # Only recommend jobs where skills were detected
+        if match_res["match_score"] > 0:
+
+            recommendations.append({
+                "job": job,
+                "match_score": match_res["match_score"],
+                "matched_skills": match_res["matched_skills"],
+                "missing_skills": match_res["missing_skills"],
+            })
+
+
+    # Highest matching jobs first
+    recommendations.sort(
+        key=lambda x: x["match_score"],
+        reverse=True
+    )
+
+
+    # Show maximum 3 jobs
+    recommended_jobs = recommendations[:3]
+
+    context = {
+
+        "applications": applications,
+
+        "recommended_jobs": recommended_jobs,
+
+        # Show View All only if more than 3 exist
+        "has_more_recommendations": len(recommendations) > 3,
+
+    }
 
     return render(
         request,
         "applications/my_applications.html",
-        {
-            "applications": applications,
-        },
+        context
     )
 
 @login_required
 def recommended_jobs(request):
 
-    profile = request.user.profile
-
-    # Get candidate skills
-    candidate_skills = [
-        skill.strip()
-        for skill in profile.skills.split(",")
-        if skill.strip()
-    ]
-
-    # Get IDs of jobs already applied to
-    applied_job_ids = request.user.applications.values_list(
-        "job_id",
-        flat=True
-    )
-
-    # Get available jobs that user has NOT applied to
-    available_jobs = (
-        Job.objects
-        .exclude(id__in=applied_job_ids)
-        .filter(status=Job.Status.OPEN)
-        .select_related("company")
-    )
-
-    # Generate AI recommendations
-    recommendations = get_job_recommendations(
-        candidate_skills,
-        available_jobs
+    recommended_jobs = get_recommended_jobs_for_user(
+        request.user
     )
 
     return render(
         request,
         "applications/recommended_jobs.html",
         {
-            "recommendations": recommendations,
+            "recommended_jobs": recommended_jobs,
         }
     )
