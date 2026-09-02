@@ -27,147 +27,212 @@ Candidate Dashboard
 
 </section>
 
+
 <section class="dashboard-section">
 
 <div class="container">
 
+
+<!-- ==========================================
+     Dashboard Statistics
+========================================== -->
+
 <div class="stats-grid">
 
-<div class="stat-card">
 
-<h2>{{ application_count }}</h2>
+    <!-- Applications -->
 
-<p>Applications</p>
+    <div class="stat-card">
+
+        <h2>{{ application_count }}</h2>
+
+        <p>Applications</p>
+
+    </div>
+
+
+    <!-- AI Recommendations -->
+
+    <div class="stat-card">
+
+        <h2>{{ recommendation_count }}</h2>
+
+        <p>AI Recommendations</p>
+
+    </div>
+
+
+    <!-- Interviews -->
+
+    <div class="stat-card">
+
+        <h2>{{ interviews }}</h2>
+
+        <p>Interviews</p>
+
+    </div>
+
+
+    <!-- Profile Completion -->
+
+    <div class="stat-card">
+
+        <h2>{{ profile_completion }}%</h2>
+
+        <p>Profile Complete</p>
+
+    </div>
+
 
 </div>
 
-<div class="stat-card">
 
-<h2>{{ saved_jobs }}</h2>
-
-<p>Saved Jobs</p>
-
-</div>
-
-<div class="stat-card">
-
-<h2>{{ interviews }}</h2>
-
-<p>Interviews</p>
-
-</div>
-
-<div class="stat-card">
-
-<h2>{{ profile_completion }}%</h2>
-
-<p>Profile Complete</p>
-
-</div>
-
-</div>
+<!-- ==========================================
+     Recent Applications
+========================================== -->
 
 <h2 class="section-title">
 
-Recent Applications
+    Recent Applications
 
 </h2>
+
 
 {% for application in applications %}
 
 <div class="application-row">
 
-<div>
+    <div>
 
-<h4>{{ application.job.title }}</h4>
+        <h4>
+            {{ application.job.title }}
+        </h4>
 
-<p>{{ application.job.company.name }}</p>
+        <p>
+            {{ application.job.company.name }}
+        </p>
+
+    </div>
+
+
+    <div>
+
+        <span class="status {{ application.badge_class }}">
+
+            {{ application.get_status_display }}
+
+        </span>
+
+    </div>
+
+
+    <div>
+
+        <a href="{% url 'job_detail' application.job.id %}">
+
+            View →
+
+        </a>
+
+    </div>
 
 </div>
 
-<div>
-
-<span class="status {{ application.badge_class }}">
-
-{{ application.get_status_display }}
-
-</span>
-
-</div>
-
-<div>
-
-<a href="{% url 'job_detail' application.job.id %}">
-
-View →
-
-</a>
-
-</div>
-
-</div>
 
 {% empty %}
 
 <div class="empty-card">
 
-<h3>No Applications Yet</h3>
+    <h3>
+        No Applications Yet
+    </h3>
 
-<p>
+    <p>
+        Start applying to jobs to see them here.
+    </p>
 
-Start applying to jobs to see them here.
+    <a
+        href="{% url 'job_list' %}"
+        class="browse-btn"
+    >
 
-</p>
+        Browse Jobs
 
-<a
-href="{% url 'job_list' %}"
-class="browse-btn">
-
-Browse Jobs
-
-</a>
+    </a>
 
 </div>
 
 {% endfor %}
 
+
+<!-- ==========================================
+     Quick Actions
+========================================== -->
+
 <div class="quick-actions">
 
-<h2 class="section-title">
+    <h2 class="section-title">
 
-Quick Actions
+        Quick Actions
 
-</h2>
+    </h2>
 
-<div class="action-grid">
 
-<a href="{% url 'job_list' %}" class="action-card">
+    <div class="action-grid">
 
-🔍
 
-<h4>
+        <!-- Browse Jobs -->
 
-Browse Jobs
+        <a
+            href="{% url 'job_list' %}"
+            class="action-card"
+        >
 
-</h4>
+            🔍
 
-</a>
+            <h4>
+                Browse Jobs
+            </h4>
 
-<a href="{% url 'my_applications' %}" class="action-card">
+        </a>
 
-📂
 
-<h4>
+        <!-- My Applications -->
 
-My Applications
+        <a
+            href="{% url 'my_applications' %}"
+            class="action-card"
+        >
 
-</h4>
+            📂
 
-</a>
+            <h4>
+                My Applications
+            </h4>
+
+        </a>
+
+
+        <!-- AI Recommended Jobs -->
+
+        <a
+            href="{% url 'recommended_jobs' %}"
+            class="action-card"
+        >
+
+            🤖
+
+            <h4>
+                AI Recommendations
+            </h4>
+
+        </a>
+
+
+    </div>
 
 </div>
 
-</div>
 
 </div>
 

@@ -61,17 +61,28 @@ def applicant_dashboard(request):
         .order_by("-applied_at")
     )
 
+    # Get AI recommended jobs
+    recommended_jobs = get_recommended_jobs_for_user(
+        request.user
+    )
+
     context = {
 
+        # Recent applications
         "applications": applications[:5],
 
+        # Real application count
         "application_count": applications.count(),
 
-        # We'll replace these with real models later
+        # Real AI recommendation count
+        "recommendation_count": len(recommended_jobs),
+
+        # Temporary values until those features are built
         "saved_jobs": 0,
 
         "interviews": 0,
 
+        # We will calculate this dynamically in Step 2
         "profile_completion": 70,
 
     }
