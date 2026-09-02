@@ -13,96 +13,56 @@ My Profile
 {% block content %}
 
 <section class="profile-page">
-
     <section class="profile-hero">
-
         <div class="container">
-
             <div class="profile-card">
-
                 <div class="profile-avatar">
-
                     {% if profile.profile_picture %}
-
                         <img
                             src="{{ profile.profile_picture.url }}"
                             alt="Profile Picture"
                             class="profile-image">
-
                     {% else %}
-
                         <div class="avatar-placeholder">
-
                             {{ request.user.username|first|upper }}
-
                         </div>
-
                     {% endif %}
-
                 </div>
-
                 <h1>
-
                     {% if request.user.first_name or request.user.last_name %}
-
                         {{ request.user.first_name }} {{ request.user.last_name }}
-
                     {% else %}
-
                         {{ request.user.username }}
-
                     {% endif %}
-
-
                 </h1>
 
                 <p class="headline">
-
                     {{ profile.headline|default:"Backend Python Developer" }}
-
                 </p>
 
                 <p class="location">
-
                     📍 {{ profile.location|default:"Location not added" }}
-
                 </p>
 
                 <div class="profile-buttons">
-
                     <a href="{% url 'edit_profile' %}" class="edit-btn">
-
                         Edit Profile
-
                     </a>
-
                     {% if profile.resume %}
-
                     <a
                         href="{{ profile.resume.url }}"
                         target="_blank"
                         class="resume-btn">
-
                         View Resume
-
                     </a>
-
                     {% else %}
-
                     <a href="#" class="resume-btn disabled">
-
                         No Resume
-
                     </a>
-
                     {% endif %}
-
                 </div>
-
             </div>
-
         </div>
-
 
     </section>
 
