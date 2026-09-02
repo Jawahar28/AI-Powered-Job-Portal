@@ -13,51 +13,32 @@ My Applications
     href="{% static 'css/applications/my_applications.css' %}">
 {% endblock %}
 
-
 {% block content %}
-
 
 <!-- ==========================================
      Applications Header
 ========================================== -->
-
 <section class="applications-header">
-
     <div class="container">
-
         <h1>📂 My Applications</h1>
-
         <p>
             Track all the jobs you've applied for and see your AI-powered
             skill match for each position.
         </p>
-
     </div>
-
 </section>
-
 
 <!-- ==========================================
      Applications Section
 ========================================== -->
-
 <section class="applications-section">
-
     <div class="container">
-
         {% for application in applications %}
-
         <!-- Application Card -->
-
         <div class="application-card">
-
-
             <!-- Job Header -->
-
             <div class="application-top">
-
                 <div>
-
                     <h3>
                         {{ application.job.title }}
                     </h3>
@@ -65,25 +46,16 @@ My Applications
                     <h5>
                         {{ application.job.company.name }}
                     </h5>
-
                 </div>
 
-
                 <!-- Application Status -->
-
                 <span class="status-badge {{ application.badge_class }}">
-
                     {{ application.get_status_display }}
-
                 </span>
-
             </div>
 
-
             <!-- Job Information -->
-
             <div class="application-info">
-
                 <span>
                     📍 {{ application.job.location }}
                 </span>
@@ -95,23 +67,15 @@ My Applications
                 <span>
                     💼 {{ application.job.get_job_type_display }}
                 </span>
-
             </div>
-
 
             <!-- ==========================================
                  AI MATCH SECTION
             =========================================== -->
-
             <div class="ai-match-section">
-
-
                 <!-- AI Match Header -->
-
                 <div class="ai-match-header">
-
                     <div>
-
                         <h5>
                             🤖 AI Match Score
                         </h5>
@@ -119,220 +83,120 @@ My Applications
                         <small>
                             Based on your profile skills
                         </small>
-
                     </div>
-
-
                     <!-- Match Percentage -->
-
                     <span class="match-percentage">
-
                         {{ application.match_score }}%
-
                     </span>
-
                 </div>
-
-
                 <!-- Progress Bar -->
-
                 <div class="match-progress">
-
                     <div
                         class="match-progress-bar"
                         style="width: {{ application.match_score }}%;">
-
                     </div>
-
                 </div>
-
-
                 <!-- Matched Skills -->
-
                 {% if application.matched_skills %}
-
                 <div class="skills-match">
-
                     <small class="skills-title matched-title">
-
                         ✓ Matched Skills
-
                     </small>
 
-
                     <div class="ai-skills">
-
                         {% for skill in application.matched_skills %}
-
                         <span class="matched-skill">
-
                             ✓ {{ skill }}
-
                         </span>
-
                         {% endfor %}
-
                     </div>
-
                 </div>
-
                 {% endif %}
 
-
                 <!-- AI Feedback -->
-
                 <div class="ai-feedback">
-
                     <h6>
                         💡 AI Feedback
                     </h6>
 
                     <p>
-
                         {{ application.ai_feedback }}
-
                     </p>
-
                 </div>
-
 
                 <!-- Missing Skills -->
-
                 {% if application.missing_skills %}
-
                 <div class="skills-match">
-
                     <small class="skills-title missing-title">
-
                         + Skills to Improve
-
                     </small>
 
-
                     <div class="ai-skills">
-
                         {% for skill in application.missing_skills %}
-
                         <span class="missing-skill">
-
                             + {{ skill }}
-
                         </span>
-
                         {% endfor %}
-
                     </div>
-
                 </div>
-
                 {% endif %}
-
 
                 <!-- No Job Skills Detected -->
-
                 {% if application.match_score == 0 and not application.matched_skills and not application.missing_skills %}
-
                 <p class="no-ai-data">
-
                     ⚠️ AI could not detect specific skills for this job.
-
                 </p>
-
                 {% endif %}
-
-
             </div>
-
 
             <!-- ==========================================
                  Application Footer
             =========================================== -->
-
             <div class="application-footer">
-
                 <small>
-
                     Applied on
                     {{ application.applied_at|date:"F d, Y" }}
-
                 </small>
-
-
                 <a
                     href="{% url 'job_detail' application.job.id %}"
                     class="view-btn">
-
                     View Job →
-
                 </a>
-
             </div>
-
-
         </div>
-
-
         {% empty %}
-
 
         <!-- ==========================================
              Empty State
         =========================================== -->
-
         <div class="empty-state">
-
             <img
                 src="{% static 'jobs/hero.svg' %}"
                 alt="No Applications">
-
-
             <h2>
-
                 No Applications Yet
-
             </h2>
-
-
             <p>
-
                 Looks like you haven't applied to any jobs yet.
-
             </p>
-
-
             <a
                 href="{% url 'job_list' %}"
                 class="browse-btn">
-
                 Browse Jobs
-
             </a>
-
         </div>
-
-
         {% endfor %}
-
     </div>
-
 </section>
-
 
 <!-- ==========================================
      Better Job Matches
 ========================================== -->
-
 <section class="better-matches-section">
-
     <div class="container">
-
-
         <!-- Section Header -->
-
         <div class="better-matches-header">
-
             <div>
-
                 <h2>
                     🤖 Better Matches for You
                 </h2>
@@ -341,180 +205,80 @@ My Applications
                     Based on your profile skills, here are jobs that may
                     be a better match.
                 </p>
-
             </div>
-
-
             <!-- Show button only if more than 3 recommendations -->
-
             {% if recommended_jobs_count > 3 %}
-
             <a
                 href="{% url 'recommended_jobs' %}"
                 class="see-all-btn">
-
                 Browse All Recommendations →
-
             </a>
-
             {% endif %}
-
         </div>
-
-
         {% if recommended_jobs %}
-
-
         <!-- Recommended Jobs -->
-
         <div class="row">
-
-
             {% for recommendation in recommended_jobs %}
-
             <div class="col-md-6 col-lg-4 mb-4">
-
-
                 <div class="better-match-card">
-
-
                     <!-- Match Score -->
-
                     <div class="better-match-score">
-
                         {{ recommendation.match_score }}% Match
-
                     </div>
-
-
                     <!-- Job Details -->
-
                     <h4>
-
                         {{ recommendation.title }}
-
                     </h4>
-
-
                     <p class="better-match-company">
-
                         {{ recommendation.company.name }}
-
                     </p>
-
-
                     <!-- Job Information -->
-
                     <div class="better-match-info">
-
                         <span>
-
                             📍 {{ recommendation.location }}
-
                         </span>
-
-
                         <span>
-
                             💼 {{ recommendation.get_job_type_display }}
-
                         </span>
-
                     </div>
-
-
                     <!-- Matching Skills -->
-
                     {% if recommendation.matched_skills %}
-
                     <div class="better-match-skills">
-
-
                         <small>
-
                             Matching Skills
-
                         </small>
-
-
                         <div class="better-skills-container">
-
-
                             <!-- Show maximum 5 skills -->
-
                             {% for skill in recommendation.matched_skills|slice:":5" %}
-
                             <span>
-
                                 ✓ {{ skill }}
-
                             </span>
-
                             {% endfor %}
-
-
                         </div>
-
-
                     </div>
-
                     {% endif %}
-
-
                     <!-- View Job -->
-
                     <a
                         href="{% url 'job_detail' recommendation.id %}"
                         class="better-match-btn">
-
                         View Job →
-
                     </a>
-
-
                 </div>
-
             </div>
-
-
             {% endfor %}
-
-
         </div>
-
-
         {% else %}
-
-
         <!-- No Recommendations -->
-
         <div class="no-better-matches">
-
-
             <h3>
-
                 🎯 No Recommendations Available
-
             </h3>
-
-
             <p>
-
                 Add more skills to your profile to receive better
                 job recommendations.
-
             </p>
-
-
         </div>
-
-
         {% endif %}
-
-
     </div>
-
 </section>
-
-
 {% endblock %}

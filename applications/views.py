@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from jobs.models import Job
+from jobs.models import Job, SavedJob
 from .forms import ApplicationForm
 from .models import Application
 from django.contrib.auth.decorators import login_required
@@ -83,7 +83,7 @@ def applicant_dashboard(request):
         "recommendation_count": len(recommended_jobs),
 
         # Temporary values until those features are built
-        "saved_jobs": 0,
+        "saved_jobs": request.user.saved_jobs.count(),
 
         "interviews": 0,
 
