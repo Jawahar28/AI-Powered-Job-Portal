@@ -315,4 +315,38 @@ def get_job_recommendations(candidate_skills, jobs):
 
     return recommendations
 
+
+def calculate_profile_completion(user):
+    profile = user.profile
+
+    fields = [
+        user.first_name, 
+        user.last_name,
+        user.email,
+
+        profile.profile_picture,
+        profile.phone,
+        profile.location,
+        profile.headline,
+        profile.bio,
+        profile.skills,
+        profile.experience,
+        profile.github,
+        profile.linkedin,
+        profile.resume,
+    ]
+
+    completed_fields = 0
+
+    for field in fields:
+        if field:
+            completed_fields+=1
+
+
+    total_fields = len(fields)
+
+    completion_percentage = (completed_fields / total_fields) * 100
+
+    return round(completion_percentage)
+
     

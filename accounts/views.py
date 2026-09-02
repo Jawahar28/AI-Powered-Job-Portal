@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import RegisterForm, LoginForm, CandidateProfileForm, UserUpdateForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
-from .utils import extract_text_from_resume, extract_skills_from_resume
+from .utils import extract_text_from_resume, extract_skills_from_resume, calculate_profile_completion
 
 def register(request):
 
@@ -78,9 +78,22 @@ def logout_view(request):
 
 @login_required
 def profile(request):
+
     profile = request.user.profile
 
-    return render(request, "accounts/candidate/profile.html", {"profile":profile},)
+    profile_completion = calculate_profile_completion(
+        request.user
+    )
+
+    return render(
+        request,
+        "accounts/candidate/profile.html",
+        {
+            "profile": profile,
+            "profile_completion": profile_completion,
+        },
+    )
+
 
 @login_required
 def edit_profile(request):

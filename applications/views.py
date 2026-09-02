@@ -4,7 +4,12 @@ from .forms import ApplicationForm
 from .models import Application
 from django.contrib.auth.decorators import login_required
 
-from accounts.utils import calculate_job_match, generate_resume_feedback, get_job_recommendations
+from accounts.utils import (
+    calculate_job_match, 
+    generate_resume_feedback, 
+    get_job_recommendations, 
+    calculate_profile_completion,
+)
 
 def get_recommended_jobs_for_user(user):
 
@@ -62,9 +67,9 @@ def applicant_dashboard(request):
     )
 
     # Get AI recommended jobs
-    recommended_jobs = get_recommended_jobs_for_user(
-        request.user
-    )
+    recommended_jobs = get_recommended_jobs_for_user(request.user)
+
+    profile_completion = calculate_profile_completion(request.user)
 
     context = {
 
@@ -82,8 +87,7 @@ def applicant_dashboard(request):
 
         "interviews": 0,
 
-        # We will calculate this dynamically in Step 2
-        "profile_completion": 70,
+        "profile_completion": profile_completion,
 
     }
 
