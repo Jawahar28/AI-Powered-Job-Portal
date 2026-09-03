@@ -30,7 +30,7 @@ class Job(models.Model):
 
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
 
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=255)
     description = models.TextField()
 
     required_skills = models.TextField(blank=True, help_text="Separate skills using commas")
