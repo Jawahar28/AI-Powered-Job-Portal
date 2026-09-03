@@ -85,13 +85,29 @@ Take the next step in your career.
 
 </p>
 
-<a
-href="{% url 'apply_job' job.id %}"
-class="apply-btn">
+{% if job.external_url %}
 
-Apply Now
+<a
+    href="{{ job.external_url }}"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="apply-btn">
+
+    Apply on Original Website ↗
 
 </a>
+
+{% else %}
+
+<a
+    href="{% url 'apply_job' job.id %}"
+    class="apply-btn">
+
+    Apply Now
+
+</a>
+
+{% endif %}
 
 <a
     href="{% url 'save_job' job.id %}"

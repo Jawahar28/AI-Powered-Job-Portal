@@ -53,6 +53,10 @@ class Job(models.Model):
 
     posted_at = models.DateTimeField(default=timezone.now)
 
+    source = models.CharField(max_length=180, blank=True)
+    external_url = models.URLField(blank=True)
+    external_job_id = models.CharField(max_length=255, blank=True)
+
     def __str__(self):
         return self.title
 
