@@ -8,17 +8,17 @@ from jobs.services.job_intelligence import analyze_candidate
 
 class Command(BaseCommand):
 
-    help = "Fetch jobs based on candidate profiles"
+    help = "Fetch jobs using unique candidate search keywords"
 
     def handle(self, *args, **options):
 
-        users = User.objects.filter(
-            profile__resume_text__isnull=False
-        ).exclude(
-            profile__resume_text=""
+        users = (
+            User.objects
+            .filter(profile__resume_text__isnull=False)
+            .exclude(profile__resume_text="")
         )
 
-        searches = []
+        unique_searches = set()
 
         for user in users:
 
@@ -26,26 +26,30 @@ class Command(BaseCommand):
                 user.profile
             )
 
+            location = user.profile.location
+
             for keyword in analysis["search_keywords"]:
 
-                searches.append({
-                    "keyword": keyword,
-                    "location": user.profile.location,
-                })
+                unique_searches.add(
+                    (keyword, location)
+                )
+
+        self.stdout.write(
+            f"Unique searches: {len(unique_searches)}"
+        )
 
         imported_count = 0
         skipped_count = 0
 
-        for search in searches:
+        for keyword, location in unique_searches:
 
             self.stdout.write(
-                f"Searching: {search['keyword']} "
-                f"in {search['location']}"
+                f"Searching: {keyword} in {location}"
             )
 
             jobs = fetch_jobs(
-                keyword=search["keyword"],
-                location=search["location"],
+                keyword=keyword,
+                location=location,
                 results_per_page=10,
             )
 
@@ -69,10 +73,6 @@ class Command(BaseCommand):
                 else:
 
                     skipped_count += 1
-
-                    self.stdout.write(
-                        f"Already exists: {job.title}"
-                    )
 
         self.stdout.write(
             self.style.SUCCESS(

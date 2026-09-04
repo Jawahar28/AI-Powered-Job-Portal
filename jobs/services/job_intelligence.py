@@ -11,31 +11,32 @@ def analyze_candidate(profile):
         for skill in skills
     }
 
-    roles = []
-    search_keywords = []
+    primary_roles = []
+    secondary_roles = []
 
-    # Backend
+    # -------------------------
+    # Backend / Python
+    # -------------------------
+
     if (
         "python" in skills_lower
         and (
             "django" in skills_lower
+            or "django rest framework" in skills_lower
             or "rest api" in skills_lower
             or "rest apis" in skills_lower
         )
     ):
-        roles.extend([
+        primary_roles.extend([
             "Python Developer",
             "Django Developer",
             "Backend Developer",
         ])
 
-        search_keywords.extend([
-            "Python Django",
-            "Python Backend",
-            "Django REST",
-        ])
-
+    # -------------------------
     # Data
+    # -------------------------
+
     if (
         "python" in skills_lower
         and (
@@ -44,35 +45,31 @@ def analyze_candidate(profile):
             or "sql" in skills_lower
         )
     ):
-        roles.extend([
+        secondary_roles.extend([
             "Data Analyst",
             "Python Data Analyst",
         ])
 
-        search_keywords.extend([
-            "Python Data Analyst",
-            "Data Analyst Python",
-        ])
-
+    # -------------------------
     # Machine Learning
+    # -------------------------
+
     if (
         "machine learning" in skills_lower
         or "scikit-learn" in skills_lower
     ):
-        roles.extend([
+        secondary_roles.extend([
             "Machine Learning Engineer",
-            "ML Engineer",
-        ])
-
-        search_keywords.extend([
-            "Machine Learning",
             "ML Engineer",
         ])
 
     return {
         "skills": skills,
-        "roles": list(dict.fromkeys(roles)),
+        "primary_roles": list(dict.fromkeys(primary_roles)),
+        "secondary_roles": list(dict.fromkeys(secondary_roles)),
         "search_keywords": list(
-            dict.fromkeys(search_keywords)
+            dict.fromkeys(
+                primary_roles + secondary_roles
+            )
         ),
     }

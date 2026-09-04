@@ -1,6 +1,58 @@
+import re
+
 from jobs.models import Job
 from accounts.utils import calculate_job_match
 from jobs.services.job_intelligence import analyze_candidate
+
+def is_experience_eligible(candidate_experience, job_text):
+
+    if not candidate_experience:
+        return True
+
+    candidate_text = candidate_experience.lower().strip()
+    job_text = job_text.lower()
+
+    # Fresher / 0 years
+    if candidate_text in [
+        "0",
+        "0 years",
+        "fresher",
+        "freshers",
+    ]:
+
+        # Explicit senior-level keywords
+        senior_keywords = [
+            "senior",
+            "sr.",
+            "sr ",
+            "lead",
+            "manager",
+            "principal",
+        ]
+
+        if any(
+            keyword in job_text
+            for keyword in senior_keywords
+        ):
+            return False
+
+        # Detect requirements such as:
+        # 2 years
+        # 3+ years
+        # 5 years
+        # 7 YoE
+        # 8+ YoE
+        experience_matches = re.findall(
+            r'(\d+)\s*(?:\+)?\s*(?:years?|yoe)',
+            job_text
+        )
+
+        for years in experience_matches:
+
+            if int(years) > 1:
+                return False
+
+    return True
 
 
 def get_recommended_jobs(user):
@@ -32,6 +84,11 @@ def get_recommended_jobs(user):
     recommendations = []
 
     for job in jobs:
+
+        job_text = job.title + " " + job.description
+
+        if not is_experience_eligible(profile.experience, job_text):
+            continue
 
         skill_match = calculate_job_match(
             candidate_skills,
@@ -80,39 +137,42 @@ def calculate_experience_score(
     candidate_experience,
     job_text
 ):
-
     if not candidate_experience:
         return 0
 
-    candidate_text = candidate_experience.lower()
+    candidate_text = candidate_experience.lower().strip()
     job_text = job_text.lower()
 
-    if any(word in candidate_text for word in [
-        "fresher",
-        "0",
-        "entry",
-        "graduate",
-    ]):
-
+    # Candidate is a fresher
+    if candidate_text in ["0", "0 years", "fresher", "freshers"]:
         if any(word in job_text for word in [
             "fresher",
             "entry level",
             "entry-level",
-            "0-1",
-            "0 - 1",
+            "0-1 years",
+            "0 - 1 years",
+            "0-1 years",
             "junior",
+            "intern",
+            "internship",
         ]):
             return 100
 
         if any(word in job_text for word in [
             "senior",
+            "sr.",
             "lead",
             "manager",
             "5+ years",
+            "6+ years",
             "7+ years",
             "8+ years",
+            "10+ years",
         ]):
             return 0
+
+        # Experience requirement isn't clearly stated
+        return 50
 
     return 50
 

@@ -25,7 +25,7 @@ def fetch_jobs(
     if keyword:
         params["what"] = keyword
 
-    if location:
+    if location and location.lower() != "remote":
         params["where"] = location
 
     response = requests.get(url, params=params, timeout=10,)
