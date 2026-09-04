@@ -121,40 +121,40 @@ def calculate_role_score(job_title, candidate_roles):
 
     title = job_title.lower()
 
-    best_score = 0
-
-    generic_words = {
-        "developer",
-        "engineer",
-        "analyst",
-        "specialist",
-        "associate",
-        "software",
-        "technical",
+    role_keywords = {
+        "python developer": ["python", "developer"],
+        "django developer": ["django", "developer"],
+        "backend developer": ["backend", "developer"],
+        "data analyst": ["data", "analyst"],
+        "python data analyst": ["python", "data", "analyst"],
+        "machine learning engineer": [
+            "machine learning",
+            "engineer"
+        ],
+        "ml engineer": ["ml", "engineer"],
     }
+
+    best_score = 0
 
     for role in candidate_roles:
 
-        role_words = role.lower().split()
-
-        meaningful_words = [
-            word
-            for word in role_words
-            if word not in generic_words
-        ]
-
-        if not meaningful_words:
-            continue
-
-        matched_words = sum(
-            word in title
-            for word in meaningful_words
+        keywords = role_keywords.get(
+            role.lower(),
+            []
         )
 
-        if matched_words == len(meaningful_words):
+        if not keywords:
+            continue
+
+        matched = sum(
+            keyword in title
+            for keyword in keywords
+        )
+
+        if matched == len(keywords):
             score = 100
 
-        elif matched_words > 0:
+        elif matched > 0:
             score = 50
 
         else:
