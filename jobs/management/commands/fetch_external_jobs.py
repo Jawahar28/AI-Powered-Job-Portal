@@ -1,48 +1,78 @@
 from django.core.management.base import BaseCommand
+from django.contrib.auth.models import User
 
 from jobs.services.sources.adzuna import fetch_jobs
 from jobs.services.job_importer import import_job
+from jobs.services.job_intelligence import analyze_candidate
 
 
 class Command(BaseCommand):
 
-    help = "Fetch and import jobs from Adzuna"
+    help = "Fetch jobs based on candidate profiles"
 
     def handle(self, *args, **options):
 
-        jobs = fetch_jobs(
-            keyword= "Python Django",
-            location= "India",
-            results_per_page= 10,
+        users = User.objects.filter(
+            profile__resume_text__isnull=False
+        ).exclude(
+            profile__resume_text=""
         )
+
+        searches = []
+
+        for user in users:
+
+            analysis = analyze_candidate(
+                user.profile
+            )
+
+            for keyword in analysis["search_keywords"]:
+
+                searches.append({
+                    "keyword": keyword,
+                    "location": user.profile.location,
+                })
 
         imported_count = 0
         skipped_count = 0
 
-        for job_data in jobs:
+        for search in searches:
 
-            job, created = import_job(
-                job_data,
-                source="Adzuna"
+            self.stdout.write(
+                f"Searching: {search['keyword']} "
+                f"in {search['location']}"
             )
 
-            if created:
+            jobs = fetch_jobs(
+                keyword=search["keyword"],
+                location=search["location"],
+                results_per_page=10,
+            )
 
-                imported_count += 1
+            for job_data in jobs:
 
-                self.stdout.write(
-                    self.style.SUCCESS(
-                        f"Imported: {job.title}"
+                job, created = import_job(
+                    job_data,
+                    source="Adzuna"
+                )
+
+                if created:
+
+                    imported_count += 1
+
+                    self.stdout.write(
+                        self.style.SUCCESS(
+                            f"Imported: {job.title}"
+                        )
                     )
-                )
 
-            else:
+                else:
 
-                skipped_count += 1
+                    skipped_count += 1
 
-                self.stdout.write(
-                    f"Already exists: {job.title}"
-                )
+                    self.stdout.write(
+                        f"Already exists: {job.title}"
+                    )
 
         self.stdout.write(
             self.style.SUCCESS(

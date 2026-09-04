@@ -115,7 +115,8 @@ def extract_text_from_resume(resume_file):
 def extract_skills_from_resume(resume_text):
 
     known_skills = [
-
+        "PHP",
+        
         "Python",
         "Django",
         "Django REST Framework",
