@@ -54,7 +54,7 @@ def get_recommended_jobs(user):
             + experience_score * 0.1
         )
 
-        if final_score > 0:
+        if skill_match["match_score"] > 0 or role_score > 0:
 
             job.match_score = round(final_score)
 
@@ -123,17 +123,35 @@ def calculate_role_score(job_title, candidate_roles):
 
     best_score = 0
 
+    generic_words = {
+        "developer",
+        "engineer",
+        "analyst",
+        "specialist",
+        "associate",
+        "software",
+        "technical",
+    }
+
     for role in candidate_roles:
 
         role_words = role.lower().split()
 
-        matched_words = 0
+        meaningful_words = [
+            word
+            for word in role_words
+            if word not in generic_words
+        ]
 
-        for word in role_words:
-            if word in title:
-                matched_words += 1
+        if not meaningful_words:
+            continue
 
-        if matched_words == len(role_words):
+        matched_words = sum(
+            word in title
+            for word in meaningful_words
+        )
+
+        if matched_words == len(meaningful_words):
             score = 100
 
         elif matched_words > 0:
