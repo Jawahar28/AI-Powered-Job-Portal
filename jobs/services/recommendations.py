@@ -61,7 +61,8 @@ def get_recommended_jobs(user):
 
     analysis = analyze_candidate(profile)
 
-    candidate_roles = analysis["roles"]
+    primary_roles = analysis["primary_roles"]
+    secondary_roles = analysis["secondary_roles"]
 
     candidate_skills = [
         skill.strip()
@@ -97,7 +98,8 @@ def get_recommended_jobs(user):
 
         role_score = calculate_role_score(
             job.title,
-            candidate_roles
+            primary_roles,
+            secondary_roles
         )
 
         experience_score = calculate_experience_score(
@@ -177,49 +179,48 @@ def calculate_experience_score(
     return 50
 
 
-def calculate_role_score(job_title, candidate_roles):
+def calculate_role_score(
+    job_title,
+    primary_roles,
+    secondary_roles
+):
 
     title = job_title.lower()
 
-    role_keywords = {
-        "python developer": ["python", "developer"],
-        "django developer": ["django", "developer"],
-        "backend developer": ["backend", "developer"],
-        "data analyst": ["data", "analyst"],
-        "python data analyst": ["python", "data", "analyst"],
-        "machine learning engineer": [
-            "machine learning",
-            "engineer"
-        ],
-        "ml engineer": ["ml", "engineer"],
-    }
+    primary_score = 0
+    secondary_score = 0
 
-    best_score = 0
+    for role in primary_roles:
 
-    for role in candidate_roles:
-
-        keywords = role_keywords.get(
-            role.lower(),
-            []
-        )
-
-        if not keywords:
-            continue
+        role_words = role.lower().split()
 
         matched = sum(
-            keyword in title
-            for keyword in keywords
+            word in title
+            for word in role_words
         )
 
-        if matched == len(keywords):
-            score = 100
+        if matched == len(role_words):
+            primary_score = max(
+                primary_score,
+                100
+            )
 
-        elif matched > 0:
-            score = 50
+    for role in secondary_roles:
 
-        else:
-            score = 0
+        role_words = role.lower().split()
 
-        best_score = max(best_score, score)
+        matched = sum(
+            word in title
+            for word in role_words
+        )
 
-    return best_score
+        if matched == len(role_words):
+            secondary_score = max(
+                secondary_score,
+                70
+            )
+
+    return max(
+        primary_score,
+        secondary_score
+    )
