@@ -108,8 +108,8 @@ def get_recommended_jobs(user):
         )
 
         final_score = (
-            skill_match["match_score"] * 0.7
-            + role_score * 0.2
+            skill_match["match_score"] * 0.6
+            + role_score * 0.3
             + experience_score * 0.1
         )
 
@@ -187,40 +187,18 @@ def calculate_role_score(
 
     title = job_title.lower()
 
-    primary_score = 0
-    secondary_score = 0
-
+    # Primary role match
     for role in primary_roles:
-
         role_words = role.lower().split()
 
-        matched = sum(
-            word in title
-            for word in role_words
-        )
+        if all(word in title for word in role_words):
+            return 100
 
-        if matched == len(role_words):
-            primary_score = max(
-                primary_score,
-                100
-            )
-
+    # Secondary role match
     for role in secondary_roles:
-
         role_words = role.lower().split()
 
-        matched = sum(
-            word in title
-            for word in role_words
-        )
+        if all(word in title for word in role_words):
+            return 70
 
-        if matched == len(role_words):
-            secondary_score = max(
-                secondary_score,
-                70
-            )
-
-    return max(
-        primary_score,
-        secondary_score
-    )
+    return 0
