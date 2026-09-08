@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 
-from jobs.services.sources.adzuna import fetch_jobs
+from jobs.services.sources.registry import get_source
 from jobs.services.job_importer import import_job
 from jobs.services.job_intelligence import analyze_candidate
 
@@ -41,13 +41,16 @@ class Command(BaseCommand):
         imported_count = 0
         skipped_count = 0
 
+        source = get_source("Adzuna")
+
         for keyword, location in unique_searches:
 
             self.stdout.write(
                 f"Searching: {keyword} in {location}"
             )
 
-            jobs = fetch_jobs(
+
+            jobs = source.fetch_jobs(
                 keyword=keyword,
                 location=location,
                 results_per_page=10,

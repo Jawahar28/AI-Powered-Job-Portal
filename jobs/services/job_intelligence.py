@@ -1,3 +1,67 @@
+import re
+
+def analyze_job_description(description):
+    text = description.lower()
+
+    result = {"total_experience" : None,
+              "skill_experience" : {},
+              "required_skills" : [],
+            }
+
+    # Total Experience
+
+    total_patterns = [
+        r"(\d+)\+?\s*(?:years?|yrs?)\s+of\s+(?:total\s+)?experience",
+        r"(\d+)\+?\s*(?:years?|yrs?)\s+of\s+overall\s+experience",
+        r"minimum\s+(?:of\s+)?(\d+)\+?\s*(?:years?|yrs?)",
+    ]
+
+    for pattern in total_patterns:
+        match = re.search(pattern, text)
+
+        if match:
+            result["total_experience"] = {
+                "min_years" : int(match.group(1))
+            }
+            break
+
+    # Skill Specific experience
+    known_skills = [
+        "python",
+        "django",
+        "django rest framework",
+        "sql",
+        "mysql",
+        "javascript",
+        "react",
+        "java",
+        "c#",
+        "machine learning",
+        "deep learning",
+        "pandas",
+        "numpy",
+    ]
+
+    for skill in known_skills:
+        pattern = (
+            rf"(\d+)\+?\s*(?:years?|yrs?)"
+            rf"(?:\s+of\s+experience)?"
+            rf"\s+(?:in|with|using|working\s+with)\s+"
+            rf"{re.escape(skill)}"
+        )
+
+        match = re.search(pattern, text)
+
+        if match:
+            result["skill_experience"][skill] = int(match.group(1))
+
+    for skill in known_skills:
+        if skill in text:
+            result["required_skills"].append(skill)
+    return result
+
+
+
 def analyze_candidate(profile):
 
     skills = [
