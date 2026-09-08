@@ -1,4 +1,5 @@
 from jobs.models import Job, Company
+from jobs.services.job_intelligence import analyze_job_description
 
 def import_job(job_data, source):
     external_job_id = job_data["external_job_id"]
@@ -13,10 +14,13 @@ def import_job(job_data, source):
 
     company, created = Company.objects.get_or_create(name=job_data["company"])
 
+    intelligence = analyze_job_description(job_data["title"], job_data["description"])
+
     job = Job.objects.create(
         company = company,
         title = job_data["title"],
         description = job_data["description"],
+        intelligence = intelligence,
         required_skills = job_data.get("required_skills", ""),
         location = job_data["location"],
         salary = job_data["salary"],

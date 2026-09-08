@@ -5,6 +5,8 @@ def analyze_job_description(title, description):
 
     title_text = title.lower()
     text = description.lower()
+
+    combined_text = title_text + " " + text
     
 
     result = {
@@ -32,6 +34,8 @@ def analyze_job_description(title, description):
         "aws",
         "azure",
         "gcp",
+        "php",
+        "css",
     ]
 
     # -------------------------
@@ -115,7 +119,7 @@ def analyze_job_description(title, description):
 
     for skill in known_skills:
 
-        if skill not in text:
+        if re.search(rf"\b{re.escape(skill)}\b",combined_text) is None:
             continue
 
         if skill in preferred_text:

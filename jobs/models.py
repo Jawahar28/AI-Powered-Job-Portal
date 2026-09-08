@@ -33,6 +33,9 @@ class Job(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
 
+    intelligence = models.JSONField(default=dict, blank=True)
+
+
     required_skills = models.TextField(blank=True, help_text="Separate skills using commas")
 
     location = models.CharField(max_length=100)
@@ -56,6 +59,7 @@ class Job(models.Model):
     source = models.CharField(max_length=180, blank=True)
     external_url = models.URLField(blank=True)
     external_job_id = models.CharField(max_length=255, blank=True)
+
 
     def __str__(self):
         return self.title
