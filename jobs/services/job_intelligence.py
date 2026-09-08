@@ -1,31 +1,18 @@
 import re
 
+
 def analyze_job_description(description):
+
     text = description.lower()
 
-    result = {"total_experience" : None,
-              "skill_experience" : {},
-              "required_skills" : [],
-            }
+    result = {
+        "role": None,
+        "total_experience": None,
+        "skill_experience": {},
+        "required_skills": [],
+        "preferred_skills": [],
+    }
 
-    # Total Experience
-
-    total_patterns = [
-        r"(\d+)\+?\s*(?:years?|yrs?)\s+of\s+(?:total\s+)?experience",
-        r"(\d+)\+?\s*(?:years?|yrs?)\s+of\s+overall\s+experience",
-        r"minimum\s+(?:of\s+)?(\d+)\+?\s*(?:years?|yrs?)",
-    ]
-
-    for pattern in total_patterns:
-        match = re.search(pattern, text)
-
-        if match:
-            result["total_experience"] = {
-                "min_years" : int(match.group(1))
-            }
-            break
-
-    # Skill Specific experience
     known_skills = [
         "python",
         "django",
@@ -40,9 +27,60 @@ def analyze_job_description(description):
         "deep learning",
         "pandas",
         "numpy",
+        "aws",
+        "azure",
+        "gcp",
     ]
 
+    # -------------------------
+    # Role
+    # -------------------------
+
+    role_patterns = [
+        r"(senior\s+)?backend\s+developer",
+        r"(senior\s+)?software\s+engineer",
+        r"(senior\s+)?python\s+developer",
+        r"(senior\s+)?django\s+developer",
+        r"(senior\s+)?data\s+analyst",
+        r"(senior\s+)?data\s+scientist",
+        r"(senior\s+)?machine\s+learning\s+engineer",
+        r"(senior\s+)?ml\s+engineer",
+    ]
+
+    for pattern in role_patterns:
+
+        match = re.search(pattern, text)
+
+        if match:
+            result["role"] = match.group(0).strip()
+            break
+
+    # -------------------------
+    # Total experience
+    # -------------------------
+
+    total_patterns = [
+        r"(\d+)\+?\s*(?:years?|yrs?)\s+of\s+(?:total\s+)?experience",
+        r"(\d+)\+?\s*(?:years?|yrs?)\s+of\s+overall\s+experience",
+        r"minimum\s+(?:of\s+)?(\d+)\+?\s*(?:years?|yrs?)",
+    ]
+
+    for pattern in total_patterns:
+
+        match = re.search(pattern, text)
+
+        if match:
+            result["total_experience"] = {
+                "min_years": int(match.group(1))
+            }
+            break
+
+    # -------------------------
+    # Skill-specific experience
+    # -------------------------
+
     for skill in known_skills:
+
         pattern = (
             rf"(\d+)\+?\s*(?:years?|yrs?)"
             rf"(?:\s+of\s+experience)?"
@@ -53,11 +91,36 @@ def analyze_job_description(description):
         match = re.search(pattern, text)
 
         if match:
-            result["skill_experience"][skill] = int(match.group(1))
+
+            result["skill_experience"][skill] = int(
+                match.group(1)
+            )
+
+    # -------------------------
+    # Required vs Preferred
+    # -------------------------
+
+    preferred_section = re.search(
+    r"(preferred|nice to have|good to have|bonus|desired)\s*:?\s*(.*?)(?=\n\s*(?:requirements|required|qualifications|responsibilities|benefits)\s*:|$)",
+    text,
+    re.DOTALL
+)
+
+    preferred_text = ""
+
+    if preferred_section:
+        preferred_text = preferred_section.group(2)
 
     for skill in known_skills:
-        if skill in text:
+
+        if skill not in text:
+            continue
+
+        if skill in preferred_text:
+            result["preferred_skills"].append(skill)
+        else:
             result["required_skills"].append(skill)
+
     return result
 
 
