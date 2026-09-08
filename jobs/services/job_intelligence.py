@@ -1,9 +1,11 @@
 import re
 
 
-def analyze_job_description(description):
+def analyze_job_description(title, description):
 
+    title_text = title.lower()
     text = description.lower()
+    
 
     result = {
         "role": None,
@@ -49,7 +51,7 @@ def analyze_job_description(description):
 
     for pattern in role_patterns:
 
-        match = re.search(pattern, text)
+        match = re.search(pattern, title_text)
 
         if match:
             result["role"] = match.group(0).strip()
