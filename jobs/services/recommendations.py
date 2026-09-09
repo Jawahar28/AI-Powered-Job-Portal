@@ -232,15 +232,26 @@ def calculate_role_score(
     primary_roles,
     secondary_roles
 ):
-
     title = job_title.lower()
 
-    # Primary role match
+    # Strong primary role match
     for role in primary_roles:
         role_words = role.lower().split()
 
         if all(word in title for word in role_words):
             return 100
+
+    # Partial primary role match
+    for role in primary_roles:
+        role_words = role.lower().split()
+
+        matched_words = sum(
+            1 for word in role_words
+            if word in title
+        )
+
+        if matched_words >= 1:
+            return 85
 
     # Secondary role match
     for role in secondary_roles:
