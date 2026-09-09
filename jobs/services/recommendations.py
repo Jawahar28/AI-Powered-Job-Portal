@@ -1,7 +1,6 @@
 import re
 
 from jobs.models import Job
-from accounts.utils import calculate_job_match
 from jobs.services.job_intelligence import analyze_candidate
 
 def is_experience_eligible(candidate_experience, job_text):
@@ -54,6 +53,71 @@ def is_experience_eligible(candidate_experience, job_text):
 
     return True
 
+def calculate_intelligence_skill_match(
+    candidate_skills,
+    job_intelligence
+):
+    candidate_skills_lower = {
+        skill.lower().strip()
+        for skill in candidate_skills
+    }
+
+    required_skills = job_intelligence.get(
+        "required_skills",
+        []
+    )
+
+    preferred_skills = job_intelligence.get(
+        "preferred_skills",
+        []
+    )
+
+    matched_skills = []
+
+    for skill in required_skills:
+
+        if skill.lower() in candidate_skills_lower:
+            matched_skills.append(skill)
+
+    missing_skills = [
+        skill
+        for skill in required_skills
+        if skill not in matched_skills
+    ]
+
+    required_score = 0
+
+    if required_skills:
+        required_score = (
+            len(matched_skills)
+            / len(required_skills)
+        ) * 100
+
+    preferred_matched = [
+        skill
+        for skill in preferred_skills
+        if skill.lower() in candidate_skills_lower
+    ]
+
+    preferred_score = 0
+
+    if preferred_skills:
+        preferred_score = (
+            len(preferred_matched)
+            / len(preferred_skills)
+        ) * 100
+
+    final_score = (
+        required_score * 0.8
+        + preferred_score * 0.2
+    )
+
+    return {
+        "match_score": round(final_score),
+        "matched_skills": matched_skills,
+        "missing_skills": missing_skills,
+    }
+
 
 def get_recommended_jobs(user):
 
@@ -93,7 +157,7 @@ def get_recommended_jobs(user):
 
         skill_match = calculate_job_match(
             candidate_skills,
-            job.description
+            job.intelligence
         )
 
         role_score = calculate_role_score(
