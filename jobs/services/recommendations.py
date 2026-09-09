@@ -3,55 +3,49 @@ import re
 from jobs.models import Job
 from jobs.services.job_intelligence import analyze_candidate
 
-def is_experience_eligible(candidate_experience, job_text):
+def is_experience_eligible(
+    candidate_experience,
+    job_intelligence
+):
 
     if not candidate_experience:
         return True
 
     candidate_text = candidate_experience.lower().strip()
-    job_text = job_text.lower()
 
-    # Fresher / 0 years
+    total_experience = job_intelligence.get(
+        "total_experience"
+    )
+
+    if not total_experience:
+        return True
+
+    required_years = total_experience.get(
+        "min_years",
+        0
+    )
+
+    # Fresher
     if candidate_text in [
         "0",
         "0 years",
         "fresher",
         "freshers",
     ]:
+        return required_years <= 1
 
-        # Explicit senior-level keywords
-        senior_keywords = [
-            "senior",
-            "sr.",
-            "sr ",
-            "lead",
-            "manager",
-            "principal",
-        ]
+    # Extract candidate years
+    match = re.search(
+        r"(\d+(?:\.\d+)?)",
+        candidate_text
+    )
 
-        if any(
-            keyword in job_text
-            for keyword in senior_keywords
-        ):
-            return False
+    if not match:
+        return True
 
-        # Detect requirements such as:
-        # 2 years
-        # 3+ years
-        # 5 years
-        # 7 YoE
-        # 8+ YoE
-        experience_matches = re.findall(
-            r'(\d+)\s*(?:\+)?\s*(?:years?|yoe)',
-            job_text
-        )
+    candidate_years = float(match.group(1))
 
-        for years in experience_matches:
-
-            if int(years) > 1:
-                return False
-
-    return True
+    return candidate_years >= required_years
 
 def calculate_intelligence_skill_match(
     candidate_skills,
@@ -149,33 +143,16 @@ def get_recommended_jobs(user):
     recommendations = []
 
     for job in jobs:
-
-        job_text = job.title + " " + job.description
-
-        if not is_experience_eligible(profile.experience, job_text):
+        if not is_experience_eligible(profile.experience, job.intelligence):
             continue
 
-        skill_match = calculate_job_match(
-            candidate_skills,
-            job.intelligence
-        )
+        skill_match = calculate_intelligence_skill_match(candidate_skills,job.intelligence)
 
-        role_score = calculate_role_score(
-            job.title,
-            primary_roles,
-            secondary_roles
-        )
+        role_score = calculate_role_score(job.title,primary_roles,secondary_roles)
 
-        experience_score = calculate_experience_score(
-            profile.experience,
-            job.title + " " + job.description
-        )
+        experience_score = calculate_experience_score(profile.experience,job.intelligence)
 
-        final_score = (
-            skill_match["match_score"] * 0.6
-            + role_score * 0.3
-            + experience_score * 0.1
-        )
+        final_score = (skill_match["match_score"] * 0.6+ role_score * 0.3+ experience_score * 0.1)
 
         if skill_match["match_score"] > 0 or role_score > 0:
 
@@ -201,46 +178,53 @@ def get_recommended_jobs(user):
 
 def calculate_experience_score(
     candidate_experience,
-    job_text
+    job_intelligence
 ):
     if not candidate_experience:
         return 0
 
     candidate_text = candidate_experience.lower().strip()
-    job_text = job_text.lower()
 
-    # Candidate is a fresher
-    if candidate_text in ["0", "0 years", "fresher", "freshers"]:
-        if any(word in job_text for word in [
-            "fresher",
-            "entry level",
-            "entry-level",
-            "0-1 years",
-            "0 - 1 years",
-            "0-1 years",
-            "junior",
-            "intern",
-            "internship",
-        ]):
-            return 100
+    total_experience = job_intelligence.get(
+        "total_experience"
+    )
 
-        if any(word in job_text for word in [
-            "senior",
-            "sr.",
-            "lead",
-            "manager",
-            "5+ years",
-            "6+ years",
-            "7+ years",
-            "8+ years",
-            "10+ years",
-        ]):
-            return 0
-
-        # Experience requirement isn't clearly stated
+    # Job does not specify experience
+    if not total_experience:
         return 50
 
-    return 50
+    required_years = total_experience.get(
+        "min_years",
+        0
+    )
+
+    # Fresher
+    if candidate_text in [
+        "0",
+        "0 years",
+        "fresher",
+        "freshers",
+    ]:
+        if required_years <= 1:
+            return 100
+
+        return 0
+
+    # Extract candidate years
+    match = re.search(
+        r"(\d+(?:\.\d+)?)",
+        candidate_text
+    )
+
+    if not match:
+        return 50
+
+    candidate_years = float(match.group(1))
+
+    if candidate_years >= required_years:
+        return 100
+
+    return 0
 
 
 def calculate_role_score(

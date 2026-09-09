@@ -55,7 +55,7 @@ def analyze_job_description(title, description):
 
     for pattern in role_patterns:
 
-        match = re.search(pattern, title_text)
+        match = re.search(pattern, combined_text)
 
         if match:
             result["role"] = match.group(0).strip()
@@ -66,14 +66,15 @@ def analyze_job_description(title, description):
     # -------------------------
 
     total_patterns = [
-        r"(\d+)\+?\s*(?:years?|yrs?)\s+of\s+(?:total\s+)?experience",
-        r"(\d+)\+?\s*(?:years?|yrs?)\s+of\s+overall\s+experience",
-        r"minimum\s+(?:of\s+)?(\d+)\+?\s*(?:years?|yrs?)",
-    ]
+    r"(\d+)\+?\s*(?:years?|yrs?)\s+of\s+(?:total\s+)?experience",
+    r"(\d+)\+?\s*(?:years?|yrs?)\s+of\s+overall\s+experience",
+    r"minimum\s+(?:of\s+)?(\d+)\+?\s*(?:years?|yrs?)",
+    r"(\d+)\+?\s*yoe\b",
+]
 
     for pattern in total_patterns:
 
-        match = re.search(pattern, text)
+        match = re.search(pattern, combined_text)
 
         if match:
             result["total_experience"] = {
