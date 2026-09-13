@@ -15,80 +15,80 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        fetch_run = JobFetchRun.objects.create(source = 'Adzuna')
-
-        users = (
-            User.objects
-            .filter(profile__resume_text__isnull=False)
-            .exclude(profile__resume_text="")
+        fetch_run = JobFetchRun.objects.create(
+            source="Adzuna"
         )
 
-        unique_searches = set()
-
-        for user in users:
-
-            analysis = analyze_candidate(
-                user.profile
-            )
-
-            location = user.profile.location
-
-            for keyword in analysis["search_keywords"]:
-
-                unique_searches.add(
-                    (keyword, location)
-                )
-
-        self.stdout.write(
-            f"Unique searches: {len(unique_searches)}"
-        )
-
+        jobs_found = 0
         imported_count = 0
         skipped_count = 0
-        jobs_found = 0
 
-
-        source = get_source("Adzuna")
-
-        for keyword, location in unique_searches:
-
-            self.stdout.write(
-                f"Searching: {keyword} in {location}"
-            )
-
-
-            jobs = source.fetch_jobs(
-                keyword=keyword,
-                location=location,
-                results_per_page=10,
-            )
-
-            jobs_found += len(jobs)
-
-            for job_data in jobs:
-
-                job, created = import_job(
-                    job_data,
-                    source="Adzuna"
-                )
-
-                if created:
-
-                    imported_count += 1
-
-                    self.stdout.write(
-                        self.style.SUCCESS(
-                            f"Imported: {job.title}"
-                        )
-                    )
-
-                else:
-
-                    skipped_count += 1
         try:
 
-        # ALL your existing fetch logic goes here
+            users = (
+                User.objects
+                .filter(profile__resume_text__isnull=False)
+                .exclude(profile__resume_text="")
+            )
 
+            unique_searches = set()
+
+            for user in users:
+
+                analysis = analyze_candidate(
+                    user.profile
+                )
+
+                location = user.profile.location
+
+                for keyword in analysis["search_keywords"]:
+
+                    unique_searches.add(
+                        (keyword, location)
+                    )
+
+            self.stdout.write(
+                f"Unique searches: {len(unique_searches)}"
+            )
+
+            source = get_source("Adzuna")
+
+            for keyword, location in unique_searches:
+
+                self.stdout.write(
+                    f"Searching: {keyword} in {location}"
+                )
+
+                jobs = source.fetch_jobs(
+                    keyword=keyword,
+                    location=location,
+                    results_per_page=10,
+                )
+
+                jobs_found += len(jobs)
+
+                for job_data in jobs:
+
+                    job, created = import_job(
+                        job_data,
+                        source="Adzuna"
+                    )
+
+                    if created:
+
+                        imported_count += 1
+
+                        self.stdout.write(
+                            self.style.SUCCESS(
+                                f"Imported: {job.title}"
+                            )
+                        )
+
+                    else:
+
+                        skipped_count += 1
+
+            # SUCCESS
             fetch_run.finished_at = timezone.now()
             fetch_run.jobs_found = jobs_found
             fetch_run.jobs_imported = imported_count
@@ -114,6 +114,7 @@ class Command(BaseCommand):
 
         except Exception as e:
 
+            # FAILED
             fetch_run.finished_at = timezone.now()
             fetch_run.jobs_found = jobs_found
             fetch_run.jobs_imported = imported_count
