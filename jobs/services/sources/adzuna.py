@@ -4,6 +4,8 @@ import requests  # type: ignore[reportMissingModuleSource]
 from accounts.utils import extract_skills_from_resume
 from jobs.services.sources.base import JobSource
 
+from datetime import datetime
+
 BASE_URL = "https://api.adzuna.com/v1/api"
 
 class AdzunaSource(JobSource):
@@ -54,6 +56,8 @@ class AdzunaSource(JobSource):
                 "required_skills": ", ".join(extract_skills_from_resume(item.get("description", ""))),
 
                 "external_url": item.get("redirect_url",""),
+
+                "posted_at" : datetime.fromisoformat(item["created"].replace("Z", "+00:00")),
 
                 "job_type": "FT",
 

@@ -28,6 +28,7 @@ def import_job(job_data, source):
         source = source,
         external_url = job_data["external_url"],
         external_job_id = external_job_id,
+        posted_at = job_data["posted_at"],
     )
 
     return job, True
