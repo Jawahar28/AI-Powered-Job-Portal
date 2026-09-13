@@ -1,5 +1,8 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
+from django.utils import timezone
+
+from jobs.models import JobFetchRun
 
 from jobs.services.sources.registry import get_source
 from jobs.services.job_importer import import_job
@@ -11,6 +14,8 @@ class Command(BaseCommand):
     help = "Fetch jobs using unique candidate search keywords"
 
     def handle(self, *args, **options):
+
+        fetch_run = JobFetchRun.objects.create(source = 'Adzuna')
 
         users = (
             User.objects
@@ -40,6 +45,8 @@ class Command(BaseCommand):
 
         imported_count = 0
         skipped_count = 0
+        jobs_found = 0
+
 
         source = get_source("Adzuna")
 
@@ -55,6 +62,8 @@ class Command(BaseCommand):
                 location=location,
                 results_per_page=10,
             )
+
+            jobs_found += len(jobs)
 
             for job_data in jobs:
 
@@ -76,10 +85,57 @@ class Command(BaseCommand):
                 else:
 
                     skipped_count += 1
+        try:
 
-        self.stdout.write(
-            self.style.SUCCESS(
-                f"Finished. Imported: {imported_count}, "
-                f"Skipped: {skipped_count}"
+        # ALL your existing fetch logic goes here
+
+            fetch_run.finished_at = timezone.now()
+            fetch_run.jobs_found = jobs_found
+            fetch_run.jobs_imported = imported_count
+            fetch_run.jobs_skipped = skipped_count
+            fetch_run.status = JobFetchRun.Status.SUCCESS
+
+            fetch_run.save(
+                update_fields=[
+                    "finished_at",
+                    "jobs_found",
+                    "jobs_imported",
+                    "jobs_skipped",
+                    "status",
+                ]
             )
-        )
+
+            self.stdout.write(
+                self.style.SUCCESS(
+                    f"Finished. Imported: {imported_count}, "
+                    f"Skipped: {skipped_count}"
+                )
+            )
+
+        except Exception as e:
+
+            fetch_run.finished_at = timezone.now()
+            fetch_run.jobs_found = jobs_found
+            fetch_run.jobs_imported = imported_count
+            fetch_run.jobs_skipped = skipped_count
+            fetch_run.status = JobFetchRun.Status.FAILED
+            fetch_run.error_message = str(e)
+
+            fetch_run.save(
+                update_fields=[
+                    "finished_at",
+                    "jobs_found",
+                    "jobs_imported",
+                    "jobs_skipped",
+                    "status",
+                    "error_message",
+                ]
+            )
+
+            self.stdout.write(
+                self.style.ERROR(
+                    f"Job fetch failed: {e}"
+                )
+            )
+
+            raise
