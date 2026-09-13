@@ -131,6 +131,46 @@ def calculate_intelligence_skill_match(
     }
 
 
+def calculate_job_match_for_user(user, job):
+    profile = user.profile
+
+    analysis = analyze_candidate(profile)
+
+    candidate_skills = [
+        skill.strip()
+        for skill in profile.skills.split(",")
+        if skill.strip()
+    ]
+
+    skill_match = calculate_intelligence_skill_match(
+        candidate_skills,
+        job.intelligence
+    )
+
+    role_score = calculate_role_score(
+        job.title,
+        analysis["primary_roles"],
+        analysis["secondary_roles"]
+    )
+
+    experience_score = calculate_experience_score(
+        profile.experience,
+        job.intelligence
+    )
+
+    final_score = (
+        skill_match["match_score"] * 0.6
+        + role_score * 0.3
+        + experience_score * 0.1
+    )
+
+    return {
+        "match_score": round(final_score),
+        "matched_skills": skill_match["matched_skills"],
+        "missing_skills": skill_match["missing_skills"],
+    }
+
+
 def get_recommended_jobs(user):
 
     profile = user.profile

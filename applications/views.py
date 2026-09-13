@@ -1,61 +1,19 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from jobs.models import Job, SavedJob
-from .forms import ApplicationForm
-from .models import Application
 from django.contrib.auth.decorators import login_required
 
-from accounts.utils import (
-    calculate_job_match, 
-    generate_resume_feedback, 
-    get_job_recommendations, 
-    calculate_profile_completion,
+from jobs.models import Job, SavedJob
+
+from .forms import ApplicationForm
+from .models import Application
+
+from accounts.utils import calculate_profile_completion
+
+from jobs.services.recommendations import (
+    get_recommended_jobs,
+    get_new_recommended_jobs,
+    calculate_job_match_for_user
 )
 
-def get_recommended_jobs_for_user(user):
-
-    profile = user.profile
-
-    candidate_skills = [
-        skill.strip()
-        for skill in profile.skills.split(",")
-        if skill.strip()
-    ]
-
-    applied_job_ids = user.applications.values_list(
-        "job_id",
-        flat=True
-    )
-
-    jobs = (
-        Job.objects
-        .exclude(id__in=applied_job_ids)
-        .select_related("company")
-    )
-
-    recommended_jobs = []
-
-    for job in jobs:
-
-        match_res = calculate_job_match(
-            candidate_skills,
-            job.description
-        )
-
-        if match_res["match_score"] > 0:
-
-            # Add temporary attributes to the Job object
-            job.match_score = match_res["match_score"]
-            job.matched_skills = match_res["matched_skills"]
-            job.missing_skills = match_res["missing_skills"]
-
-            recommended_jobs.append(job)
-
-    recommended_jobs.sort(
-        key=lambda job: job.match_score,
-        reverse=True
-    )
-
-    return recommended_jobs
 
 @login_required
 def applicant_dashboard(request):
@@ -67,28 +25,31 @@ def applicant_dashboard(request):
     )
 
     # Get AI recommended jobs
-    recommended_jobs = get_recommended_jobs_for_user(request.user)
+    recommended_jobs = get_recommended_jobs(request.user)
+
+    new_recommended_jobs = get_new_recommended_jobs(request.user)
 
     profile_completion = calculate_profile_completion(request.user)
 
     context = {
 
-        # Recent applications
-        "applications": applications[:5],
+    "applications": applications[:5],
 
-        # Real application count
-        "application_count": applications.count(),
+    "application_count": applications.count(),
 
-        # Real AI recommendation count
-        "recommendation_count": len(recommended_jobs),
+    "recommendation_count": len(recommended_jobs),
 
-        # Temporary values until those features are built
-        "saved_jobs": request.user.saved_jobs.count(),
+    "new_recommended_jobs": new_recommended_jobs,
 
-        "interviews": 0,
+    "new_recommendation_count": len(
+        new_recommended_jobs
+    ),
 
-        "profile_completion": profile_completion,
+    "saved_jobs": request.user.saved_jobs.count(),
 
+    "interviews": 0,
+
+    "profile_completion": profile_completion,
     }
 
     return render(
@@ -163,30 +124,17 @@ def my_applications(request):
         .order_by("-applied_at")
     )
 
-    profile = request.user.profile
-
-    candidate_skills = [
-        skill.strip()
-        for skill in profile.skills.split(",")
-        if skill.strip()
-    ]
-
     # AI Match Score for Applied Jobs
     for app in applications:
 
-        match_res = calculate_job_match(
-            candidate_skills,
-            app.job.description
-        )
+        match_res = calculate_job_match_for_user(request.user,app.job)
 
         app.match_score = match_res["match_score"]
         app.matched_skills = match_res["matched_skills"]
         app.missing_skills = match_res["missing_skills"]
 
     # Get all recommendations using the same helper
-    recommendations = get_recommended_jobs_for_user(
-        request.user
-    )
+    recommendations = get_recommended_jobs(request.user)
 
     # Show only first 3
     recommended_jobs = recommendations[:3]
@@ -206,7 +154,7 @@ def my_applications(request):
 @login_required
 def recommended_jobs(request):
 
-    recommendations = get_recommended_jobs_for_user(
+    recommendations = get_recommended_jobs(
         request.user
     )
 
