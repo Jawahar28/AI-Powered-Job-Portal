@@ -66,12 +66,11 @@ def calculate_intelligence_skill_match(
         []
     )
 
-    matched_skills = []
-
-    for skill in required_skills:
-
-        if skill.lower() in candidate_skills_lower:
-            matched_skills.append(skill)
+    matched_skills = [
+        skill
+        for skill in required_skills
+        if skill.lower() in candidate_skills_lower
+    ]
 
     missing_skills = [
         skill
@@ -79,6 +78,7 @@ def calculate_intelligence_skill_match(
         if skill not in matched_skills
     ]
 
+    # Required skill coverage
     required_score = 0
 
     if required_skills:
@@ -87,6 +87,7 @@ def calculate_intelligence_skill_match(
             / len(required_skills)
         ) * 100
 
+    # Preferred skill coverage
     preferred_matched = [
         skill
         for skill in preferred_skills
@@ -101,13 +102,27 @@ def calculate_intelligence_skill_match(
             / len(preferred_skills)
         ) * 100
 
-    final_score = (
+    # Base skill score
+    skill_score = (
         required_score * 0.8
         + preferred_score * 0.2
     )
 
+    # Depth bonus:
+    # More matched required skills means stronger evidence
+    if len(matched_skills) >= 5:
+        skill_score += 10
+    elif len(matched_skills) >= 4:
+        skill_score += 7
+    elif len(matched_skills) >= 3:
+        skill_score += 5
+    elif len(matched_skills) >= 2:
+        skill_score += 3
+
+    skill_score = min(round(skill_score), 100)
+
     return {
-        "match_score": round(final_score),
+        "match_score": skill_score,
         "matched_skills": matched_skills,
         "missing_skills": missing_skills,
     }
@@ -234,30 +249,31 @@ def calculate_role_score(
 ):
     title = job_title.lower()
 
-    # Strong primary role match
+    # Exact primary role phrase
     for role in primary_roles:
-        role_words = role.lower().split()
+        role_text = role.lower()
 
-        if all(word in title for word in role_words):
+        if role_text in title:
             return 100
 
-    # Partial primary role match
+    # Strong primary-role keyword combination
     for role in primary_roles:
         role_words = role.lower().split()
 
         matched_words = sum(
-            1 for word in role_words
+            1
+            for word in role_words
             if word in title
         )
 
-        if matched_words >= 1:
-            return 85
+        if len(role_words) >= 2 and matched_words == len(role_words):
+            return 90
 
-    # Secondary role match
+    # Secondary role phrase
     for role in secondary_roles:
-        role_words = role.lower().split()
+        role_text = role.lower()
 
-        if all(word in title for word in role_words):
+        if role_text in title:
             return 70
 
     return 0
