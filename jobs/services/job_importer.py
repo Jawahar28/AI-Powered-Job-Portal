@@ -1,6 +1,8 @@
 from jobs.models import Job, Company
 from jobs.services.job_intelligence import analyze_job_description
 
+from django.utils import timezone
+
 def import_job(job_data, source):
     external_job_id = job_data["external_job_id"]
 
@@ -29,6 +31,7 @@ def import_job(job_data, source):
         external_url = job_data["external_url"],
         external_job_id = external_job_id,
         posted_at = job_data["posted_at"],
+        imported_at = timezone.now(),
     )
 
     return job, True

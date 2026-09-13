@@ -55,7 +55,9 @@ class Job(models.Model):
     )
 
     posted_at = models.DateTimeField(default=timezone.now)
-    created_at = models.DateTimeField(auto_now_add=True)
+    # created_at = models.DateTimeField(auto_now_add=True)
+
+    imported_at = models.DateTimeField(null=True,blank=True)
 
     source = models.CharField(max_length=180, blank=True)
     external_url = models.URLField(blank=True)

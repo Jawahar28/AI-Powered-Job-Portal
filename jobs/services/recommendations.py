@@ -3,6 +3,9 @@ import re
 from jobs.models import Job
 from jobs.services.job_intelligence import analyze_candidate
 
+from django.utils import timezone
+from datetime import timedelta
+
 def is_experience_eligible(
     candidate_experience,
     job_intelligence
@@ -189,6 +192,23 @@ def get_recommended_jobs(user):
     )
 
     return recommendations
+
+
+def get_new_recommended_jobs(user, days = 1):
+    """
+    Return personalized recommendations that were
+    imported into JOBCode recently.
+    """
+
+    recommended_jobs = get_recommended_jobs(user)
+
+    cutoff = timezone.now() - timedelta(days=days)
+
+    new_jobs = [job for job in recommended_jobs if (job.imported_at and job.imported_at >= cutoff)]
+
+    return new_jobs
+    
+
 
 
 def calculate_experience_score(
