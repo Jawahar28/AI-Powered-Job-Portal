@@ -105,10 +105,32 @@ class Command(BaseCommand):
                 ]
             )
 
+            self.stdout.write("")
             self.stdout.write(
                 self.style.SUCCESS(
-                    f"Finished. Imported: {imported_count}, "
-                    f"Skipped: {skipped_count}"
+                    "JOBCode Daily Job Bot"
+                )
+            )
+
+            self.stdout.write(
+                f"Searches: {len(unique_searches)}"
+            )
+
+            self.stdout.write(
+                f"Jobs found: {jobs_found}"
+            )
+
+            self.stdout.write(
+                f"New jobs: {imported_count}"
+            )
+
+            self.stdout.write(
+                f"Already known: {skipped_count}"
+            )
+
+            self.stdout.write(
+                self.style.SUCCESS(
+                    "Job fetch completed successfully."
                 )
             )
 
