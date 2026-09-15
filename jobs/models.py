@@ -42,22 +42,16 @@ class Job(models.Model):
 
     salary = models.PositiveIntegerField()
 
-    job_type = models.CharField(
-        max_length=2,
-        choices=JobType.choices,
-        default=JobType.FULL_TIME,
-    )
+    job_type = models.CharField(max_length=2,choices=JobType.choices,default=JobType.FULL_TIME,)
 
-    status = models.CharField(
-        max_length=1,
-        choices=Status.choices,
-        default=Status.OPEN,
-    )
+    status = models.CharField(max_length=1,choices=Status.choices,default=Status.OPEN,)
 
     posted_at = models.DateTimeField(default=timezone.now)
     # created_at = models.DateTimeField(auto_now_add=True)
 
     imported_at = models.DateTimeField(null=True,blank=True)
+
+    fetch_run = models.ForeignKey("JobFetchRun", on_delete=models.SET_NULL, null=True, blank=True, related_name='jobs')
 
     source = models.CharField(max_length=180, blank=True)
     external_url = models.URLField(blank=True)

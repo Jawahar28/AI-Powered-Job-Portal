@@ -71,7 +71,8 @@ class Command(BaseCommand):
 
                     job, created = import_job(
                         job_data,
-                        source="Adzuna"
+                        source="Adzuna",
+                        fetch_run=fetch_run
                     )
 
                     if created:

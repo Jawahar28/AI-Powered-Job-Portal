@@ -1,6 +1,6 @@
 import re
 
-from jobs.models import Job
+from jobs.models import Job, JobFetchRun
 from jobs.services.job_intelligence import analyze_candidate
 
 from django.utils import timezone
@@ -285,14 +285,17 @@ def get_new_recommended_jobs(user, days = 1):
     imported into JOBCode recently.
     """
 
+    latest_run = (JobFetchRun.objects.filter(source='Adzuna', status = JobFetchRun.Status.SUCCESS).order_by("-finished_at").first())
+
+    if not latest_run:
+        return []
+
     recommended_jobs = get_recommended_jobs(user)
 
-    cutoff = timezone.now() - timedelta(days=days)
-
-    new_jobs = [job for job in recommended_jobs if (job.imported_at and job.imported_at >= cutoff)]
+    new_jobs = [job for job in recommended_jobs if job.fetch_run_id == latest_run.id]
 
     return new_jobs
-    
+
 def calculate_experience_score(
     candidate_experience,
     job_intelligence

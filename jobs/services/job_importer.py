@@ -3,7 +3,7 @@ from jobs.services.job_intelligence import analyze_job_description
 
 from django.utils import timezone
 
-def import_job(job_data, source):
+def import_job(job_data, source, fetch_run):
     external_job_id = job_data["external_job_id"]
 
     existing_job = Job.objects.filter(
@@ -32,6 +32,7 @@ def import_job(job_data, source):
         external_job_id = external_job_id,
         posted_at = job_data["posted_at"],
         imported_at = timezone.now(),
+        fetch_run = fetch_run,
     )
 
     return job, True
