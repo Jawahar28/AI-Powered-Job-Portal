@@ -14,30 +14,57 @@ def is_experience_eligible(
     if not candidate_experience:
         return True
 
-    candidate_text = candidate_experience.lower().strip()
-
-    total_experience = job_intelligence.get(
-        "total_experience"
+    candidate_text = (
+        candidate_experience
+        .lower()
+        .strip()
     )
 
-    if not total_experience:
-        return True
-
-    required_years = total_experience.get(
-        "min_years",
-        0
+    job_level = job_intelligence.get(
+        "experience_level"
     )
 
-    # Fresher
+    # ------------------------------------------
+    # Fresher / Entry-level candidate
+    # ------------------------------------------
+
     if candidate_text in [
         "0",
         "0 years",
         "fresher",
         "freshers",
+        "entry level",
     ]:
+
+        # Explicit seniority should reject
+        # a fresher even if years weren't extracted.
+
+        if job_level in [
+            "senior",
+            "lead",
+            "management",
+        ]:
+            return False
+
+        total_experience = job_intelligence.get(
+            "total_experience"
+        )
+
+        if not total_experience:
+            return True
+
+        required_years = total_experience.get(
+            "min_years",
+            0
+        )
+
         return required_years <= 1
 
-    # Extract candidate years
+
+    # ------------------------------------------
+    # Experienced candidate
+    # ------------------------------------------
+
     match = re.search(
         r"(\d+(?:\.\d+)?)",
         candidate_text
@@ -46,7 +73,25 @@ def is_experience_eligible(
     if not match:
         return True
 
-    candidate_years = float(match.group(1))
+    candidate_years = float(
+        match.group(1)
+    )
+
+    total_experience = job_intelligence.get(
+        "total_experience"
+    )
+
+    if not total_experience:
+
+        # We don't know the numerical requirement.
+        # Don't reject solely because extraction failed.
+
+        return True
+
+    required_years = total_experience.get(
+        "min_years",
+        0
+    )
 
     return candidate_years >= required_years
 
@@ -248,29 +293,22 @@ def get_new_recommended_jobs(user, days = 1):
 
     return new_jobs
     
-
-
-
 def calculate_experience_score(
     candidate_experience,
     job_intelligence
 ):
+
     if not candidate_experience:
-        return 0
-
-    candidate_text = candidate_experience.lower().strip()
-
-    total_experience = job_intelligence.get(
-        "total_experience"
-    )
-
-    # Job does not specify experience
-    if not total_experience:
         return 50
 
-    required_years = total_experience.get(
-        "min_years",
-        0
+    candidate_text = (
+        candidate_experience
+        .lower()
+        .strip()
+    )
+
+    job_level = job_intelligence.get(
+        "experience_level"
     )
 
     # Fresher
@@ -279,13 +317,34 @@ def calculate_experience_score(
         "0 years",
         "fresher",
         "freshers",
+        "entry level",
     ]:
+
+        if job_level in [
+            "senior",
+            "lead",
+            "management",
+        ]:
+            return 0
+
+        total_experience = job_intelligence.get(
+            "total_experience"
+        )
+
+        if not total_experience:
+            return 50
+
+        required_years = total_experience.get(
+            "min_years",
+            0
+        )
+
         if required_years <= 1:
             return 100
 
         return 0
 
-    # Extract candidate years
+    # Experienced candidate
     match = re.search(
         r"(\d+(?:\.\d+)?)",
         candidate_text
@@ -294,7 +353,21 @@ def calculate_experience_score(
     if not match:
         return 50
 
-    candidate_years = float(match.group(1))
+    candidate_years = float(
+        match.group(1)
+    )
+
+    total_experience = job_intelligence.get(
+        "total_experience"
+    )
+
+    if not total_experience:
+        return 50
+
+    required_years = total_experience.get(
+        "min_years",
+        0
+    )
 
     if candidate_years >= required_years:
         return 100

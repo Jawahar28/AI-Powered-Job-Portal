@@ -65,22 +65,103 @@ def analyze_job_description(title, description):
     # Total experience
     # -------------------------
 
-    total_patterns = [
-    r"(\d+)\+?\s*(?:years?|yrs?)\s+of\s+(?:total\s+)?experience",
-    r"(\d+)\+?\s*(?:years?|yrs?)\s+of\s+overall\s+experience",
-    r"minimum\s+(?:of\s+)?(\d+)\+?\s*(?:years?|yrs?)",
-    r"(\d+)\+?\s*yoe\b",
+        # ------------------------------------------
+    # Total Experience
+    # ------------------------------------------
+
+    experience_patterns = [
+
+    # ------------------------------------------
+    # Ranges must come FIRST
+    # ------------------------------------------
+
+    # 0-1 years / 2–4 years
+    r"(\d+(?:\.\d+)?)\s*[-–]\s*(\d+(?:\.\d+)?)"
+    r"\s*(?:years?|yrs?)",
+
+    # 0 to 2 years
+    r"(\d+(?:\.\d+)?)\s*to\s*(\d+(?:\.\d+)?)"
+    r"\s*(?:years?|yrs?)",
+
+    # ------------------------------------------
+    # Single minimum experience
+    # ------------------------------------------
+
+    # 3+ years experience
+    r"(\d+(?:\.\d+)?)\s*\+?\s*(?:years?|yrs?)"
+    r"\s*(?:of\s+)?(?:total\s+|overall\s+)?experience",
+
+    # minimum 3 years
+    r"minimum\s+(?:of\s+)?(\d+(?:\.\d+)?)"
+    r"\s*\+?\s*(?:years?|yrs?)",
+
+    # 3 YOE / 3 YoE
+    r"(\d+(?:\.\d+)?)\s*\+?\s*yoe\b",
 ]
 
-    for pattern in total_patterns:
+    for pattern in experience_patterns:
 
-        match = re.search(pattern, combined_text)
+        match = re.search(
+            pattern,
+            combined_text
+        )
 
         if match:
-            result["total_experience"] = {
-                "min_years": int(match.group(1))
-            }
+
+            if match.lastindex == 2:
+
+                result["total_experience"] = {
+                    "min_years": float(match.group(1)),
+                    "max_years": float(match.group(2)),
+                }
+
+            else:
+
+                result["total_experience"] = {
+                    "min_years": float(match.group(1)),
+                    "max_years": None,
+                }
+
             break
+
+        # ------------------------------------------
+    # Experience Level
+    # ------------------------------------------
+
+    experience_level = None
+
+    if re.search(
+        r"\b(fresher|freshers|entry[- ]level|"
+        r"no experience|0\s*[-–]\s*1\s*years?)\b",
+        combined_text
+    ):
+        experience_level = "entry"
+
+    elif re.search(
+        r"\b(junior|jr\.?|associate)\b",
+        combined_text
+    ):
+        experience_level = "junior"
+
+    elif re.search(
+        r"\b(senior|sr\.?)\b",
+        combined_text
+    ):
+        experience_level = "senior"
+
+    elif re.search(
+        r"\b(lead|principal|staff)\b",
+        combined_text
+    ):
+        experience_level = "lead"
+
+    elif re.search(
+        r"\b(manager|director|head)\b",
+        combined_text
+    ):
+        experience_level = "management"
+
+    result["experience_level"] = experience_level
 
     # -------------------------
     # Skill-specific experience
