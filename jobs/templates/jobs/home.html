@@ -32,7 +32,9 @@ JOBCode | Find Your Dream Job
                     Here's a quick overview of your job search.
                 </p>
 
-                <a href="{% url 'my_applications' %}" class="dashboard-link">
+                <a
+                    href="{% url 'my_applications' %}"
+                    class="dashboard-link">
 
                     View Applications →
 
@@ -46,11 +48,16 @@ JOBCode | Find Your Dream Job
                             📂
                         </div>
 
-                        <h3>{{ application_count }}</h3>
+                        <h3>
+                            {{ application_count }}
+                        </h3>
 
-                        <span>Applications</span>
+                        <span>
+                            Applications
+                        </span>
 
                     </div>
+
 
                     <div class="dashboard-card">
 
@@ -58,11 +65,16 @@ JOBCode | Find Your Dream Job
                             ❤️
                         </div>
 
-                        <h3>{{ saved_jobs }}</h3>
+                        <h3>
+                            {{ saved_jobs }}
+                        </h3>
 
-                        <span>Saved Jobs</span>
+                        <span>
+                            Saved Jobs
+                        </span>
 
                     </div>
+
 
                     <div class="dashboard-card">
 
@@ -70,11 +82,16 @@ JOBCode | Find Your Dream Job
                             🎯
                         </div>
 
-                        <h3>{{ interviews }}</h3>
+                        <h3>
+                            {{ interviews }}
+                        </h3>
 
-                        <span>Interviews</span>
+                        <span>
+                            Interviews
+                        </span>
 
                     </div>
+
 
                     <div class="dashboard-card">
 
@@ -82,9 +99,13 @@ JOBCode | Find Your Dream Job
                             👤
                         </div>
 
-                        <h3>{{ profile_completion }}%</h3>
+                        <h3>
+                            {{ profile_completion }}%
+                        </h3>
 
-                        <span>Profile Complete</span>
+                        <span>
+                            Profile Complete
+                        </span>
 
                     </div>
 
@@ -92,14 +113,13 @@ JOBCode | Find Your Dream Job
 
             </div>
 
+
             <!-- Right Card -->
 
             <div class="dashboard-right">
 
                 <h3>
-
                     Recent Applications
-
                 </h3>
 
                 {% for application in recent_applications %}
@@ -109,15 +129,11 @@ JOBCode | Find Your Dream Job
                     <div>
 
                         <h5>
-
                             {{ application.job.title }}
-
                         </h5>
 
                         <small>
-
                             {{ application.job.company.name }}
-
                         </small>
 
                     </div>
@@ -137,21 +153,15 @@ JOBCode | Find Your Dream Job
                 <div class="empty-applications">
 
                     <div class="empty-icon">
-
                         📄
-
                     </div>
 
                     <h5>
-
                         No Applications Yet
-
                     </h5>
 
                     <p>
-
                         Start applying to jobs.
-
                     </p>
 
                     <a
@@ -174,7 +184,182 @@ JOBCode | Find Your Dream Job
 
 </section>
 
+
+<!-- ==========================================
+     New Jobs For You
+========================================== -->
+
+<section class="new-jobs-section">
+
+    <div class="container">
+
+        <div class="new-jobs-header">
+
+            <div>
+
+                <span class="section-tag">
+                    🤖 AI MATCHED
+                </span>
+
+                <h2>
+                    🔥 New Jobs For You
+                </h2>
+
+                <p>
+                    Fresh opportunities matched to your skills and experience.
+                </p>
+
+            </div>
+
+            <a
+                href="{% url 'recommended_jobs' %}"
+                class="view-all-link">
+
+                View All Recommendations →
+
+            </a>
+
+        </div>
+
+
+        <div class="new-jobs-grid">
+
+            {% for job in new_recommended_jobs|slice:":3" %}
+
+            <div class="new-job-card">
+
+                <div class="new-job-card-top">
+
+                    <div>
+
+                        <h3>
+                            {{ job.title }}
+                        </h3>
+
+                        <p class="job-company">
+                            {{ job.company.name }}
+                        </p>
+
+                    </div>
+
+                    <div class="match-score">
+
+                        {{ job.match_score }}%
+
+                        <small>
+                            Match
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="job-meta">
+
+                    <span>
+                        📍 {{ job.location }}
+                    </span>
+
+                    {% if job.job_type %}
+
+                    <span>
+                        💼 {{ job.get_job_type_display }}
+                    </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                {% if job.matched_skills %}
+
+                <div class="matched-skills">
+
+                    {% for skill in job.matched_skills|slice:":4" %}
+
+                    <span class="skill-tag">
+                        ✓ {{ skill }}
+                    </span>
+
+                    {% endfor %}
+
+                </div>
+
+                {% endif %}
+
+
+                <div class="new-job-footer">
+
+                    <a
+                        href="{% url 'job_detail' job.id %}"
+                        class="job-details-btn">
+
+                        View Details →
+
+                    </a>
+
+
+                    {% if job.external_url %}
+
+                    <a
+                        href="{{ job.external_url }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="original-link">
+
+                        Original Posting ↗
+
+                    </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            {% empty %}
+
+            <div class="new-jobs-empty">
+
+                <div class="empty-job-icon">
+                    🔎
+                </div>
+
+                <h3>
+                    No new personalized jobs today
+                </h3>
+
+                <p>
+                    We're checking for fresh opportunities that match
+                    your skills and experience.
+                </p>
+
+                <a
+                    href="{% url 'recommended_jobs' %}"
+                    class="browse-recommendations-btn">
+
+                    View My Recommendations →
+
+                </a>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
 {% endif %}
+
+
+<!-- ==========================================
+     Hero Section
+========================================== -->
 
 <section class="hero-section">
 
@@ -185,16 +370,16 @@ JOBCode | Find Your Dream Job
             <div class="col-lg-6">
 
                 <span class="hero-tag">
-
                     🚀 AI Powered Recruitment Platform
-
                 </span>
 
                 <h1>
 
                     Find Your
 
-                    <span>Dream Career</span>
+                    <span>
+                        Dream Career
+                    </span>
 
                     With AI
 
@@ -209,7 +394,11 @@ JOBCode | Find Your Dream Job
 
                 </p>
 
-                <form method="GET" action="{% url 'job_list' %}" class="hero-search">
+
+                <form
+                    method="GET"
+                    action="{% url 'job_list' %}"
+                    class="hero-search">
 
                     <input
                         type="text"
@@ -226,26 +415,39 @@ JOBCode | Find Your Dream Job
 
                 </form>
 
+
                 <div class="popular-skills">
 
-                    <a href="{% url 'job_list' %}?q=Python">Python</a>
-                    <a href="{% url 'job_list' %}?q=Django">Django</a>
-                    <a href="{% url 'job_list' %}?q=Backend">Backend</a>
-                    <a href="{% url 'job_list' %}?q=AI">AI</a>
-                    <a href="{% url 'job_list' %}?q=AI">AI</a>
-                    <a href="{% url 'job_list' %}?q=Machine Learning">Machine Learning</a>
+                    <a href="{% url 'job_list' %}?q=Python">
+                        Python
+                    </a>
+
+                    <a href="{% url 'job_list' %}?q=Django">
+                        Django
+                    </a>
+
+                    <a href="{% url 'job_list' %}?q=Backend">
+                        Backend
+                    </a>
+
+                    <a href="{% url 'job_list' %}?q=AI">
+                        AI
+                    </a>
+
+                    <a href="{% url 'job_list' %}?q=Machine Learning">
+                        Machine Learning
+                    </a>
+
                 </div>
 
             </div>
 
+
             <div class="col-lg-6 text-center">
 
                 <img
-
                     src="{% static 'jobs/hero.svg' %}"
-
                     class="hero-image"
-
                     alt="Hero">
 
             </div>
@@ -256,21 +458,26 @@ JOBCode | Find Your Dream Job
 
 </section>
 
+
+<!-- ==========================================
+     Trusted Companies
+========================================== -->
+
 <section class="companies">
 
     <div class="container">
 
         <h2 class="section-title">
-
             Trusted by Top Companies
-
         </h2>
 
         <p class="section-subtitle">
 
-            Helping candidates connect with leading technology companies.
+            Helping candidates connect with leading
+            technology companies.
 
         </p>
+
 
         <div class="company-grid">
 
@@ -278,39 +485,53 @@ JOBCode | Find Your Dream Job
 
                 <i class="bi bi-google"></i>
 
-                <h4>Google</h4>
+                <h4>
+                    Google
+                </h4>
 
             </div>
+
 
             <div class="company-card">
 
                 <i class="bi bi-microsoft"></i>
 
-                <h4>Microsoft</h4>
+                <h4>
+                    Microsoft
+                </h4>
 
             </div>
+
 
             <div class="company-card">
 
                 <i class="bi bi-amazon"></i>
 
-                <h4>Amazon</h4>
+                <h4>
+                    Amazon
+                </h4>
 
             </div>
+
 
             <div class="company-card">
 
                 <i class="bi bi-cpu"></i>
 
-                <h4>OpenAI</h4>
+                <h4>
+                    OpenAI
+                </h4>
 
             </div>
+
 
             <div class="company-card">
 
                 <i class="bi bi-play-circle"></i>
 
-                <h4>Netflix</h4>
+                <h4>
+                    Netflix
+                </h4>
 
             </div>
 
@@ -320,6 +541,10 @@ JOBCode | Find Your Dream Job
 
 </section>
 
+
+<!-- ==========================================
+     Platform Statistics
+========================================== -->
 
 <section class="stats">
 
@@ -329,25 +554,39 @@ JOBCode | Find Your Dream Job
 
             <div class="col-md-4">
 
-                <h2>{{ job_count }}+</h2>
-                
-                <p>Active Jobs</p>
+                <h2>
+                    {{ job_count }}+
+                </h2>
+
+                <p>
+                    Active Jobs
+                </p>
 
             </div>
 
+
             <div class="col-md-4">
 
-                <h2>{{ company_count }}+</h2>
+                <h2>
+                    {{ company_count }}+
+                </h2>
 
-                <p>Companies</p>
+                <p>
+                    Companies
+                </p>
 
             </div>
 
+
             <div class="col-md-4">
 
-                <h2>{{ candidate_count }}+</h2>
+                <h2>
+                    {{ candidate_count }}+
+                </h2>
 
-                <p>Candidates</p>
+                <p>
+                    Candidates
+                </p>
 
             </div>
 
@@ -356,6 +595,11 @@ JOBCode | Find Your Dream Job
     </div>
 
 </section>
+
+
+<!-- ==========================================
+     Latest Opportunities
+========================================== -->
 
 <section class="py-5 bg-white">
 
@@ -375,7 +619,9 @@ JOBCode | Find Your Dream Job
 
                     <div class="card-body">
 
-                        <h4>{{ job.title }}</h4>
+                        <h4>
+                            {{ job.title }}
+                        </h4>
 
                         <p class="text-muted">
                             {{ job.company.name }}
@@ -405,7 +651,9 @@ JOBCode | Find Your Dream Job
 
             {% empty %}
 
-            <p>No jobs available.</p>
+            <p>
+                No jobs available.
+            </p>
 
             {% endfor %}
 

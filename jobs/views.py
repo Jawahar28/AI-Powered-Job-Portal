@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from jobs.services.recommendations import get_new_recommended_jobs, get_recommended_jobs
 
 # Create your views here.
 def home(request):
@@ -22,20 +23,31 @@ def home(request):
 
     if request.user.is_authenticated:
 
-        applications = request.user.applications.select_related(
-            "job",
-            "job__company"
-        ).order_by("-applied_at")
+        applications = (
+            request.user.applications
+            .select_related(
+                "job",
+                "job__company"
+            )
+            .order_by("-applied_at")
+        )
+
+        recommended_jobs = get_recommended_jobs(request.user)
+
+        new_recommended_jobs = get_new_recommended_jobs(request.user)
 
         context.update({
             "application_count": applications.count(),
             "recent_applications": applications[:5],
-            "saved_jobs": 0,          # We'll replace later
-            "interviews": 0,          # We'll replace later
-            "profile_completion": 70, # We'll calculate later
+            "saved_jobs": request.user.saved_jobs.count(),
+            "interviews": 0,
+            "profile_completion": 70,
+            "recommendation_count": len(recommended_jobs),
+            "new_recommended_jobs": new_recommended_jobs,
+            "new_recommendation_count": len(new_recommended_jobs),
         })
 
-    return render(request, "jobs/home.html", context)
+    return render(request,"jobs/home.html",context)
 
 
 def job_list(request):

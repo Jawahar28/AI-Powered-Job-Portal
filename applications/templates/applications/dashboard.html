@@ -164,6 +164,129 @@ Candidate Dashboard
 
 {% endfor %}
 
+<!-- ==========================================
+     New Jobs Today
+========================================== -->
+
+<h2 class="section-title">
+
+    🔥 New Jobs Today
+
+</h2>
+
+
+<div class="recommendation-grid">
+
+    {% for job in new_recommended_jobs|slice:":3" %}
+
+    <div class="recommendation-card">
+
+        <div class="recommendation-header">
+
+            <div>
+
+                <h3>
+                    {{ job.title }}
+                </h3>
+
+                <p>
+                    {{ job.company.name }}
+                </p>
+
+            </div>
+
+            <span class="match-score">
+
+                {{ job.match_score }}% Match
+
+            </span>
+
+        </div>
+
+
+        <p class="job-location">
+
+            📍 {{ job.location }}
+
+        </p>
+
+
+        {% if job.matched_skills %}
+
+        <div class="matched-skills">
+
+            {% for skill in job.matched_skills %}
+
+            <span class="skill-tag">
+                ✓ {{ skill }}
+            </span>
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+
+        <div class="recommendation-footer">
+
+            {% if job.external_url %}
+
+            <a
+                href="{{ job.external_url }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="apply-btn"
+            >
+
+                Apply on Original Website ↗
+
+            </a>
+
+            {% else %}
+
+            <a
+                href="{% url 'job_detail' job.id %}"
+                class="apply-btn"
+            >
+
+                View Job →
+
+            </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <div class="empty-card">
+
+        <h3>
+            No new personalized jobs today
+        </h3>
+
+        <p>
+            We'll keep checking for new opportunities that match your profile.
+        </p>
+
+        <a
+            href="{% url 'recommended_jobs' %}"
+            class="browse-btn"
+        >
+
+            View All Recommendations
+
+        </a>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
 
 <!-- ==========================================
      Quick Actions
