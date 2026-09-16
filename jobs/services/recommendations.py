@@ -215,6 +215,133 @@ def calculate_job_match_for_user(user, job):
         "missing_skills": skill_match["missing_skills"],
     }
 
+def analyze_job_fit(user, job):
+    profile = user.profile
+
+    analysis = analyze_candidate(profile)
+
+    candidate_skills = [
+        skill.strip()
+        for skill in profile.skills.split(",")
+        if skill.strip()
+    ]
+
+    # -------------------------
+    # Skill analysis
+    # -------------------------
+
+    skill_match = calculate_intelligence_skill_match(
+        candidate_skills,
+        job.intelligence
+    )
+
+    # -------------------------
+    # Role analysis
+    # -------------------------
+
+    role_score = calculate_role_score(
+        job.title,
+        analysis["primary_roles"],
+        analysis["secondary_roles"]
+    )
+
+    # -------------------------
+    # Experience analysis
+    # -------------------------
+
+    experience_score = calculate_experience_score(
+        profile.experience,
+        job.intelligence
+    )
+
+    # -------------------------
+    # Final match score
+    # -------------------------
+
+    final_score = (
+        skill_match["match_score"] * 0.6
+        + role_score * 0.3
+        + experience_score * 0.1
+    )
+
+    # -------------------------
+    # Boolean match indicators
+    # -------------------------
+
+    role_match = role_score > 0
+    experience_match = experience_score == 100
+
+    # -------------------------
+    # Strengths
+    # -------------------------
+
+    strengths = []
+
+    if skill_match["matched_skills"]:
+        strengths.append(
+            f"You match {len(skill_match['matched_skills'])} required skill(s)."
+        )
+
+    if role_match:
+        strengths.append(
+            "Your profile matches the job role."
+        )
+
+    if experience_match:
+        strengths.append(
+            "Your experience matches the job requirements."
+        )
+
+    # -------------------------
+    # Gaps
+    # -------------------------
+
+    gaps = []
+
+    if skill_match["missing_skills"]:
+        gaps.append(
+            "Missing required skills: "
+            + ", ".join(skill_match["missing_skills"])
+        )
+
+    if not role_match:
+        gaps.append(
+            "Your current profile does not strongly match the job role."
+        )
+
+    if not experience_match:
+        gaps.append(
+            "Your experience does not fully match the job requirements."
+        )
+
+    return {
+        "match_score": round(final_score),
+
+        "matched_skills": skill_match[
+            "matched_skills"
+        ],
+
+        "missing_skills": skill_match[
+            "missing_skills"
+        ],
+
+        "skill_score": skill_match[
+            "match_score"
+        ],
+
+        "role_score": role_score,
+
+        "experience_score": experience_score,
+
+        "role_match": role_match,
+
+        "experience_match": experience_match,
+
+        "strengths": strengths,
+
+        "gaps": gaps,
+    }
+
 
 def get_recommended_jobs(user):
 
