@@ -73,6 +73,227 @@
 </div>
 
 
+{% if user.is_authenticated and job_fit %}
+<section class="job-fit-card">
+
+    <div class="job-fit-header">
+        <div>
+            <span class="job-fit-label">
+                AI JOB FIT ANALYSIS
+            </span>
+
+            <h2>
+                Your Match
+            </h2>
+        </div>
+
+        <div class="match-score">
+            {{ job_fit.match_score }}%
+        </div>
+    </div>
+
+
+    <div class="job-fit-summary">
+
+        {% if job_fit.eligible %}
+            <div class="fit-status fit-status-success">
+                <i class="fa-solid fa-circle-check"></i>
+                You meet the current role and experience requirements.
+            </div>
+
+        {% else %}
+            <div class="fit-status fit-status-warning">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                This role has requirements that your current profile does not fully meet.
+            </div>
+        {% endif %}
+
+    </div>
+
+
+    <!-- Skills -->
+
+    <div class="job-fit-section">
+
+        <h3>
+            <i class="fa-solid fa-code"></i>
+            Skills
+        </h3>
+
+        {% if job_fit.matched_skills %}
+
+            <div class="skill-list">
+
+                {% for skill in job_fit.matched_skills %}
+
+                    <span class="skill matched">
+                        <i class="fa-solid fa-check"></i>
+                        {{ skill }}
+                    </span>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <p class="job-fit-muted">
+                No matching required skills were detected.
+            </p>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- Missing Skills -->
+
+    {% if job_fit.missing_skills %}
+
+    <div class="job-fit-section">
+
+        <h3>
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            Skills to Improve
+        </h3>
+
+        <div class="skill-list">
+
+            {% for skill in job_fit.missing_skills %}
+
+                <span class="skill missing">
+                    {{ skill }}
+                </span>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- Match Breakdown -->
+
+    <div class="job-fit-section">
+
+        <h3>
+            <i class="fa-solid fa-chart-simple"></i>
+            Match Breakdown
+        </h3>
+
+        <div class="match-breakdown">
+
+            <div class="breakdown-item">
+
+                <span>Skills</span>
+
+                <strong>
+                    {{ job_fit.skill_score }}%
+                </strong>
+
+            </div>
+
+
+            <div class="breakdown-item">
+
+                <span>Role</span>
+
+                <strong>
+                    {{ job_fit.role_score }}%
+                </strong>
+
+            </div>
+
+
+            <div class="breakdown-item">
+
+                <span>Experience</span>
+
+                {% if job_fit.experience_match is None %}
+
+                    <strong class="not-required">
+                        Not specified
+                    </strong>
+
+                {% else %}
+
+                    <strong>
+                        {{ job_fit.experience_score }}%
+                    </strong>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Strengths -->
+
+    {% if job_fit.strengths %}
+
+    <div class="job-fit-section">
+
+        <h3>
+            <i class="fa-solid fa-thumbs-up"></i>
+            Your Strengths
+        </h3>
+
+        <ul class="fit-list">
+
+            {% for strength in job_fit.strengths %}
+
+                <li>
+                    <i class="fa-solid fa-check"></i>
+                    {{ strength }}
+                </li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- Gaps -->
+
+    {% if job_fit.gaps %}
+
+    <div class="job-fit-section">
+
+        <h3>
+            <i class="fa-solid fa-circle-exclamation"></i>
+            Gaps
+        </h3>
+
+        <ul class="fit-list">
+
+            {% for gap in job_fit.gaps %}
+
+                <li>
+                    <i class="fa-solid fa-minus"></i>
+                    {{ gap }}
+                </li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    {% endif %}
+
+</section>
+
+{% endif %}
+
+
 <div class="col-lg-4">
 
 <div class="apply-card">

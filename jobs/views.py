@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from jobs.services.recommendations import get_new_recommended_jobs, get_recommended_jobs
+from jobs.services.recommendations import get_new_recommended_jobs, get_recommended_jobs, analyze_job_fit
 
 # Create your views here.
 def home(request):
@@ -95,12 +95,21 @@ def job_detail(request, id):
         .exclude(id=job.id)[:3]
     )
 
+    job_fit = None
+
+    if request.user.is_authenticated:
+        job_fit = analyze_job_fit(
+            request.user,
+            job
+        )
+
     return render(
         request,
         "jobs/job_detail.html",
         {
             "job": job,
             "related_jobs": related_jobs,
+            "job_fit": job_fit,
         },
     )
 
