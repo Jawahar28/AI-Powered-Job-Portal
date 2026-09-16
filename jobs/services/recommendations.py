@@ -269,7 +269,14 @@ def analyze_job_fit(user, job):
     # -------------------------
 
     role_match = role_score > 0
-    experience_match = experience_score == 100
+    total_experience = job.intelligence.get("total_expereience")
+
+    job_level = job.intelligence.get("experience_level")
+
+    if (not total_experience and not job_level):
+        experience_match = None
+    else:
+        experience_match = experience_score == 100
 
     # -------------------------
     # Strengths
@@ -309,7 +316,7 @@ def analyze_job_fit(user, job):
             "Your current profile does not strongly match the job role."
         )
 
-    if not experience_match:
+    if experience_match is False:
         gaps.append(
             "Your experience does not fully match the job requirements."
         )
@@ -336,6 +343,8 @@ def analyze_job_fit(user, job):
         "role_match": role_match,
 
         "experience_match": experience_match,
+
+        "eligible" : (experience_match is not False and role_match),
 
         "strengths": strengths,
 
