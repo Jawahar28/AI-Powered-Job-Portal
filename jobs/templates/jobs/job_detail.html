@@ -338,6 +338,21 @@ Take the next step in your career.
 
 </a>
 
+{% if user.is_authenticated %}
+
+<button
+    type="button"
+    class="cover-letter-btn"
+    id="generateCoverLetterBtn"
+    data-url="{% url 'generate_cover_letter' job.id %}">
+
+    <i class="fa-solid fa-wand-magic-sparkles"></i>
+    Generate Cover Letter
+
+</button>
+
+{% endif %}
+
 </div>
 
 </div>
@@ -405,5 +420,96 @@ No related jobs available.
 </div>
 
 </section>
+
+{% if user.is_authenticated %}
+
+<div
+    class="cover-letter-modal"
+    id="coverLetterModal">
+
+    <div class="cover-letter-modal-content">
+
+        <div class="cover-letter-modal-header">
+
+            <div>
+                <span class="cover-letter-label">
+                    AI APPLICATION ASSISTANT
+                </span>
+
+                <h2>Your Cover Letter</h2>
+            </div>
+
+            <button
+                type="button"
+                class="close-cover-letter"
+                id="closeCoverLetter">
+
+                &times;
+
+            </button>
+
+        </div>
+
+        <div
+            id="coverLetterLoading"
+            class="cover-letter-loading">
+
+            <i class="fa-solid fa-spinner fa-spin"></i>
+
+            <p>
+                Creating a personalized cover letter...
+            </p>
+
+        </div>
+
+        <div
+            id="coverLetterError"
+            class="cover-letter-error">
+
+            Unable to generate the cover letter.
+            Please try again.
+
+        </div>
+
+        <textarea
+            id="coverLetterText"
+            class="cover-letter-text"
+            readonly></textarea>
+
+        <div class="cover-letter-actions">
+
+            <button
+                type="button"
+                id="copyCoverLetter"
+                class="copy-cover-letter">
+
+                <i class="fa-solid fa-copy"></i>
+                Copy
+
+            </button>
+
+            <button
+                type="button"
+                id="regenerateCoverLetter"
+                class="regenerate-cover-letter">
+
+                <i class="fa-solid fa-rotate"></i>
+                Regenerate
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endif %}
+
+{% block extra_js %}
+
+<script src="{% static 'js/jobs/job_detail.js' %}"></script>
+
+{% endblock %}
 
 {% endblock %}
