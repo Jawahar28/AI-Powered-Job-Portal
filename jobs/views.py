@@ -1,11 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .models import Job, Company, SavedJob
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from jobs.services.recommendations import get_new_recommended_jobs, get_recommended_jobs, analyze_job_fit
+from jobs.services.cover_letter import generate_cover_letter
+from django.views.decorators.http import require_POST
 
 # Create your views here.
 def home(request):
@@ -149,3 +151,31 @@ def unsave_job(request, id):
     messages.success(request, "Job removed from your saved jobs.")
 
     return redirect("saved_jobs")
+
+
+@login_required
+@require_POST
+def generate_cover_letter_view(request, id):
+
+    job = get_object_or_404(
+        Job,
+        id=id
+    )
+
+    try:
+        cover_letter = generate_cover_letter(
+            request.user,
+            job
+        )
+
+        return JsonResponse({
+            "success": True,
+            "cover_letter": cover_letter,
+        })
+
+    except Exception as e:
+
+        return JsonResponse({
+            "success": False,
+            "error": "Unable to generate cover letter right now.",
+        }, status=500)

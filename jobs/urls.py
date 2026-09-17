@@ -8,5 +8,6 @@ urlpatterns = [
     path("jobs/<int:id>/save/", views.save_job, name="save_job"),
     path("saved-jobs/", views.saved_jobs, name="saved_jobs"),
     path("jobs/<int:id>/unsave/", views.unsave_job, name="unsave_job"),
+    path("jobs/<int:id>/cover-letter/", views.generate_cover_letter_view, name="generate_cover_letter"),
 
 ]
