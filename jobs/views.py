@@ -233,3 +233,9 @@ def generate_cover_letter_view(request, id):
             },
             status=500
         )
+
+@login_required
+def recommended_jobs(request):
+    recommendations = get_recommended_jobs(request.user)
+
+    return render(request, "jobs/recommended_jobs.html",{"recommendations" : recommendations})
