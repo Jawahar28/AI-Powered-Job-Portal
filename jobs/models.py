@@ -108,4 +108,18 @@ class SavedJob(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.job.title}"
-    
+
+class CoverLetterGeneration(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="cover_letter_generations")
+
+    job = models.ForeignKey(Job, on_delete= models.CASCADE, related_name="cover_letter_generations")
+
+    generated_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return (
+            f"{self.user.username} - "
+            f"{self.job.title} - "
+            f"{self.generated_at}"
+        )
+

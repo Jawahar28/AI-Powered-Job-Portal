@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, JsonResponse
-from .models import Job, Company, SavedJob
+from .models import Job, Company, SavedJob, CoverLetterGeneration
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
@@ -8,6 +8,8 @@ from django.contrib import messages
 from jobs.services.recommendations import get_new_recommended_jobs, get_recommended_jobs, analyze_job_fit
 from jobs.services.cover_letter import generate_cover_letter
 from django.views.decorators.http import require_POST
+from django.utils import timezone
+
 
 # Create your views here.
 def home(request):
@@ -179,3 +181,83 @@ def generate_cover_letter_view(request, id):
             "success": False,
             "error": "Unable to generate cover letter right now.",
         }, status=500)
+
+
+@login_required
+@require_POST
+def generate_cover_letter_view(request, id):
+
+    job = get_object_or_404(
+        Job,
+        id=id
+    )
+
+    today = timezone.localdate()
+
+    generation_count = (
+        CoverLetterGeneration.objects
+        .filter(
+            user=request.user,
+            generated_at__date=today
+        )
+        .count()
+    )
+
+    DAILY_LIMIT = 5
+
+    if generation_count >= DAILY_LIMIT:
+
+        return JsonResponse(
+            {
+                "success": False,
+                "error": (
+                    "You have reached your daily "
+                    "cover letter generation limit. "
+                    "Please try again tomorrow."
+                ),
+            },
+            status=429
+        )
+
+    try:
+
+        cover_letter = generate_cover_letter(
+            request.user,
+            job
+        )
+
+        CoverLetterGeneration.objects.create(
+            user=request.user,
+            job=job
+        )
+
+        return JsonResponse(
+            {
+                "success": True,
+                "cover_letter": cover_letter,
+                "remaining_generations": (
+                    DAILY_LIMIT
+                    - generation_count
+                    - 1
+                ),
+            }
+        )
+
+    except Exception as e:
+
+        print(
+            "Cover letter generation error:",
+            e
+        )
+
+        return JsonResponse(
+            {
+                "success": False,
+                "error": (
+                    "Unable to generate your "
+                    "cover letter right now. "
+                    "Please try again later."
+                ),
+            },
+            status=500
+        )
