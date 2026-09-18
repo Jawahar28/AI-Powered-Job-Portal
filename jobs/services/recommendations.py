@@ -269,7 +269,7 @@ def analyze_job_fit(user, job):
     # -------------------------
 
     role_match = role_score > 0
-    total_experience = job.intelligence.get("total_expereience")
+    total_experience = job.intelligence.get("total_experience")
 
     job_level = job.intelligence.get("experience_level")
 

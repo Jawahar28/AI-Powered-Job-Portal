@@ -164,34 +164,6 @@ def generate_cover_letter_view(request, id):
         id=id
     )
 
-    try:
-        cover_letter = generate_cover_letter(
-            request.user,
-            job
-        )
-
-        return JsonResponse({
-            "success": True,
-            "cover_letter": cover_letter,
-        })
-
-    except Exception as e:
-
-        return JsonResponse({
-            "success": False,
-            "error": "Unable to generate cover letter right now.",
-        }, status=500)
-
-
-@login_required
-@require_POST
-def generate_cover_letter_view(request, id):
-
-    job = get_object_or_404(
-        Job,
-        id=id
-    )
-
     today = timezone.localdate()
 
     generation_count = (
