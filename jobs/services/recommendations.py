@@ -266,6 +266,11 @@ def analyze_job_fit(user, job):
         job
     )
 
+    preference_reasons = get_preference_reasons(
+    profile,
+    job
+    )
+
     # -------------------------
     # Final match score
     # -------------------------
@@ -311,6 +316,9 @@ def analyze_job_fit(user, job):
             "Your experience matches the job requirements."
         )
 
+    for reason in preference_reasons:
+        strengths.append(reason)
+
     # -------------------------
     # Gaps
     # -------------------------
@@ -333,35 +341,32 @@ def analyze_job_fit(user, job):
             "Your experience does not fully match the job requirements."
         )
 
+    
+
     return {
-        "match_score": round(final_score),
+    "match_score": round(final_score),
 
-        "matched_skills": skill_match[
-            "matched_skills"
-        ],
+    "matched_skills": skill_match["matched_skills"],
+    "missing_skills": skill_match["missing_skills"],
 
-        "missing_skills": skill_match[
-            "missing_skills"
-        ],
+    "skill_score": skill_match["match_score"],
+    "role_score": role_score,
+    "experience_score": experience_score,
+    "preference_score": preference_score,
 
-        "skill_score": skill_match[
-            "match_score"
-        ],
+    "role_match": role_match,
+    "experience_match": experience_match,
 
-        "role_score": role_score,
+    "preference_reasons": preference_reasons,
 
-        "experience_score": experience_score,
+    "eligible": (
+        experience_match is not False
+        and role_match
+    ),
 
-        "role_match": role_match,
-
-        "experience_match": experience_match,
-
-        "eligible" : (experience_match is not False and role_match),
-
-        "strengths": strengths,
-
-        "gaps": gaps,
-    }
+    "strengths": strengths,
+    "gaps": gaps,
+}
 
 
 def get_recommended_jobs(user):
@@ -417,7 +422,7 @@ def get_recommended_jobs(user):
             + experience_score * 0.10
             + preference_score * 0.10
         )
-        
+
         if skill_match["match_score"] > 0 or role_score > 0:
 
             job.match_score = round(final_score)
@@ -714,3 +719,134 @@ def calculate_preference_score(profile, job):
         return 50
 
     return round(sum(scores) / len(scores))
+
+
+def get_preference_reasons(profile, job):
+    """
+    Return human-readable reasons explaining how a job
+    matches the candidate's career preferences.
+    """
+
+    reasons = []
+
+    # ------------------------------------------
+    # Preferred role
+    # ------------------------------------------
+
+    preferred_roles = _split_preferences(
+        profile.preferred_roles
+    )
+
+    if preferred_roles:
+        title = job.title.lower()
+
+        matched_role = next(
+            (
+                role
+                for role in preferred_roles
+                if role in title
+            ),
+            None
+        )
+
+        if matched_role:
+            reasons.append(
+                f"'{job.title}' matches your preferred role "
+                f"'{matched_role.title()}'."
+            )
+
+    # ------------------------------------------
+    # Preferred location
+    # ------------------------------------------
+
+    preferred_locations = _split_preferences(
+        profile.preferred_locations
+    )
+
+    if preferred_locations:
+        job_location = job.location.lower()
+
+        matched_location = next(
+            (
+                location
+                for location in preferred_locations
+                if location in job_location
+            ),
+            None
+        )
+
+        if matched_location:
+            reasons.append(
+                f"This job matches your preferred location "
+                f"'{matched_location.title()}'."
+            )
+
+    # ------------------------------------------
+    # Job type
+    # ------------------------------------------
+
+    if profile.preferred_job_type:
+
+        if job.job_type == profile.preferred_job_type:
+            reasons.append(
+                f"This is a {job.get_job_type_display().lower()} "
+                f"position, matching your preference."
+            )
+
+    # ------------------------------------------
+    # Work mode
+    # ------------------------------------------
+
+    if profile.work_mode:
+
+        job_text = (
+            f"{job.title} "
+            f"{job.location} "
+            f"{job.description}"
+        ).lower()
+
+        if profile.work_mode == "REMOTE":
+
+            if (
+                "remote" in job_text
+                or "work from home" in job_text
+                or "wfh" in job_text
+            ):
+                reasons.append(
+                    "This job supports remote work, "
+                    "matching your preference."
+                )
+
+        elif profile.work_mode == "HYBRID":
+
+            if "hybrid" in job_text:
+                reasons.append(
+                    "This job supports hybrid work, "
+                    "matching your preference."
+                )
+
+        elif profile.work_mode == "ONSITE":
+
+            if (
+                "on-site" in job_text
+                or "onsite" in job_text
+                or "office" in job_text
+            ):
+                reasons.append(
+                    "This job supports on-site work, "
+                    "matching your preference."
+                )
+
+    # ------------------------------------------
+    # Expected salary
+    # ------------------------------------------
+
+    if profile.expected_salary and job.salary:
+
+        if job.salary >= profile.expected_salary:
+            reasons.append(
+                "The listed salary meets or exceeds "
+                "your expected salary."
+            )
+
+    return reasons

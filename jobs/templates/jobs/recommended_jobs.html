@@ -10,16 +10,25 @@
 <div class="recommendations-page">
 
     <div class="recommendations-header">
+
         <div>
+
             <h1>Recommended Jobs</h1>
+
             <p>
                 Jobs matched to your skills, experience, and preferred roles.
             </p>
+
         </div>
 
-        <a href="{% url 'job_list' %}" class="browse-jobs-btn">
+
+        <a
+            href="{% url 'job_list' %}"
+            class="browse-jobs-btn"
+        >
             Browse All Jobs
         </a>
+
     </div>
 
 
@@ -31,64 +40,103 @@
 
                 <div class="recommendation-card">
 
-                    <!-- Header -->
+
+                    <!-- ==========================
+                         Header
+                    =========================== -->
+
                     <div class="job-card-header">
 
                         <div>
-                            <h2>{{ job.title }}</h2>
+
+                            <h2>
+                                {{ job.title }}
+                            </h2>
 
                             <p class="company-name">
                                 {{ job.company.name }}
                             </p>
+
                         </div>
 
+
                         <div class="match-score">
+
                             {{ job.match_score }}%
-                            <span>Match</span>
+
+                            <span>
+                                Match
+                            </span>
+
                         </div>
 
                     </div>
 
 
-                    <!-- Job information -->
+                    <!-- ==========================
+                         Job information
+                    =========================== -->
+
                     <div class="job-meta">
 
                         <span>
+
                             <i class="fa-solid fa-location-dot"></i>
+
                             {{ job.location }}
+
                         </span>
 
+
                         <span>
+
                             <i class="fa-solid fa-briefcase"></i>
+
                             {{ job.get_job_type_display }}
+
                         </span>
+
 
                         {% if job.salary %}
-                        <span>
-                            <i class="fa-solid fa-money-bill-wave"></i>
-                            ₹{{ job.salary }}
-                        </span>
+
+                            <span>
+
+                                <i class="fa-solid fa-money-bill-wave"></i>
+
+                                ₹{{ job.salary }}
+
+                            </span>
+
                         {% endif %}
 
                     </div>
 
 
-                    <!-- Matched skills -->
+                    <!-- ==========================
+                         Matched skills
+                    =========================== -->
+
                     {% if job.matched_skills %}
 
                         <div class="skills-section">
 
                             <h4>
+
                                 <i class="fa-solid fa-circle-check"></i>
+
                                 Matched Skills
+
                             </h4>
+
 
                             <div class="skills-list">
 
                                 {% for skill in job.matched_skills %}
 
                                     <span class="skill matched">
+
                                         {{ skill }}
+
                                     </span>
 
                                 {% endfor %}
@@ -100,22 +148,31 @@
                     {% endif %}
 
 
-                    <!-- Missing skills -->
+                    <!-- ==========================
+                         Missing skills
+                    =========================== -->
+
                     {% if job.missing_skills %}
 
                         <div class="skills-section">
 
                             <h4>
+
                                 <i class="fa-solid fa-circle-exclamation"></i>
+
                                 Skills to Improve
+
                             </h4>
+
 
                             <div class="skills-list">
 
                                 {% for skill in job.missing_skills %}
 
                                     <span class="skill missing">
+
                                         {{ skill }}
+
                                     </span>
 
                                 {% endfor %}
@@ -126,64 +183,139 @@
 
                     {% endif %}
 
-                    <!-- Why this job -->
+
+                    <!-- ==========================
+                         Why this job?
+                    =========================== -->
+
                     <div class="job-fit-explanation">
 
                         <h4>
+
                             <i class="fa-solid fa-wand-magic-sparkles"></i>
+
                             Why this job?
+
                         </h4>
+
 
                         <div class="fit-reasons">
 
+
+                            <!-- Role match -->
+
                             {% if job.fit.role_match %}
+
                                 <div class="fit-reason">
+
                                     <i class="fa-solid fa-check"></i>
-                                    <span>Your profile matches the job role.</span>
+
+                                    <span>
+                                        Your profile matches the job role.
+                                    </span>
+
                                 </div>
+
                             {% endif %}
 
+
+                            <!-- Matched skills -->
 
                             {% if job.fit.matched_skills %}
+
                                 <div class="fit-reason">
+
                                     <i class="fa-solid fa-check"></i>
+
                                     <span>
-                                        You match {{ job.fit.matched_skills|length }}
+
+                                        You match
+                                        {{ job.fit.matched_skills|length }}
                                         required skill{{ job.fit.matched_skills|length|pluralize }}.
+
                                     </span>
+
                                 </div>
+
                             {% endif %}
 
+
+                            <!-- Experience -->
 
                             {% if job.fit.experience_match %}
+
                                 <div class="fit-reason">
+
                                     <i class="fa-solid fa-check"></i>
+
                                     <span>
+
                                         Your experience matches the job requirement.
+
                                     </span>
+
                                 </div>
+
+
                             {% elif job.fit.experience_match == False %}
+
                                 <div class="fit-reason warning">
+
                                     <i class="fa-solid fa-triangle-exclamation"></i>
+
                                     <span>
+
                                         Your experience doesn't fully match the requirement.
+
                                     </span>
+
                                 </div>
+
                             {% endif %}
+
+
+                            <!-- ==========================
+                                 Career Preferences
+                            =========================== -->
+
+                            {% if job.fit.preference_reasons %}
+
+                                {% for reason in job.fit.preference_reasons %}
+
+                                    <div class="fit-reason">
+
+                                        <i class="fa-solid fa-check"></i>
+
+                                        <span>
+                                            {{ reason }}
+                                        </span>
+
+                                    </div>
+
+                                {% endfor %}
+
+                            {% endif %}
+
 
                         </div>
 
                     </div>
 
 
-                    <!-- Actions -->
+                    <!-- ==========================
+                         Actions
+                    =========================== -->
+
                     <div class="recommendation-actions">
+
 
                         <a
                             href="{% url 'job_detail' job.id %}"
                             class="view-job-btn"
                         >
+
                             View Details
+
                         </a>
 
 
@@ -195,12 +327,16 @@
                                 rel="noopener noreferrer"
                                 class="apply-job-btn"
                             >
+
                                 Apply on Original Website ↗
+
                             </a>
 
                         {% endif %}
 
+
                     </div>
+
 
                 </div>
 
@@ -211,26 +347,40 @@
 
     {% else %}
 
-        <!-- Empty state -->
+
+        <!-- ==========================
+             Empty state
+        =========================== -->
+
         <div class="empty-recommendations">
 
             <i class="fa-solid fa-magnifying-glass"></i>
 
-            <h2>No recommendations yet</h2>
+
+            <h2>
+                No recommendations yet
+            </h2>
+
 
             <p>
+
                 Complete your profile with your skills, experience,
                 and preferred roles to get personalized job recommendations.
+
             </p>
+
 
             <a
                 href="{% url 'edit_profile' %}"
                 class="browse-jobs-btn"
             >
+
                 Complete Your Profile
+
             </a>
 
         </div>
+
 
     {% endif %}
 
