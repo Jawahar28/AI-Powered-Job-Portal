@@ -9,6 +9,7 @@ from jobs.services.recommendations import get_new_recommended_jobs, get_recommen
 from jobs.services.cover_letter import generate_cover_letter
 from django.views.decorators.http import require_POST
 from django.utils import timezone
+from django.core.paginator import Paginator
 
 
 # Create your views here.
@@ -76,15 +77,19 @@ def job_list(request):
             Q(description__icontains=query)
         )
 
+    # Location
     if location:
         jobs = jobs.filter(location__icontains=location)
 
+    # Job Types
     if job_type:
         jobs = jobs.filter(job_type=job_type)
 
+    # Experience Levels
     if experience:
         jobs = jobs.filter(intelligence__experience_level = experience)
 
+    # Sorting
     if sort == "oldest":
         jobs = jobs.order_by("posted_at")
     elif sort == "salary_high":
@@ -92,9 +97,15 @@ def job_list(request):
     else:
         jobs = jobs.order_by("-posted_at")
 
+    # Pagination
+    paginator = Paginator(jobs,10)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
     
     context = {
-            "jobs" : jobs,
+            "jobs" : page_obj,
+            "page_obj" : page_obj,
             "query" : query,
             "location": location,
             "job_type": job_type,

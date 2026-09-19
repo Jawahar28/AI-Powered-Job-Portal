@@ -200,7 +200,7 @@ Available Jobs
     <div>
 
         <h4>
-            {{ jobs|length }} Jobs Found
+            {{ page_obj.paginator.count }} Jobs Found
         </h4>
 
         <p class="text-muted mb-0">
@@ -351,6 +351,108 @@ Available Jobs
                 {% endfor %}
 
             </div>
+
+            {% if page_obj.has_other_pages %}
+
+<nav class="mt-5" aria-label="Job pagination">
+
+    <ul class="pagination justify-content-center">
+
+        <!-- Previous -->
+
+        {% if page_obj.has_previous %}
+
+            <li class="page-item">
+
+                <a
+                    class="page-link"
+                    href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query|urlencode }}{% endif %}{% if location %}&location={{ location|urlencode }}{% endif %}{% if job_type %}&job_type={{ job_type|urlencode }}{% endif %}{% if experience %}&experience={{ experience|urlencode }}{% endif %}{% if sort %}&sort={{ sort|urlencode }}{% endif %}">
+
+                    ← Previous
+
+                </a>
+
+            </li>
+
+        {% else %}
+
+            <li class="page-item disabled">
+
+                <span class="page-link">
+                    ← Previous
+                </span>
+
+            </li>
+
+        {% endif %}
+
+
+        <!-- Page Numbers -->
+
+        {% for num in page_obj.paginator.page_range %}
+
+            {% if page_obj.number == num %}
+
+                <li class="page-item active">
+
+                    <span class="page-link">
+                        {{ num }}
+                    </span>
+
+                </li>
+
+            {% else %}
+
+                <li class="page-item">
+
+                    <a
+                        class="page-link"
+                        href="?page={{ num }}{% if query %}&q={{ query|urlencode }}{% endif %}{% if location %}&location={{ location|urlencode }}{% endif %}{% if job_type %}&job_type={{ job_type|urlencode }}{% endif %}{% if experience %}&experience={{ experience|urlencode }}{% endif %}{% if sort %}&sort={{ sort|urlencode }}{% endif %}">
+
+                        {{ num }}
+
+                    </a>
+
+                </li>
+
+            {% endif %}
+
+        {% endfor %}
+
+
+        <!-- Next -->
+
+        {% if page_obj.has_next %}
+
+            <li class="page-item">
+
+                <a
+                    class="page-link"
+                    href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query|urlencode }}{% endif %}{% if location %}&location={{ location|urlencode }}{% endif %}{% if job_type %}&job_type={{ job_type|urlencode }}{% endif %}{% if experience %}&experience={{ experience|urlencode }}{% endif %}{% if sort %}&sort={{ sort|urlencode }}{% endif %}">
+
+                    Next →
+
+                </a>
+
+            </li>
+
+        {% else %}
+
+            <li class="page-item disabled">
+
+                <span class="page-link">
+                    Next →
+                </span>
+
+            </li>
+
+        {% endif %}
+
+    </ul>
+
+</nav>
+
+{% endif %}
 
         {% else %}
 
