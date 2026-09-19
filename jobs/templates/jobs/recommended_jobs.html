@@ -126,6 +126,55 @@
 
                     {% endif %}
 
+                    <!-- Why this job -->
+                    <div class="job-fit-explanation">
+
+                        <h4>
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            Why this job?
+                        </h4>
+
+                        <div class="fit-reasons">
+
+                            {% if job.fit.role_match %}
+                                <div class="fit-reason">
+                                    <i class="fa-solid fa-check"></i>
+                                    <span>Your profile matches the job role.</span>
+                                </div>
+                            {% endif %}
+
+
+                            {% if job.fit.matched_skills %}
+                                <div class="fit-reason">
+                                    <i class="fa-solid fa-check"></i>
+                                    <span>
+                                        You match {{ job.fit.matched_skills|length }}
+                                        required skill{{ job.fit.matched_skills|length|pluralize }}.
+                                    </span>
+                                </div>
+                            {% endif %}
+
+
+                            {% if job.fit.experience_match %}
+                                <div class="fit-reason">
+                                    <i class="fa-solid fa-check"></i>
+                                    <span>
+                                        Your experience matches the job requirement.
+                                    </span>
+                                </div>
+                            {% elif job.fit.experience_match == False %}
+                                <div class="fit-reason warning">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    <span>
+                                        Your experience doesn't fully match the requirement.
+                                    </span>
+                                </div>
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
 
                     <!-- Actions -->
                     <div class="recommendation-actions">

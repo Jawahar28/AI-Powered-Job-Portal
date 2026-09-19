@@ -238,4 +238,8 @@ def generate_cover_letter_view(request, id):
 def recommended_jobs(request):
     recommendations = get_recommended_jobs(request.user)
 
+    for job in recommendations:
+        job.fit = analyze_job_fit(request.user, job)
+
+
     return render(request, "jobs/recommended_jobs.html",{"recommendations" : recommendations})
