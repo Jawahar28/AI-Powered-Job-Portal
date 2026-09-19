@@ -62,8 +62,10 @@ def job_list(request):
 
     job_type = request.GET.get("job_type")
 
+    experience = request.GET.get("experience")
 
-    jobs = Job.objects.select_related("company").all()
+
+    jobs = Job.objects.select_related("company").filter(status = Job.Status.OPEN)
 
     if query:
         jobs = jobs.filter(
@@ -78,12 +80,16 @@ def job_list(request):
     if job_type:
         jobs = jobs.filter(job_type=job_type)
 
+    if experience:
+        jobs = jobs.filter(intelligence__experience_level = experience)
+
     
     context = {
             "jobs" : jobs,
             "query" : query,
             "location": location,
             "job_type": job_type,
+            "experience" : experience,
     }
     return render(request, "jobs/job_list.html", context)
 

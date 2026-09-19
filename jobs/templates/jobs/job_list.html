@@ -29,13 +29,16 @@ Available Jobs
                 Browse thousands of verified AI, Python, Backend and Software Engineering jobs from top companies.
             </p>
 
-            <form method="GET" class="search-panel">
+
+            <!-- Search Form -->
+
+            <form method="GET" action="" class="search-panel">
 
                 <div class="row g-3">
 
-                    <!-- Search -->
+                    <!-- Keyword Search -->
 
-                    <div class="col-lg-5">
+                    <div class="col-lg-4">
 
                         <div class="search-input">
 
@@ -52,9 +55,10 @@ Available Jobs
 
                     </div>
 
+
                     <!-- Location -->
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-2">
 
                         <div class="search-input">
 
@@ -71,6 +75,7 @@ Available Jobs
 
                     </div>
 
+
                     <!-- Job Type -->
 
                     <div class="col-lg-2">
@@ -83,17 +88,20 @@ Available Jobs
                                 💼 All Types
                             </option>
 
-                            <option value="FT"
+                            <option
+                                value="FT"
                                 {% if job_type == "FT" %}selected{% endif %}>
                                 Full Time
                             </option>
 
-                            <option value="PT"
+                            <option
+                                value="PT"
                                 {% if job_type == "PT" %}selected{% endif %}>
                                 Part Time
                             </option>
 
-                            <option value="IN"
+                            <option
+                                value="IN"
                                 {% if job_type == "IN" %}selected{% endif %}>
                                 Internship
                             </option>
@@ -102,11 +110,60 @@ Available Jobs
 
                     </div>
 
-                    <!-- Search -->
+
+                    <!-- Experience -->
+
+                    <div class="col-lg-2">
+
+                        <select
+                            class="form-select"
+                            name="experience">
+
+                            <option value="">
+                                🎯 Experience
+                            </option>
+
+                            <option
+                                value="entry"
+                                {% if experience == "entry" %}selected{% endif %}>
+                                Fresher / Entry
+                            </option>
+
+                            <option
+                                value="junior"
+                                {% if experience == "junior" %}selected{% endif %}>
+                                Junior
+                            </option>
+
+                            <option
+                                value="senior"
+                                {% if experience == "senior" %}selected{% endif %}>
+                                Senior
+                            </option>
+
+                            <option
+                                value="lead"
+                                {% if experience == "lead" %}selected{% endif %}>
+                                Lead
+                            </option>
+
+                            <option
+                                value="management"
+                                {% if experience == "management" %}selected{% endif %}>
+                                Management
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Search Button -->
 
                     <div class="col-lg-2 d-grid">
 
                         <button
+                            type="submit"
                             class="btn hero-search-btn">
 
                             <i class="bi bi-search"></i>
@@ -128,114 +185,136 @@ Available Jobs
 </section>
 
 
+<!-- Jobs Section -->
+
 <section class="jobs-section">
 
-<div class="container">
+    <div class="container">
 
-{% if jobs %}
-<div class="d-flex justify-content-between align-items-center mb-4">
+        {% if jobs %}
 
-    <div>
+            <!-- Results Header -->
 
-        <h4>
+            <div class="d-flex justify-content-between align-items-center mb-4">
 
-            {{ jobs|length }} Jobs Found
+                <div>
 
-        </h4>
+                    <h4>
+                        {{ jobs|length }} Jobs Found
+                    </h4>
 
-        <p class="text-muted mb-0">
+                    <p class="text-muted mb-0">
+                        Find the perfect opportunity for your career.
+                    </p>
 
-            Find the perfect opportunity for your career.
+                </div>
 
-        </p>
+            </div>
+
+
+            <!-- Jobs Grid -->
+
+            <div class="jobs-grid">
+
+                {% for job in jobs %}
+
+                    <div class="job-card">
+
+                        <!-- Job Header -->
+
+                        <div class="job-header">
+
+                            <div>
+
+                                <h3>
+                                    {{ job.title }}
+                                </h3>
+
+                                <p class="company">
+                                    {{ job.company.name }}
+                                </p>
+
+                            </div>
+
+                            <span class="salary">
+                                ₹{{ job.salary }}
+                            </span>
+
+                        </div>
+
+
+                        <!-- Job Meta -->
+
+                        <div class="job-meta">
+
+                            <span>
+                                📍 {{ job.location }}
+                            </span>
+
+                            <span>
+                                💼 {{ job.get_job_type_display }}
+                            </span>
+
+                            <span>
+
+                                {% if job.status == "O" %}
+                                    🟢 Open
+                                {% else %}
+                                    🔴 Closed
+                                {% endif %}
+
+                            </span>
+
+                        </div>
+
+
+                        <!-- Job Footer -->
+
+                        <div class="job-footer">
+
+                            <small>
+                                Posted {{ job.posted_at|date:"M d, Y" }}
+                            </small>
+
+                            <a
+                                href="{% url 'job_detail' job.id %}"
+                                class="details-btn">
+                                Explore →
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <!-- No Jobs -->
+
+            <div class="text-center py-5">
+
+                <h3>
+                    No jobs found.
+                </h3>
+
+                <p>
+                    Try searching with another keyword or adjusting your filters.
+                </p>
+
+                <a
+                    href="{% url 'job_list' %}"
+                    class="btn btn-outline-primary mt-2">
+                    Clear Filters
+                </a>
+
+            </div>
+
+        {% endif %}
 
     </div>
-
-</div>
-
-<div class="jobs-grid">
-
-{% for job in jobs %}
-
-<div class="job-card">
-
-<div class="job-header">
-
-<div>
-
-<h3>{{ job.title }}</h3>
-
-<p class="company">
-    {{ job.company.name }}
-</p>
-
-</div>
-
-<span class="salary">
-₹{{ job.salary }}
-</span>
-
-</div>
-
-<div class="job-meta">
-
-<span>📍 {{ job.location }}</span>
-
-<span>💼 {{ job.get_job_type_display }}</span>
-
-<span>
-
-{% if job.status == "O" %}
-🟢 Open
-{% else %}
-🔴 Closed
-{% endif %}
-
-</span>
-
-</div>
-
-<div class="job-footer">
-
-<small>
-
-Posted
-
-{{ job.posted_at|date:"M d, Y" }}
-
-</small>
-
-<a
-href="{% url 'job_detail' job.id %}"
-class="details-btn">
-
-Explore →
-
-</a>
-
-</div>
-
-</div>
-
-{% endfor %}
-
-</div>
-
-{% else %}
-
-<div class="text-center py-5">
-
-<h3>No jobs found.</h3>
-
-<p>
-Try searching with another keyword.
-</p>
-
-</div>
-
-{% endif %}
-
-</div>
 
 </section>
 
