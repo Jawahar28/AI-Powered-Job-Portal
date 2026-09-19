@@ -64,6 +64,8 @@ def job_list(request):
 
     experience = request.GET.get("experience")
 
+    sort = request.GET.get("sort", "newest")
+
 
     jobs = Job.objects.select_related("company").filter(status = Job.Status.OPEN)
 
@@ -83,6 +85,13 @@ def job_list(request):
     if experience:
         jobs = jobs.filter(intelligence__experience_level = experience)
 
+    if sort == "oldest":
+        jobs = jobs.order_by("posted_at")
+    elif sort == "salary_high":
+        jobs = jobs.order_by("-salary")
+    else:
+        jobs = jobs.order_by("-posted_at")
+
     
     context = {
             "jobs" : jobs,
@@ -90,6 +99,7 @@ def job_list(request):
             "location": location,
             "job_type": job_type,
             "experience" : experience,
+            "sort" : sort,
     }
     return render(request, "jobs/job_list.html", context)
 
