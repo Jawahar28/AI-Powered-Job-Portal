@@ -240,6 +240,86 @@ Edit Profile
                     </div>
                 </div>
 
+                <!-- ==========================
+                    Career Preferences
+                =========================== -->
+
+                <div class="glass-section preferences-section">
+
+                    <h4 class="section-title">
+                        🎯 Career Preferences
+                    </h4>
+
+                    <div class="col-12">
+
+                        <label class="form-label">
+                            Preferred Job Roles
+                        </label>
+
+                        {{ form.preferred_roles }}
+
+                        <small class="text-muted">
+                            Separate multiple roles with commas.
+                            Example: Python Developer, Backend Developer, Django Developer
+                        </small>
+
+                    </div>
+
+
+                    <div class="col-12">
+
+                        <label class="form-label">
+                            Preferred Locations
+                        </label>
+
+                        {{ form.preferred_locations }}
+
+                        <small class="text-muted">
+                            Separate multiple locations with commas.
+                            Example: Hyderabad, Bangalore, Remote
+                        </small>
+
+                    </div>
+
+
+                    <div class="col-md-4">
+
+                        <label class="form-label">
+                            Preferred Job Type
+                        </label>
+
+                        {{ form.preferred_job_type }}
+
+                    </div>
+
+
+                    <div class="col-md-4">
+
+                        <label class="form-label">
+                            Work Mode
+                        </label>
+
+                        {{ form.work_mode }}
+
+                    </div>
+
+
+                    <div class="col-md-4">
+
+                        <label class="form-label">
+                            Expected Salary
+                        </label>
+
+                        {{ form.expected_salary }}
+
+                        <small class="text-muted">
+                            Enter annual salary in ₹.
+                        </small>
+
+                    </div>
+
+                </div>
+
                     <!-- ==========================
                          Social Links
                     =========================== -->

@@ -76,6 +76,7 @@ class LoginForm(AuthenticationForm):
     )
 
 class CandidateProfileForm(forms.ModelForm):
+
     class Meta:
         model = CandidateProfile
 
@@ -87,6 +88,14 @@ class CandidateProfileForm(forms.ModelForm):
             "bio",
             "skills",
             "experience",
+
+            # Career preferences
+            "preferred_roles",
+            "preferred_locations",
+            "preferred_job_type",
+            "work_mode",
+            "expected_salary",
+
             "education",
             "github",
             "linkedin",
@@ -94,24 +103,101 @@ class CandidateProfileForm(forms.ModelForm):
         ]
 
         widgets = {
-            "phone": forms.TextInput(attrs={"class": "form-control"}),
-            "location": forms.TextInput(attrs={"class": "form-control"}),
-            "headline": forms.TextInput(attrs={"class": "form-control"}),
-            "bio": forms.Textarea(attrs={
-                "class": "form-control",
-                "rows": 5
-            }),
-            "skills": forms.Textarea(attrs={
-                "class": "form-control",
-                "rows": 3,
-                "placeholder": "Python, Django, REST API..."
-            }),
-            "experience": forms.TextInput(attrs={"class": "form-control"}),
-            "education": forms.TextInput(attrs={"class": "form-control"}),
-            "github": forms.URLInput(attrs={"class": "form-control"}),
-            "linkedin": forms.URLInput(attrs={"class": "form-control"}),
-        }
 
+            "phone": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                }
+            ),
+
+            "location": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                }
+            ),
+
+            "headline": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                }
+            ),
+
+            "bio": forms.Textarea(
+                attrs={
+                    "class": "form-control",
+                    "rows": 5,
+                }
+            ),
+
+            "skills": forms.Textarea(
+                attrs={
+                    "class": "form-control",
+                    "rows": 3,
+                    "placeholder": "Python, Django, REST API...",
+                }
+            ),
+
+            "experience": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "e.g. Fresher, 1 year, 2 years",
+                }
+            ),
+
+            "preferred_roles": forms.Textarea(
+                attrs={
+                    "class": "form-control",
+                    "rows": 3,
+                    "placeholder": "Python Developer, Backend Developer, Django Developer",
+                }
+            ),
+
+            "preferred_locations": forms.Textarea(
+                attrs={
+                    "class": "form-control",
+                    "rows": 2,
+                    "placeholder": "Hyderabad, Bangalore, Remote",
+                }
+            ),
+
+            "preferred_job_type": forms.Select(
+                attrs={
+                    "class": "form-select",
+                }
+            ),
+
+            "work_mode": forms.Select(
+                attrs={
+                    "class": "form-select",
+                }
+            ),
+
+            "expected_salary": forms.NumberInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "e.g. 600000",
+                    "min": 0,
+                }
+            ),
+
+            "education": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                }
+            ),
+
+            "github": forms.URLInput(
+                attrs={
+                    "class": "form-control",
+                }
+            ),
+
+            "linkedin": forms.URLInput(
+                attrs={
+                    "class": "form-control",
+                }
+            ),
+        }
 class UserUpdateForm(forms.ModelForm):
 
     class Meta:
