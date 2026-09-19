@@ -203,16 +203,23 @@ def calculate_job_match_for_user(user, job):
         job.intelligence
     )
 
+    preference_score = calculate_preference_score(
+        profile,
+        job
+    )
+
     final_score = (
-        skill_match["match_score"] * 0.6
-        + role_score * 0.3
-        + experience_score * 0.1
+        skill_match["match_score"] * 0.55
+        + role_score * 0.25
+        + experience_score * 0.10
+        + preference_score * 0.10
     )
 
     return {
         "match_score": round(final_score),
         "matched_skills": skill_match["matched_skills"],
         "missing_skills": skill_match["missing_skills"],
+        "preference_score" : preference_score,
     }
 
 def analyze_job_fit(user, job):
@@ -252,6 +259,11 @@ def analyze_job_fit(user, job):
     experience_score = calculate_experience_score(
         profile.experience,
         job.intelligence
+    )
+
+    preference_score = calculate_preference_score(
+        profile,
+        job
     )
 
     # -------------------------
@@ -389,10 +401,23 @@ def get_recommended_jobs(user):
 
         role_score = calculate_role_score(job.title,primary_roles,secondary_roles)
 
-        experience_score = calculate_experience_score(profile.experience,job.intelligence)
+        experience_score = calculate_experience_score(
+            profile.experience,
+            job.intelligence
+        )
 
-        final_score = (skill_match["match_score"] * 0.6+ role_score * 0.3+ experience_score * 0.1)
+        preference_score = calculate_preference_score(
+            profile,
+            job
+        )
 
+        final_score = (
+            skill_match["match_score"] * 0.55
+            + role_score * 0.25
+            + experience_score * 0.10
+            + preference_score * 0.10
+        )
+        
         if skill_match["match_score"] > 0 or role_score > 0:
 
             job.match_score = round(final_score)
@@ -549,3 +574,143 @@ def calculate_role_score(
             return 70
 
     return 0
+
+
+def _split_preferences(value):
+    """
+    Convert comma-separated profile preferences into
+    normalized lowercase values.
+    """
+    if not value:
+        return []
+
+    return [
+        item.strip().lower()
+        for item in value.split(",")
+        if item.strip()
+    ]
+
+
+def calculate_preference_score(profile, job):
+    """
+    Calculate how well a job matches the candidate's
+    explicit career preferences.
+
+    Maximum score: 100
+    """
+
+    scores = []
+
+    # ------------------------------------------
+    # Preferred roles
+    # ------------------------------------------
+
+    preferred_roles = _split_preferences(
+        profile.preferred_roles
+    )
+
+    if preferred_roles:
+
+        title = job.title.lower()
+
+        role_match = any(
+            role in title
+            for role in preferred_roles
+        )
+
+        scores.append(100 if role_match else 0)
+
+    # ------------------------------------------
+    # Preferred locations
+    # ------------------------------------------
+
+    preferred_locations = _split_preferences(
+        profile.preferred_locations
+    )
+
+    if preferred_locations:
+
+        job_location = job.location.lower()
+
+        location_match = any(
+            location in job_location
+            for location in preferred_locations
+        )
+
+        scores.append(100 if location_match else 0)
+
+    # ------------------------------------------
+    # Preferred job type
+    # ------------------------------------------
+
+    if profile.preferred_job_type:
+
+        scores.append(
+            100
+            if job.job_type == profile.preferred_job_type
+            else 0
+        )
+
+    # ------------------------------------------
+    # Work mode
+    # ------------------------------------------
+
+    if profile.work_mode:
+
+        job_text = (
+            f"{job.title} "
+            f"{job.location} "
+            f"{job.description}"
+        ).lower()
+
+        if profile.work_mode == "REMOTE":
+
+            mode_match = (
+                "remote" in job_text
+                or "work from home" in job_text
+                or "wfh" in job_text
+            )
+
+        elif profile.work_mode == "HYBRID":
+
+            mode_match = "hybrid" in job_text
+
+        elif profile.work_mode == "ONSITE":
+
+            mode_match = (
+                "on-site" in job_text
+                or "onsite" in job_text
+                or "office" in job_text
+            )
+
+        else:
+            mode_match = False
+
+        scores.append(100 if mode_match else 0)
+
+    # ------------------------------------------
+    # Expected salary
+    # ------------------------------------------
+
+    if profile.expected_salary and job.salary:
+
+        if job.salary >= profile.expected_salary:
+            scores.append(100)
+        else:
+            # Give partial credit when salary is reasonably close.
+            salary_ratio = (
+                job.salary / profile.expected_salary
+            ) * 100
+
+            scores.append(
+                max(0, min(round(salary_ratio), 100))
+            )
+
+    # ------------------------------------------
+    # No preferences configured
+    # ------------------------------------------
+
+    if not scores:
+        return 50
+
+    return round(sum(scores) / len(scores))
