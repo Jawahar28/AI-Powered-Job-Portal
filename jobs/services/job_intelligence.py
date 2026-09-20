@@ -18,25 +18,49 @@ def analyze_job_description(title, description):
     }
 
     known_skills = [
-        "python",
-        "django",
-        "django rest framework",
-        "sql",
-        "mysql",
-        "javascript",
-        "react",
-        "java",
-        "c#",
-        "machine learning",
-        "deep learning",
-        "pandas",
-        "numpy",
-        "aws",
-        "azure",
-        "gcp",
-        "php",
-        "css",
-    ]
+    "python",
+    "django",
+    "django rest framework",
+    "fastapi",
+    "flask",
+    "rest api",
+    "rest apis",
+    "sql",
+    "mysql",
+    "postgresql",
+    "mongodb",
+    "redis",
+
+    "javascript",
+    "typescript",
+    "react",
+    "node.js",
+
+    "java",
+    "c#",
+
+    "machine learning",
+    "deep learning",
+    "scikit-learn",
+    "pytorch",
+    "tensorflow",
+
+    "pandas",
+    "numpy",
+
+    "aws",
+    "azure",
+    "gcp",
+
+    "docker",
+    "kubernetes",
+    "linux",
+    "git",
+    "github",
+
+    "html",
+    "css",
+]
 
     # -------------------------
     # Role
@@ -61,31 +85,16 @@ def analyze_job_description(title, description):
             result["role"] = match.group(0).strip()
             break
 
-    # -------------------------
-    # Total experience
-    # -------------------------
-
-        # ------------------------------------------
+    # ------------------------------------------
     # Total Experience
     # ------------------------------------------
 
     experience_patterns = [
-
-    # ------------------------------------------
-    # Ranges must come FIRST
-    # ------------------------------------------
-
-    # 0-1 years / 2–4 years
-    r"(\d+(?:\.\d+)?)\s*[-–]\s*(\d+(?:\.\d+)?)"
-    r"\s*(?:years?|yrs?)",
+    # 0-1 years / 2-4 years
+    r"(\d+(?:\.\d+)?)\s*[-–]\s*(\d+(?:\.\d+)?)\s*(?:years?|yrs?)",
 
     # 0 to 2 years
-    r"(\d+(?:\.\d+)?)\s*to\s*(\d+(?:\.\d+)?)"
-    r"\s*(?:years?|yrs?)",
-
-    # ------------------------------------------
-    # Single minimum experience
-    # ------------------------------------------
+    r"(\d+(?:\.\d+)?)\s*to\s*(\d+(?:\.\d+)?)\s*(?:years?|yrs?)",
 
     # 3+ years experience
     r"(\d+(?:\.\d+)?)\s*\+?\s*(?:years?|yrs?)"
@@ -131,10 +140,8 @@ def analyze_job_description(title, description):
     experience_level = None
 
     if re.search(
-        r"\b(fresher|freshers|entry[- ]level|"
-        r"no experience|0\s*[-–]\s*1\s*years?)\b",
-        combined_text
-    ):
+    r"\b(fresher|freshers|entry[- ]level|no experience|0\s*[-–]\s*1\s*years?)\b",
+    combined_text):
         experience_level = "entry"
 
     elif re.search(
@@ -189,7 +196,10 @@ def analyze_job_description(title, description):
     # -------------------------
 
     preferred_section = re.search(
-    r"(preferred|nice to have|good to have|bonus|desired)\s*:?\s*(.*?)(?=\n\s*(?:requirements|required|qualifications|responsibilities|benefits)\s*:|$)",
+    r"(preferred|nice to have|good to have|bonus|desired)"
+    r"\s*:?\s*(.*?)(?=\n\s*"
+    r"(?:requirements|required|qualifications|responsibilities|benefits)"
+    r"\s*:|$)",
     text,
     re.DOTALL
 )
@@ -197,7 +207,7 @@ def analyze_job_description(title, description):
     preferred_text = ""
 
     if preferred_section:
-        preferred_text = preferred_section.group(2)
+        preferred_text = preferred_section.group(2).lower()
 
     for skill in known_skills:
 

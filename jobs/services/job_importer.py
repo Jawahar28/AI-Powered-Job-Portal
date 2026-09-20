@@ -23,7 +23,7 @@ def import_job(job_data, source, fetch_run):
         title = job_data["title"],
         description = job_data["description"],
         intelligence = intelligence,
-        required_skills = job_data.get("required_skills", ""),
+        required_skills = ", ".join(intelligence["required_skills"]),
         location = job_data["location"],
         salary = job_data["salary"],
         job_type = job_data["job_type"],
