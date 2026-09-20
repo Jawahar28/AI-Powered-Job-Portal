@@ -152,6 +152,13 @@ LOGIN_URL = "login"
 CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
 CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/0"
 
+CELERY_BEAT_SCHEDULE = {
+    "fetch-jobs-every-5-minutes" : {
+        "task" : "jobs.tasks.fetch_jobs_task",
+        "schedule" : 300.0,
+    },
+}
+
 
 # ADMIN PANEL: 
 # USERNAME: django123
