@@ -41,16 +41,14 @@ class Application(models.Model):
     @property
     def badge_class(self):
         mapping = {
-            "Applied" : "bg-primary",
-            "Under Review" : "bg-warning text-dark",
-            "Shortlisted" : "bg-success",
-            "Rejected" : "bg-danger",
-            "Hired" : "bg-success"
+            "A": "bg-primary",
+            "UR": "bg-warning text-dark",
+            "S": "bg-success",
+            "R": "bg-danger",
+            "H": "bg-success",
         }
 
-        return mapping.get(
-            self.status, "bg-secondary"
-        )
+        return mapping.get(self.status, "bg-secondary")
 
     def __str__(self):
         return f"{self.applicant_name} - {self.job.title}"

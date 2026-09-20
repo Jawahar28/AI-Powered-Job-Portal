@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-{{ job.title }}
+    {{ job.title }}
 {% endblock %}
 
 {% block extra_css %}
@@ -10,6 +10,10 @@
 {% endblock %}
 
 {% block content %}
+
+<!-- =========================================================
+     JOB BANNER
+========================================================= -->
 
 <section class="job-banner">
 
@@ -21,11 +25,17 @@
 
         <div class="job-info">
 
-            <span>💰 ₹{{ job.salary }}</span>
+            <span>
+                💰 ₹{{ job.salary }}
+            </span>
 
-            <span>📍 {{ job.location }}</span>
+            <span>
+                📍 {{ job.location }}
+            </span>
 
-            <span>💼 {{ job.get_job_type_display }}</span>
+            <span>
+                💼 {{ job.get_job_type_display }}
+            </span>
 
             <span>
 
@@ -40,9 +50,7 @@
         </div>
 
         <small>
-
             Posted on {{ job.posted_at|date:"F d, Y" }}
-
         </small>
 
     </div>
@@ -50,446 +58,653 @@
 </section>
 
 
+<!-- =========================================================
+     MAIN JOB CONTENT
+========================================================= -->
+
 <section class="job-content">
 
-<div class="container">
+    <div class="container">
 
-<div class="row">
+        <div class="row">
 
-<div class="col-lg-8">
+            <!-- =================================================
+                 LEFT COLUMN
+            ================================================== -->
 
-<div class="content-card">
+            <div class="col-lg-8">
 
-<h2>Job Description</h2>
+                <!-- JOB DESCRIPTION -->
 
-<p>
+                <div class="content-card">
 
-{{ job.description|linebreaks }}
+                    <h2>
+                        Job Description
+                    </h2>
 
-</p>
+                    <p>
+                        {{ job.description|linebreaks }}
+                    </p>
 
-</div>
+                </div>
 
-</div>
 
+                <!-- =================================================
+                     AI JOB FIT ANALYSIS
+                ================================================== -->
 
-{% if user.is_authenticated and job_fit %}
-<section class="job-fit-card">
+                {% if user.is_authenticated and job_fit %}
 
-    <div class="job-fit-header">
-        <div>
-            <span class="job-fit-label">
-                AI JOB FIT ANALYSIS
-            </span>
+                <section class="job-fit-card">
 
-            <h2>
-                Your Match
-            </h2>
-        </div>
+                    <div class="job-fit-header">
 
-        <div class="match-score">
-            {{ job_fit.match_score }}%
-        </div>
-    </div>
+                        <div>
 
+                            <span class="job-fit-label">
+                                AI JOB FIT ANALYSIS
+                            </span>
 
-    <div class="job-fit-summary">
+                            <h2>
+                                Your Match
+                            </h2>
 
-        {% if job_fit.eligible %}
-            <div class="fit-status fit-status-success">
-                <i class="fa-solid fa-circle-check"></i>
-                You meet the current role and experience requirements.
-            </div>
+                        </div>
 
-        {% else %}
-            <div class="fit-status fit-status-warning">
-                <i class="fa-solid fa-triangle-exclamation"></i>
-                This role has requirements that your current profile does not fully meet.
-            </div>
-        {% endif %}
+                        <div class="match-score">
+                            {{ job_fit.match_score }}%
+                        </div>
 
-    </div>
+                    </div>
 
 
-    <!-- Skills -->
+                    <!-- FIT STATUS -->
 
-    <div class="job-fit-section">
+                    <div class="job-fit-summary">
 
-        <h3>
-            <i class="fa-solid fa-code"></i>
-            Skills
-        </h3>
+                        {% if job_fit.eligible %}
 
-        {% if job_fit.matched_skills %}
+                            <div class="fit-status fit-status-success">
 
-            <div class="skill-list">
+                                <i class="fa-solid fa-circle-check"></i>
 
-                {% for skill in job_fit.matched_skills %}
+                                You meet the current role and experience requirements.
 
-                    <span class="skill matched">
-                        <i class="fa-solid fa-check"></i>
-                        {{ skill }}
-                    </span>
+                            </div>
 
-                {% endfor %}
+                        {% else %}
 
-            </div>
+                            <div class="fit-status fit-status-warning">
 
-        {% else %}
+                                <i class="fa-solid fa-triangle-exclamation"></i>
 
-            <p class="job-fit-muted">
-                No matching required skills were detected.
-            </p>
+                                This role has requirements that your current profile does not fully meet.
 
-        {% endif %}
+                            </div>
 
-    </div>
+                        {% endif %}
 
+                    </div>
 
-    <!-- Missing Skills -->
 
-    {% if job_fit.missing_skills %}
+                    <!-- =================================================
+                         MATCHED SKILLS
+                    ================================================== -->
 
-    <div class="job-fit-section">
+                    <div class="job-fit-section">
 
-        <h3>
-            <i class="fa-solid fa-triangle-exclamation"></i>
-            Skills to Improve
-        </h3>
+                        <h3>
 
-        <div class="skill-list">
+                            <i class="fa-solid fa-code"></i>
 
-            {% for skill in job_fit.missing_skills %}
+                            Skills
 
-                <span class="skill missing">
-                    {{ skill }}
-                </span>
+                        </h3>
 
-            {% endfor %}
 
-        </div>
+                        {% if job_fit.matched_skills %}
 
-    </div>
+                            <div class="skill-list">
 
-    {% endif %}
+                                {% for skill in job_fit.matched_skills %}
 
+                                    <span class="skill matched">
 
-    <!-- Match Breakdown -->
+                                        <i class="fa-solid fa-check"></i>
 
-    <div class="job-fit-section">
+                                        {{ skill }}
 
-        <h3>
-            <i class="fa-solid fa-chart-simple"></i>
-            Match Breakdown
-        </h3>
+                                    </span>
 
-        <div class="match-breakdown">
+                                {% endfor %}
 
-            <div class="breakdown-item">
+                            </div>
 
-                <span>Skills</span>
+                        {% else %}
 
-                <strong>
-                    {{ job_fit.skill_score }}%
-                </strong>
+                            <p class="job-fit-muted">
 
-            </div>
+                                No matching required skills were detected.
 
+                            </p>
 
-            <div class="breakdown-item">
+                        {% endif %}
 
-                <span>Role</span>
+                    </div>
 
-                <strong>
-                    {{ job_fit.role_score }}%
-                </strong>
 
-            </div>
+                    <!-- =================================================
+                         MISSING SKILLS
+                    ================================================== -->
 
+                    {% if job_fit.missing_skills %}
 
-            <div class="breakdown-item">
+                    <div class="job-fit-section">
 
-                <span>Experience</span>
+                        <h3>
 
-                {% if job_fit.experience_match is None %}
+                            <i class="fa-solid fa-triangle-exclamation"></i>
 
-                    <strong class="not-required">
-                        Not specified
-                    </strong>
+                            Skills to Improve
 
-                {% else %}
+                        </h3>
 
-                    <strong>
-                        {{ job_fit.experience_score }}%
-                    </strong>
+                        <div class="skill-list">
+
+                            {% for skill in job_fit.missing_skills %}
+
+                                <span class="skill missing">
+
+                                    {{ skill }}
+
+                                </span>
+
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <!-- =================================================
+                         MATCH BREAKDOWN
+                    ================================================== -->
+
+                    <div class="job-fit-section">
+
+                        <h3>
+
+                            <i class="fa-solid fa-chart-simple"></i>
+
+                            Match Breakdown
+
+                        </h3>
+
+
+                        <div class="match-breakdown">
+
+                            <!-- SKILLS -->
+
+                            <div class="breakdown-item">
+
+                                <span>
+                                    Skills
+                                </span>
+
+                                <strong>
+                                    {{ job_fit.skill_score }}%
+                                </strong>
+
+                            </div>
+
+
+                            <!-- ROLE -->
+
+                            <div class="breakdown-item">
+
+                                <span>
+                                    Role
+                                </span>
+
+                                <strong>
+                                    {{ job_fit.role_score }}%
+                                </strong>
+
+                            </div>
+
+
+                            <!-- EXPERIENCE -->
+
+                            <div class="breakdown-item">
+
+                                <span>
+                                    Experience
+                                </span>
+
+                                {% if job_fit.experience_match is None %}
+
+                                    <strong class="not-required">
+                                        Not specified
+                                    </strong>
+
+                                {% else %}
+
+                                    <strong>
+                                        {{ job_fit.experience_score }}%
+                                    </strong>
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         STRENGTHS
+                    ================================================== -->
+
+                    {% if job_fit.strengths %}
+
+                    <div class="job-fit-section">
+
+                        <h3>
+
+                            <i class="fa-solid fa-thumbs-up"></i>
+
+                            Your Strengths
+
+                        </h3>
+
+
+                        <ul class="fit-list">
+
+                            {% for strength in job_fit.strengths %}
+
+                                <li>
+
+                                    <i class="fa-solid fa-check"></i>
+
+                                    {{ strength }}
+
+                                </li>
+
+                            {% endfor %}
+
+                        </ul>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <!-- =================================================
+                         GAPS
+                    ================================================== -->
+
+                    {% if job_fit.gaps %}
+
+                    <div class="job-fit-section">
+
+                        <h3>
+
+                            <i class="fa-solid fa-circle-exclamation"></i>
+
+                            Gaps
+
+                        </h3>
+
+
+                        <ul class="fit-list">
+
+                            {% for gap in job_fit.gaps %}
+
+                                <li>
+
+                                    <i class="fa-solid fa-minus"></i>
+
+                                    {{ gap }}
+
+                                </li>
+
+                            {% endfor %}
+
+                        </ul>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <!-- =================================================
+                         PREFERENCE REASONS
+                    ================================================== -->
+
+                    {% if job_fit.preference_reasons %}
+
+                    <div class="job-fit-section">
+
+                        <h3>
+
+                            <i class="fa-solid fa-sliders"></i>
+
+                            Preference Match
+
+                        </h3>
+
+
+                        <ul class="fit-list">
+
+                            {% for reason in job_fit.preference_reasons %}
+
+                                <li>
+
+                                    <i class="fa-solid fa-check"></i>
+
+                                    {{ reason }}
+
+                                </li>
+
+                            {% endfor %}
+
+                        </ul>
+
+                    </div>
+
+                    {% endif %}
+
+
+                </section>
 
                 {% endif %}
 
             </div>
 
+
+            <!-- =================================================
+                 RIGHT COLUMN
+            ================================================== -->
+
+            <div class="col-lg-4">
+
+                <!-- =================================================
+                     APPLICATION CARD
+                ================================================== -->
+
+                <div class="apply-card">
+
+                    <h3>
+                        Ready to Apply?
+                    </h3>
+
+                    <p>
+                        Take the next step in your career.
+                    </p>
+
+
+                    <!-- =================================================
+                         APPLICATION STATUS
+                    ================================================== -->
+
+                    {% if user.is_authenticated %}
+
+                        {% if application %}
+
+                            <div class="application-status-box">
+
+                                <div class="application-status-icon">
+
+                                    <i class="fa-solid fa-circle-check"></i>
+
+                                </div>
+
+
+                                <div>
+
+                                    <strong>
+                                        Application Submitted
+                                    </strong>
+
+
+                                    <p>
+
+                                        Status:
+
+                                        <span class="{{ application.badge_class }}">
+
+                                            {{ application.get_status_display }}
+
+                                        </span>
+
+                                    </p>
+
+
+                                    <small>
+
+                                        Applied on
+                                        {{ application.applied_at|date:"F d, Y" }}
+
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                        {% else %}
+
+                            <!-- =================================================
+                                 APPLY BUTTON
+                            ================================================== -->
+
+                            <a
+                                href="{% url 'apply_job' job.id %}"
+                                class="apply-btn"
+                            >
+                                {% if job.external_url %}
+                                    Apply on Original Website ↗
+                                {% else %}
+                                    Apply Now
+                                {% endif %}
+                            </a>
+
+                        {% endif %}
+
+                    {% else %}
+
+                        <!-- =================================================
+                             LOGIN REQUIRED
+                        ================================================== -->
+
+                        {% if job.external_url %}
+
+                            <a
+                                href="{{ job.external_url }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="apply-btn"
+                            >
+
+                                Apply on Original Website ↗
+
+                            </a>
+
+                        {% else %}
+
+                            <a
+                                href="{% url 'login' %}?next={% url 'job_detail' job.id %}"
+                                class="apply-btn"
+                            >
+
+                                Login to Apply
+
+                            </a>
+
+                        {% endif %}
+
+                    {% endif %}
+
+
+                    <!-- =================================================
+                         SAVE JOB
+                    ================================================== -->
+
+                    {% if user.is_authenticated %}
+
+                        {% if is_saved %}
+
+                            <a
+                                href="{% url 'unsave_job' job.id %}"
+                                class="btn btn-outline-danger"
+                            >
+
+                                <i class="fa-solid fa-bookmark"></i>
+
+                                Saved
+
+                            </a>
+
+                        {% else %}
+
+                            <a
+                                href="{% url 'save_job' job.id %}"
+                                class="btn btn-outline-primary"
+                            >
+
+                                <i class="fa-regular fa-bookmark"></i>
+
+                                Save Job
+
+                            </a>
+
+                        {% endif %}
+
+                    {% endif %}
+
+
+                    <!-- =================================================
+                         COVER LETTER
+                    ================================================== -->
+
+                    {% if user.is_authenticated %}
+
+                        <button
+                            type="button"
+                            class="cover-letter-btn"
+                            id="generateCoverLetterBtn"
+                            data-url="{% url 'generate_cover_letter' job.id %}"
+                        >
+
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                            Generate Cover Letter
+
+                        </button>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
         </div>
 
     </div>
 
-
-    <!-- Strengths -->
-
-    {% if job_fit.strengths %}
-
-    <div class="job-fit-section">
-
-        <h3>
-            <i class="fa-solid fa-thumbs-up"></i>
-            Your Strengths
-        </h3>
-
-        <ul class="fit-list">
-
-            {% for strength in job_fit.strengths %}
-
-                <li>
-                    <i class="fa-solid fa-check"></i>
-                    {{ strength }}
-                </li>
-
-            {% endfor %}
-
-        </ul>
-
-    </div>
-
-    {% endif %}
-
-
-    <!-- Gaps -->
-
-    {% if job_fit.gaps %}
-
-    <div class="job-fit-section">
-
-        <h3>
-            <i class="fa-solid fa-circle-exclamation"></i>
-            Gaps
-        </h3>
-
-        <ul class="fit-list">
-
-            {% for gap in job_fit.gaps %}
-
-                <li>
-                    <i class="fa-solid fa-minus"></i>
-                    {{ gap }}
-                </li>
-
-            {% endfor %}
-
-        </ul>
-
-    </div>
-
-    {% endif %}
-
 </section>
 
-{% endif %}
 
-
-<div class="col-lg-4">
-
-<div class="apply-card">
-
-<h3>Ready to Apply?</h3>
-
-<p>
-
-Take the next step in your career.
-
-</p>
-
-{% if application %}
-
-<div class="application-status-box">
-
-    <div class="application-status-icon">
-        <i class="fa-solid fa-circle-check"></i>
-    </div>
-
-    <div>
-        <strong>Application Submitted</strong>
-
-        <p>
-            Status:
-            <span class="{{ application.badge_class }}">
-                {{ application.get_status_display }}
-            </span>
-        </p>
-
-        <small>
-            Applied on {{ application.applied_at|date:"F d, Y" }}
-        </small>
-    </div>
-
-</div>
-
-{% else %}
-
-    {% if job.external_url %}
-
-    <a
-        href="{{ job.external_url }}"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="apply-btn">
-
-        Apply on Original Website ↗
-
-    </a>
-
-    {% else %}
-
-    <a
-        href="{% url 'apply_job' job.id %}"
-        class="apply-btn">
-
-        Apply Now
-
-    </a>
-
-    {% endif %}
-
-{% endif %}
-
-{% if user.is_authenticated %}
-
-    {% if is_saved %}
-
-        <a
-            href="{% url 'unsave_job' job.id %}"
-            class="btn btn-outline-danger"
-        >
-            <i class="fa-solid fa-bookmark"></i>
-            Saved
-        </a>
-
-    {% else %}
-
-        <a
-            href="{% url 'save_job' job.id %}"
-            class="btn btn-outline-primary"
-        >
-            <i class="fa-regular fa-bookmark"></i>
-            Save Job
-        </a>
-
-    {% endif %}
-
-{% endif %}
-
-{% if user.is_authenticated %}
-
-<button
-    type="button"
-    class="cover-letter-btn"
-    id="generateCoverLetterBtn"
-    data-url="{% url 'generate_cover_letter' job.id %}">
-
-    <i class="fa-solid fa-wand-magic-sparkles"></i>
-    Generate Cover Letter
-
-</button>
-
-{% endif %}
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
+<!-- =========================================================
+     RELATED JOBS
+========================================================= -->
 
 <section class="related-section">
 
-<div class="container">
+    <div class="container">
 
-<h2>
+        <h2>
+            Related Jobs
+        </h2>
 
-Related Jobs
 
-</h2>
+        <div class="row">
 
-<div class="row">
+            {% for item in related_jobs %}
 
-{% for item in related_jobs %}
+                <div class="col-lg-4">
 
-<div class="col-lg-4">
+                    <div class="related-card">
 
-<div class="related-card">
+                        <h4>
+                            {{ item.title }}
+                        </h4>
 
-<h4>
+                        <p>
+                            {{ item.company.name }}
+                        </p>
 
-{{ item.title }}
+                        <a href="{% url 'job_detail' item.id %}">
+                            View →
+                        </a>
 
-</h4>
+                    </div>
 
-<p>
+                </div>
 
-{{ item.company.name }}
+            {% empty %}
 
-</p>
+                <p>
+                    No related jobs available.
+                </p>
 
-<a
-href="{% url 'job_detail' item.id %}">
+            {% endfor %}
 
-View →
+        </div>
 
-</a>
-
-</div>
-
-</div>
-
-{% empty %}
-
-<p>
-
-No related jobs available.
-
-</p>
-
-{% endfor %}
-
-</div>
-
-</div>
+    </div>
 
 </section>
+
+
+<!-- =========================================================
+     COVER LETTER MODAL
+========================================================= -->
 
 {% if user.is_authenticated %}
 
 <div
     class="cover-letter-modal"
-    id="coverLetterModal">
+    id="coverLetterModal"
+>
 
     <div class="cover-letter-modal-content">
+
+
+        <!-- MODAL HEADER -->
 
         <div class="cover-letter-modal-header">
 
             <div>
+
                 <span class="cover-letter-label">
                     AI APPLICATION ASSISTANT
                 </span>
 
-                <h2>Your Cover Letter</h2>
+                <h2>
+                    Your Cover Letter
+                </h2>
+
             </div>
+
 
             <button
                 type="button"
                 class="close-cover-letter"
-                id="closeCoverLetter">
+                id="closeCoverLetter"
+            >
 
                 &times;
 
@@ -497,9 +712,13 @@ No related jobs available.
 
         </div>
 
+
+        <!-- LOADING -->
+
         <div
             id="coverLetterLoading"
-            class="cover-letter-loading">
+            class="cover-letter-loading"
+        >
 
             <i class="fa-solid fa-spinner fa-spin"></i>
 
@@ -509,38 +728,55 @@ No related jobs available.
 
         </div>
 
+
+        <!-- ERROR -->
+
         <div
             id="coverLetterError"
-            class="cover-letter-error">
+            class="cover-letter-error"
+        >
 
             Unable to generate the cover letter.
+
             Please try again.
 
         </div>
 
+
+        <!-- COVER LETTER TEXT -->
+
         <textarea
             id="coverLetterText"
             class="cover-letter-text"
-            readonly></textarea>
+            readonly
+        ></textarea>
+
+
+        <!-- ACTIONS -->
 
         <div class="cover-letter-actions">
 
             <button
                 type="button"
                 id="copyCoverLetter"
-                class="copy-cover-letter">
+                class="copy-cover-letter"
+            >
 
                 <i class="fa-solid fa-copy"></i>
+
                 Copy
 
             </button>
 
+
             <button
                 type="button"
                 id="regenerateCoverLetter"
-                class="regenerate-cover-letter">
+                class="regenerate-cover-letter"
+            >
 
                 <i class="fa-solid fa-rotate"></i>
+
                 Regenerate
 
             </button>
@@ -552,6 +788,11 @@ No related jobs available.
 </div>
 
 {% endif %}
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
 
 {% block extra_js %}
 

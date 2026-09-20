@@ -10,6 +10,7 @@ from jobs.services.cover_letter import generate_cover_letter
 from django.views.decorators.http import require_POST
 from django.utils import timezone
 from django.core.paginator import Paginator
+from applications.models import Application
 
 
 # Create your views here.
@@ -118,13 +119,11 @@ def job_list(request):
 def job_detail(request, id):
     job = get_object_or_404(Job, id=id)
 
-    related_jobs = (
-        Job.objects.filter(
+    related_jobs = Job.objects.filter(
             company=job.company,
             status=Job.Status.OPEN
-        )
-        .exclude(id=job.id)[:3]
-    )
+        ).exclude(id=job.id)[:3]
+    
 
     job_fit = None
     is_saved = False
@@ -140,7 +139,7 @@ def job_detail(request, id):
             user = request.user, job = job
         ).exists()
 
-        application = request.user.applications.filter(job=job).first()
+        application = Application.objects.filter(user=request.user, job=job).first()
 
     return render(
         request,

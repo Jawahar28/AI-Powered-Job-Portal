@@ -61,18 +61,48 @@ def applicant_dashboard(request):
 
 @login_required
 def apply_job(request, job_id):
-
     job = get_object_or_404(Job, id=job_id)
 
     # Prevent duplicate applications
-    if Application.objects.filter(user=request.user,job=job).exists():
+    existing_application = Application.objects.filter(
+        user=request.user,
+        job=job
+    ).first()
+
+    if existing_application:
+        if job.external_url:
+            return redirect(job.external_url)
+
         return redirect("job_detail", id=job.id)
 
+    # For external jobs, record the application immediately
+    if job.external_url and request.method == "GET":
+
+        application = Application.objects.create(
+            user=request.user,
+            job=job,
+            applicant_name=(
+                request.user.get_full_name()
+                or request.user.username
+            ),
+            applicant_email=request.user.email,
+            resume=(
+                request.user.profile.resume
+                if hasattr(request.user, "profile")
+                and request.user.profile.resume
+                else None
+            ),
+            status="A",
+        )
+
+        return redirect(job.external_url)
+
+    # Internal application flow
     if request.method == "POST":
 
         form = ApplicationForm(
             request.POST,
-            request.FILES,
+            request.FILES
         )
 
         if form.is_valid():
@@ -82,7 +112,6 @@ def apply_job(request, job_id):
             application.job = job
             application.user = request.user
 
-            # Automatically fill applicant details
             application.applicant_name = (
                 request.user.get_full_name()
                 or request.user.username
@@ -90,7 +119,6 @@ def apply_job(request, job_id):
 
             application.applicant_email = request.user.email
 
-            # Use profile resume if no new resume uploaded
             if (
                 not application.resume
                 and hasattr(request.user, "profile")
@@ -100,10 +128,12 @@ def apply_job(request, job_id):
 
             application.save()
 
-            return redirect("job_detail", id=job.id)
+            return redirect(
+                "job_detail",
+                id=job.id
+            )
 
     else:
-
         form = ApplicationForm()
 
     return render(
@@ -112,7 +142,7 @@ def apply_job(request, job_id):
         {
             "form": form,
             "job": job,
-        },
+        }
     )
 
 @login_required
