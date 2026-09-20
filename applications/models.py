@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 STATUS_CHOICES = [
     ("A", "Applied"),
-    ("UR ", "Under Review"),
+    ("UR", "Under Review"),
     ("S", "Shortlisted"),
     ("R", "Rejected"),
     ("H", "Hired"),
@@ -28,6 +28,14 @@ class Application(models.Model):
         choices=STATUS_CHOICES,
         default="A"
     )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user", "job"],
+                name="unique_user_job_application"
+            )
+        ]
 
 
     @property

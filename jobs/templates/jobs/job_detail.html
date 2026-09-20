@@ -306,27 +306,56 @@ Take the next step in your career.
 
 </p>
 
-{% if job.external_url %}
+{% if application %}
 
-<a
-    href="{{ job.external_url }}"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="apply-btn">
+<div class="application-status-box">
 
-    Apply on Original Website ↗
+    <div class="application-status-icon">
+        <i class="fa-solid fa-circle-check"></i>
+    </div>
 
-</a>
+    <div>
+        <strong>Application Submitted</strong>
+
+        <p>
+            Status:
+            <span class="{{ application.badge_class }}">
+                {{ application.get_status_display }}
+            </span>
+        </p>
+
+        <small>
+            Applied on {{ application.applied_at|date:"F d, Y" }}
+        </small>
+    </div>
+
+</div>
 
 {% else %}
 
-<a
-    href="{% url 'apply_job' job.id %}"
-    class="apply-btn">
+    {% if job.external_url %}
 
-    Apply Now
+    <a
+        href="{{ job.external_url }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="apply-btn">
 
-</a>
+        Apply on Original Website ↗
+
+    </a>
+
+    {% else %}
+
+    <a
+        href="{% url 'apply_job' job.id %}"
+        class="apply-btn">
+
+        Apply Now
+
+    </a>
+
+    {% endif %}
 
 {% endif %}
 

@@ -128,6 +128,7 @@ def job_detail(request, id):
 
     job_fit = None
     is_saved = False
+    application = None
 
     if request.user.is_authenticated:
         job_fit = analyze_job_fit(
@@ -139,6 +140,8 @@ def job_detail(request, id):
             user = request.user, job = job
         ).exists()
 
+        application = request.user.applications.filter(job=job).first()
+
     return render(
         request,
         "jobs/job_detail.html",
@@ -147,6 +150,7 @@ def job_detail(request, id):
             "related_jobs": related_jobs,
             "job_fit": job_fit,
             "is_saved" : is_saved,
+            "application" : application,
         },
     )
 
