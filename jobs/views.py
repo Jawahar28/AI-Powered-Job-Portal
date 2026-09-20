@@ -127,12 +127,17 @@ def job_detail(request, id):
     )
 
     job_fit = None
+    is_saved = False
 
     if request.user.is_authenticated:
         job_fit = analyze_job_fit(
             request.user,
             job
         )
+
+        is_saved = SavedJob.objects.filter(
+            user = request.user, job = job
+        ).exists()
 
     return render(
         request,
@@ -141,6 +146,7 @@ def job_detail(request, id):
             "job": job,
             "related_jobs": related_jobs,
             "job_fit": job_fit,
+            "is_saved" : is_saved,
         },
     )
 
@@ -154,6 +160,8 @@ def save_job(request, id):
         user=request.user,
         job=job
     )
+
+    messages.success(request, "Job saved successfully.")
 
     return redirect("job_detail", id=id)
 

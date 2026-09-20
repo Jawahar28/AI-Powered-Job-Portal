@@ -330,13 +330,31 @@ Take the next step in your career.
 
 {% endif %}
 
-<a
-    href="{% url 'save_job' job.id %}"
-    class="btn btn-outline-warning mt-2">
+{% if user.is_authenticated %}
 
-    ❤️ Save Job
+    {% if is_saved %}
 
-</a>
+        <a
+            href="{% url 'unsave_job' job.id %}"
+            class="btn btn-outline-danger"
+        >
+            <i class="fa-solid fa-bookmark"></i>
+            Saved
+        </a>
+
+    {% else %}
+
+        <a
+            href="{% url 'save_job' job.id %}"
+            class="btn btn-outline-primary"
+        >
+            <i class="fa-regular fa-bookmark"></i>
+            Save Job
+        </a>
+
+    {% endif %}
+
+{% endif %}
 
 {% if user.is_authenticated %}
 
