@@ -7,6 +7,7 @@ from jobs.models import JobFetchRun
 from jobs.services.sources.registry import get_source
 from jobs.services.job_importer import import_job
 from jobs.services.job_intelligence import analyze_candidate
+from jobs.services.job_matching import match_new_jobs_to_candidates
 
 
 class Command(BaseCommand):
@@ -88,6 +89,23 @@ class Command(BaseCommand):
                     else:
 
                         skipped_count += 1
+
+            matches = match_new_jobs_to_candidates(fetch_run)
+
+            self.stdout.write(
+                self.style.SUCCESS(
+                    f"Candidate matches: {len(matches)}"
+                )
+            )
+
+            for match in matches:
+                self.stdout.write(
+                    self.style.SUCCESS(
+                        f"Match: {match['user'].username} | "
+                        f"{match['job'].title} | "
+                        f"Score: {match['match_score']}"
+                    )
+                )
 
             # SUCCESS
             fetch_run.finished_at = timezone.now()
