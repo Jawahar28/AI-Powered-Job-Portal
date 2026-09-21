@@ -135,6 +135,20 @@
 
                     </li>
 
+                    <a
+                        href="{% url 'notifications' %}"
+                        class="text-decoration-none position-relative me-3"
+                        title="Notifications"
+                    >
+                        🔔
+
+                        {% if unread_notification_count > 0 %}
+                            <span class="badge bg-danger">
+                                {{ unread_notification_count }}
+                            </span>
+                        {% endif %}
+                    </a>  
+
 
                     <li class="nav-item me-2">
 
