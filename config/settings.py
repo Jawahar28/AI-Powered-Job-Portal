@@ -15,6 +15,8 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 
+from celery.schedules import crontab
+
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -155,7 +157,7 @@ CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/0"
 CELERY_BEAT_SCHEDULE = {
     "fetch-jobs-every-5-minutes" : {
         "task" : "jobs.tasks.fetch_jobs_task",
-        "schedule" : 300.0,
+        "schedule" : crontab(hour=0,minute=0),
     },
 }
 
