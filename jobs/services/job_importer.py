@@ -12,6 +12,8 @@ def import_job(job_data, source, fetch_run):
     ).first()
 
     if existing_job:
+        existing_job.fetch_run = fetch_run
+        existing_job.save(update_fields=["fetch_run"])
         return existing_job, False
 
     company, created = Company.objects.get_or_create(name=job_data["company"])

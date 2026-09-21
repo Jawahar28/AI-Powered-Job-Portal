@@ -109,6 +109,29 @@ class SavedJob(models.Model):
     def __str__(self):
         return f"{self.user.username} - {self.job.title}"
 
+class Notification(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE,related_name="notifications")
+
+    job = models.ForeignKey(Job, on_delete=models.CASCADE, null=True, blank=True,related_name="notifications")
+
+    title = models.CharField(max_length=255)
+
+    message = models.TextField()
+
+    is_read = models.BooleanField(default=False)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.title}"
+
+    class Meta:
+        ordering = ["-created_at"]
+
+        constraints = [models.UniqueConstraint(
+            fields=["user", "job"],
+            name="unique_user_job_notification",
+        )]
 class CoverLetterGeneration(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="cover_letter_generations")
 
