@@ -33,6 +33,9 @@ def match_new_jobs_to_candidates(fetch_run):
 
             profile = user.profile
 
+            if user.applications.filter(job=job).exists():
+                continue
+
             if not is_experience_eligible(
                 profile.experience,
                 job.intelligence,
