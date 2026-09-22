@@ -61,6 +61,14 @@ class Job(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["source", "external_job_id"],
+                name="unique_source_external_job",
+            )
+        ]
+
 
 class JobFetchRun(models.Model):
 
