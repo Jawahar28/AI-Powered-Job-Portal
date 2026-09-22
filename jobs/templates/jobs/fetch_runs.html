@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2>Job Fetch Monitoring</h2>
+            <p class="text-muted mb-0">
+                Monitor JOBCode's external job fetching runs.
+            </p>
+        </div>
+    </div>
+
+    {% if runs %}
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+
+            <thead class="table-dark">
+                <tr>
+                    <th>Source</th>
+                    <th>Status</th>
+                    <th>Started</th>
+                    <th>Finished</th>
+                    <th>Found</th>
+                    <th>Imported</th>
+                    <th>Skipped</th>
+                    <th>Error</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for run in runs %}
+
+                <tr>
+
+                    <td>
+                        <strong>{{ run.source }}</strong>
+                    </td>
+
+                    <td>
+                        {% if run.status == "SUCCESS" %}
+                            <span class="badge bg-success">
+                                Success
+                            </span>
+                        {% elif run.status == "FAILED" %}
+                            <span class="badge bg-danger">
+                                Failed
+                            </span>
+                        {% else %}
+                            <span class="badge bg-warning text-dark">
+                                Running
+                            </span>
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {{ run.started_at|date:"d M Y, H:i" }}
+                    </td>
+
+                    <td>
+                        {% if run.finished_at %}
+                            {{ run.finished_at|date:"d M Y, H:i" }}
+                        {% else %}
+                            —
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {{ run.jobs_found }}
+                    </td>
+
+                    <td>
+                        <strong>{{ run.jobs_imported }}</strong>
+                    </td>
+
+                    <td>
+                        {{ run.jobs_skipped }}
+                    </td>
+
+                    <td>
+                        {% if run.error_message %}
+                            <span class="text-danger">
+                                {{ run.error_message }}
+                            </span>
+                        {% else %}
+                            —
+                        {% endif %}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+    </div>
+
+    {% else %}
+
+        <div class="alert alert-info">
+            No job fetch runs have been recorded yet.
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

@@ -11,6 +11,6 @@ from django.core.management import call_command
         retry_backoff = True,
         retry_kwargs = {"maz_retries" : 3},
 )
-def fetch_jobs_task():
+def fetch_jobs_task(self):
     call_command("fetch_external_jobs")
     return "JOBCode job fetching completed successfully!"

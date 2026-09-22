@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, JsonResponse
-from .models import Job, Company, SavedJob, CoverLetterGeneration
+from .models import Job, Company, SavedJob, CoverLetterGeneration, JobFetchRun
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
@@ -304,3 +304,13 @@ def mark_notification_read(request, notification_id):
     notification.save(update_fields=["is_read"])
 
     return redirect("notifications")
+
+@login_required
+def fetch_runs(request):
+    runs = JobFetchRun.objects.all().order_by("-started_at")
+
+    return render(
+        request,
+        "jobs/fetch_runs.html",
+        {"runs" : runs}
+    )

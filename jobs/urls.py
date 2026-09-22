@@ -12,5 +12,6 @@ urlpatterns = [
     path("recommended/", views.recommended_jobs, name="recommended"),
     path("notifications/",views.notifications,name="notifications",),
     path("notifications/<int:notification_id>/read/",views.mark_notification_read,name="mark_notification_read",),
+    path("fetch-runs/", views.fetch_runs, name="fetch_runs"),
 
 ]
