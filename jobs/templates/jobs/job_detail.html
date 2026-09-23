@@ -416,7 +416,148 @@
                     </div>
 
                     {% endif %}
+                
+                <!-- =================================================
+     RESUME ↔ JOB INTELLIGENCE
+================================================== -->
 
+{% if resume_analysis %}
+
+<div class="job-fit-section resume-analysis-section">
+
+    <h3>
+        <i class="fa-solid fa-file-circle-check"></i>
+        Resume ↔ Job Intelligence
+    </h3>
+
+    <!-- APPLICATION READINESS -->
+
+    <div class="readiness-card">
+
+        <div class="readiness-header">
+
+            <span>
+                Application Readiness
+            </span>
+
+            <strong>
+                {{ resume_analysis.readiness_score }}%
+            </strong>
+
+        </div>
+
+        <div class="readiness-bar">
+
+            <div
+                class="readiness-progress"
+                style="width: {{ resume_analysis.readiness_score }}%;">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- SKILL COVERAGE -->
+
+    <div class="resume-analysis-item">
+
+        <strong>
+            Skill Coverage
+        </strong>
+
+        <span>
+            {{ resume_analysis.skill_coverage }}%
+        </span>
+
+    </div>
+
+
+    <!-- EXPERIENCE -->
+
+    <div class="resume-analysis-item">
+
+        <strong>
+            Experience Eligibility
+        </strong>
+
+        {% if resume_analysis.experience_eligible %}
+
+            <span class="analysis-success">
+                <i class="fa-solid fa-circle-check"></i>
+                Eligible
+            </span>
+
+        {% else %}
+
+            <span class="analysis-warning">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                Review requirements
+            </span>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- STRENGTHS -->
+
+    {% if resume_analysis.strengths %}
+
+    <div class="resume-analysis-subsection">
+
+        <h4>
+            <i class="fa-solid fa-thumbs-up"></i>
+            Your Strengths
+        </h4>
+
+        <ul>
+
+            {% for strength in resume_analysis.strengths %}
+
+                <li>
+                    {{ strength }}
+                </li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- IMPROVEMENTS -->
+
+    {% if resume_analysis.improvements %}
+
+    <div class="resume-analysis-subsection">
+
+        <h4>
+            <i class="fa-solid fa-lightbulb"></i>
+            Before Applying
+        </h4>
+
+        <ul>
+
+            {% for improvement in resume_analysis.improvements %}
+
+                <li>
+                    {{ improvement }}
+                </li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endif %}
 
                 </section>
 

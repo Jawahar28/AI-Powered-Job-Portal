@@ -12,6 +12,7 @@ from django.utils import timezone
 from django.core.paginator import Paginator
 from applications.models import Application
 from jobs.models import Notification
+from jobs.services.resume_job_analysis import analyze_resume_for_job
 
 
 # Create your views here.
@@ -121,26 +122,36 @@ def job_detail(request, id):
     job = get_object_or_404(Job, id=id)
 
     related_jobs = Job.objects.filter(
-            company=job.company,
-            status=Job.Status.OPEN
-        ).exclude(id=job.id)[:3]
-    
+        company=job.company,
+        status=Job.Status.OPEN
+    ).exclude(id=job.id)[:3]
 
     job_fit = None
+    resume_analysis = None
     is_saved = False
     application = None
 
     if request.user.is_authenticated:
+
         job_fit = analyze_job_fit(
             request.user,
             job
         )
 
+        resume_analysis = analyze_resume_for_job(
+            request.user,
+            job
+        )
+
         is_saved = SavedJob.objects.filter(
-            user = request.user, job = job
+            user=request.user,
+            job=job
         ).exists()
 
-        application = Application.objects.filter(user=request.user, job=job).first()
+        application = Application.objects.filter(
+            user=request.user,
+            job=job
+        ).first()
 
     return render(
         request,
@@ -149,8 +160,9 @@ def job_detail(request, id):
             "job": job,
             "related_jobs": related_jobs,
             "job_fit": job_fit,
-            "is_saved" : is_saved,
-            "application" : application,
+            "resume_analysis": resume_analysis,
+            "is_saved": is_saved,
+            "application": application,
         },
     )
 
