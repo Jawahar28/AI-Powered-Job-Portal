@@ -1,0 +1,360 @@
+[
+{
+  "model": "jobs.job",
+  "pk": 1,
+  "fields": {
+    "company": 1,
+    "title": "Backend Developer",
+    "description": "None",
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    },
+    "required_skills": "",
+    "location": "India",
+    "salary": 100000,
+    "job_type": "FT",
+    "status": "C",
+    "posted_at": "2026-07-19T17:48:02.644Z",
+    "imported_at": null,
+    "fetch_run": null,
+    "source": "legacy",
+    "external_url": "",
+    "external_job_id": "manual-1"
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 2,
+  "fields": {
+    "company": 3,
+    "title": "SDE 3",
+    "description": "None",
+    "intelligence": {
+      "role": null,
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    },
+    "required_skills": "",
+    "location": "India",
+    "salary": 100000,
+    "job_type": "FT",
+    "status": "C",
+    "posted_at": "2026-07-19T17:48:02.644Z",
+    "imported_at": null,
+    "fetch_run": null,
+    "source": "legacy",
+    "external_url": "",
+    "external_job_id": "manual-2"
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 3,
+  "fields": {
+    "company": 2,
+    "title": "AI Engineer",
+    "description": "None",
+    "intelligence": {
+      "role": null,
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    },
+    "required_skills": "",
+    "location": "India",
+    "salary": 100000,
+    "job_type": "FT",
+    "status": "O",
+    "posted_at": "2026-07-19T17:48:02Z",
+    "imported_at": null,
+    "fetch_run": null,
+    "source": "wellfound",
+    "external_url": "https://example.com",
+    "external_job_id": "test-001"
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 4,
+  "fields": {
+    "company": 1,
+    "title": "SDE 1",
+    "description": "We are looking for a Python Backend Developer with experience in Django,\r\nMySQL, REST APIs, Git and Docker.\r\n\r\nCandidates should have knowledge of HTML, CSS and JavaScript.",
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "python",
+        "django",
+        "rest apis",
+        "mysql",
+        "javascript",
+        "docker",
+        "git",
+        "html",
+        "css"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    },
+    "required_skills": "",
+    "location": "India",
+    "salary": 100000,
+    "job_type": "FT",
+    "status": "C",
+    "posted_at": "2026-07-19T17:48:02Z",
+    "imported_at": null,
+    "fetch_run": null,
+    "source": "legacy",
+    "external_url": "",
+    "external_job_id": "manual-4"
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 5,
+  "fields": {
+    "company": 4,
+    "title": "SDE 2",
+    "description": "None",
+    "intelligence": {
+      "role": null,
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    },
+    "required_skills": "",
+    "location": "India",
+    "salary": 100000,
+    "job_type": "FT",
+    "status": "C",
+    "posted_at": "2026-07-19T17:48:02.644Z",
+    "imported_at": null,
+    "fetch_run": null,
+    "source": "legacy",
+    "external_url": "",
+    "external_job_id": "manual-5"
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 6,
+  "fields": {
+    "company": 6,
+    "title": "Python Backend Developer",
+    "description": "We are looking for a Python Developerwith experience in Django, REST APIs,SQL and Git",
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "python",
+        "django",
+        "rest apis",
+        "sql",
+        "git"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    },
+    "required_skills": "",
+    "location": "Hyderbad",
+    "salary": 600000,
+    "job_type": "FT",
+    "status": "O",
+    "posted_at": "2026-09-03T17:06:22.022Z",
+    "imported_at": null,
+    "fetch_run": null,
+    "source": "Wellfound",
+    "external_url": "https://example.com/jobs/python-backend",
+    "external_job_id": "wellfound-test-001"
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 7,
+  "fields": {
+    "company": 6,
+    "title": "Python Backend Developer",
+    "description": "We are looking for a Python Developerwith experience in Django, REST APIs,SQL and Git",
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "python",
+        "django",
+        "rest apis",
+        "sql",
+        "git"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    },
+    "required_skills": "Python, Django, REST API, SQL, Git",
+    "location": "Hyderbad",
+    "salary": 600000,
+    "job_type": "FT",
+    "status": "O",
+    "posted_at": "2026-09-03T17:10:24.246Z",
+    "imported_at": null,
+    "fetch_run": null,
+    "source": "Wellfound",
+    "external_url": "https://example.com/jobs/python-backend",
+    "external_job_id": "wellfound-test-002"
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 8,
+  "fields": {
+    "company": 7,
+    "title": "Hiring for Senior Backend Developer with Python Django",
+    "description": "Looking for a workplace where people realize their full potential, are recognized for the impact they make, and enjoy the company of the peers they work with? Welcome to Zensar! Read on for more details on the role and about us. What's this role about? 8 years of experience in a Senior Software Development role, with a strong emphasis on Python Django. Proven experience working with an Agile development team, continuous development, and deployment. Experience in scoping, user testing, and train…",
+    "intelligence": {
+      "role": "senior backend developer",
+      "required_skills": [
+        "python",
+        "django"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": null,
+        "min_years": 8.0
+      }
+    },
+    "required_skills": "Python, Django",
+    "location": "India",
+    "salary": 0,
+    "job_type": "PT",
+    "status": "O",
+    "posted_at": "2026-09-03T18:20:29.097Z",
+    "imported_at": null,
+    "fetch_run": null,
+    "source": "Adzuna",
+    "external_url": "https://www.adzuna.in/land/ad/5864431671?se=OsNf_cOn8RGd3KVBIBG6qw&utm_medium=api&utm_source=aa18bd7f&v=9213651A34988F2B4B383961CA911651DC384C40",
+    "external_job_id": "5864431671"
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 9,
+  "fields": {
+    "company": 8,
+    "title": "Full Stack Engineer (Backend & Web UI)",
+    "description": "Full Stack Engineer (Backend & Web UI) Long Term Vizag-India Backend (Django, Python)  Frontend (React) Technical Requirements Expert Python/Django: 3 years of experience with Django, specifically handling high-concurrency environments and Celery workers. Modern React: Proficiency in React.js (Hooks, Functional Components) and modern CSS frameworks (Tailwind or Styled Components). Database Proficiency: Strong SQL skills (PostgreSQL) and experience with NoSQL/Document stores Firestore). Tooling:…",
+    "intelligence": {
+      "role": null,
+      "required_skills": [
+        "python",
+        "django",
+        "sql",
+        "postgresql",
+        "react",
+        "css"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {
+        "django": 3
+      },
+      "total_experience": {
+        "max_years": null,
+        "min_years": 3.0
+      }
+    },
+    "required_skills": "Python, Django, SQL, CSS, JavaScript",
+    "location": "Visakhapatnam, Andhra Pradesh",
+    "salary": 0,
+    "job_type": "PT",
+    "status": "O",
+    "posted_at": "2026-09-02T16:41:40Z",
+    "imported_at": null,
+    "fetch_run": null,
+    "source": "Adzuna",
+    "external_url": "https://www.adzuna.in/land/ad/5867035863?se=OsNf_cOn8RGd3KVBIBG6qw&utm_medium=api&utm_source=aa18bd7f&v=A5BB3B1E2E47F1CF4D2B1FE6E59DC8E94B24FE56",
+    "external_job_id": "5867035863"
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 10,
+  "fields": {
+    "company": 9,
+    "title": "PHP Developer (MySQL, Python, CSS)",
+    "description": "Company Description: Beverage Trade Network is a global platform that connects beverage, wine, spirits, beer, and non-alcoholic drink producers with importers, distributors, and related companies. The company offers a comprehensive database and directory that helps industry professionals source new products and build competitive portfolios. Producers use BTN to expand their distribution and reach thousands of qualified buyers worldwide. Buyers rely on BTN as a one-stop sourcing point to easily …",
+    "intelligence": {
+      "role": null,
+      "required_skills": [
+        "python",
+        "mysql",
+        "css"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    },
+    "required_skills": "",
+    "location": "Vadodara, Gujarat",
+    "salary": 0,
+    "job_type": "FT",
+    "status": "O",
+    "posted_at": "2026-09-03T18:20:29.121Z",
+    "imported_at": null,
+    "fetch_run": null,
+    "source": "Adzuna",
+    "external_url": "https://www.adzuna.in/land/ad/5864432446?se=OsNf_cOn8RGd3KVBIBG6qw&utm_medium=api&utm_source=aa18bd7f&v=74EF1397FCBEE0C8D73D290EDCB85A56AB949CF1",
+    "external_job_id": "5864432446"
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 11,
+  "fields": {
+    "company": 10,
+    "title": "Senior Technical Project Manager",
+    "description": "About the Role Looking for an experienced technology manager to own the end-to-end delivery of secure, scalable and AI-enabled medical learning products. The role combines project execution, people leadership, technical governance and stakeholder management, with sufficient hands-on depth to guide architecture, AI/RAG delivery and production readiness. Key Responsibilities - Delivery & Stakeholders Own delivery from requirement clarification and technical planning through development, testing, …",
+    "intelligence": {
+      "role": null,
+      "required_skills": [],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    },
+    "required_skills": "",
+    "location": "Hyderabad, Telangana",
+    "salary": 0,
+    "job_type": "PT",
+    "status": "O",
+    "posted_at": "2026-09-03T18:20:29.134Z",
+    "imported_at": null,
+    "fetch_run": null,
+    "source": "Adzuna",
+    "external_url": "https://www.adzuna.in/land/ad/5853824246?se=OsNf_cOn8RGd3KVBIBG6qw&utm_medium=api&utm_source=aa18bd7f&v=2BDF9B328B229FD12CAFC97D13D58FE3DC2B201A",
+    "external_job_id": "5853824246"
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 12,
+  "fields": {
+    "company": 11,
+    "title": "Bioinformatics Specialist, Software Developer, Clinical reporting, Genome Analyst",
+    "description": 

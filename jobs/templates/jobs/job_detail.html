@@ -481,20 +481,21 @@
             Experience Eligibility
         </strong>
 
-        {% if resume_analysis.experience_eligible %}
-
+        {% if resume_analysis.experience_eligible is None %}
+            <span class="analysis-neutral">
+                <i class="fa-solid fa-circle-info"></i>
+                Requirement not detected
+            </span>
+        {% elif resume_analysis.experience_eligible %}
             <span class="analysis-success">
                 <i class="fa-solid fa-circle-check"></i>
                 Eligible
             </span>
-
         {% else %}
-
             <span class="analysis-warning">
                 <i class="fa-solid fa-triangle-exclamation"></i>
                 Review requirements
             </span>
-
         {% endif %}
 
     </div>

@@ -22,10 +22,16 @@ def analyze_resume_for_job(user, job):
     missing_skills = match_result["missing_skills"]
 
     # Experience eligibility
-    experience_eligible = is_experience_eligible(
-        profile.experience,
-        job.intelligence,
-    )
+    total_experience = job.intelligence.get("total_experience")
+    job_level = job.intelligence.get("experience_level")
+
+    if not total_experience and not job_level:
+        experience_eligible = None
+    else:
+        experience_eligible = is_experience_eligible(
+            profile.experience,
+            job.intelligence,
+        )
 
     # Resume availability
     has_resume = bool(profile.resume_text)
@@ -75,11 +81,11 @@ def analyze_resume_for_job(user, job):
             f"of the identified job skills."
         )
 
-    if experience_eligible:
+    if experience_eligible is True:
         strengths.append(
             "Your experience level is eligible for this role."
         )
-    else:
+    elif experience_eligible is False:
         improvements.append(
             "Your current experience level does not meet "
             "the detected experience requirements."

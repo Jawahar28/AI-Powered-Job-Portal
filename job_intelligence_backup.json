@@ -1,0 +1,2319 @@
+[
+  {
+    "id": 1,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 2,
+    "intelligence": {
+      "role": null,
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 3,
+    "intelligence": {
+      "role": null,
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 4,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "python",
+        "django",
+        "rest apis",
+        "mysql",
+        "javascript",
+        "docker",
+        "git",
+        "html",
+        "css"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 5,
+    "intelligence": {
+      "role": null,
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 6,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "python",
+        "django",
+        "rest apis",
+        "sql",
+        "git"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 7,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "python",
+        "django",
+        "rest apis",
+        "sql",
+        "git"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 8,
+    "intelligence": {
+      "role": "senior backend developer",
+      "required_skills": [
+        "python",
+        "django"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": null,
+        "min_years": 8.0
+      }
+    }
+  },
+  {
+    "id": 9,
+    "intelligence": {
+      "role": null,
+      "required_skills": [
+        "python",
+        "django",
+        "sql",
+        "postgresql",
+        "react",
+        "css"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {
+        "django": 3
+      },
+      "total_experience": {
+        "max_years": null,
+        "min_years": 3.0
+      }
+    }
+  },
+  {
+    "id": 10,
+    "intelligence": {
+      "role": null,
+      "required_skills": [
+        "python",
+        "mysql",
+        "css"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 11,
+    "intelligence": {
+      "role": null,
+      "required_skills": [],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 12,
+    "intelligence": {
+      "role": null,
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": 5.0,
+        "min_years": 2.0
+      }
+    }
+  },
+  {
+    "id": 13,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "python",
+        "django",
+        "fastapi",
+        "flask",
+        "rest apis"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {
+        "python": 7
+      },
+      "total_experience": {
+        "max_years": null,
+        "min_years": 7.0
+      }
+    }
+  },
+  {
+    "id": 14,
+    "intelligence": {
+      "role": null,
+      "required_skills": [],
+      "experience_level": "junior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 15,
+    "intelligence": {
+      "role": null,
+      "required_skills": [],
+      "experience_level": "lead",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 16,
+    "intelligence": {
+      "role": null,
+      "required_skills": [
+        "python",
+        "django"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 17,
+    "intelligence": {
+      "role": null,
+      "required_skills": [
+        "python",
+        "django"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 18,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [
+        "python",
+        "sql"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 19,
+    "intelligence": {
+      "role": "senior data analyst",
+      "required_skills": [
+        "python",
+        "sql"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 20,
+    "intelligence": {
+      "role": "senior data analyst",
+      "required_skills": [
+        "python"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 21,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [
+        "python",
+        "sql"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": 7.0,
+        "min_years": 3.0
+      }
+    }
+  },
+  {
+    "id": 22,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [
+        "python",
+        "sql"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 23,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [
+        "python"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 24,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [
+        "python",
+        "gcp"
+      ],
+      "experience_level": "lead",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 25,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [
+        "python",
+        "gcp"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 26,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [
+        "python",
+        "gcp"
+      ],
+      "experience_level": "lead",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 27,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [
+        "python"
+      ],
+      "experience_level": "lead",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 28,
+    "intelligence": {
+      "role": null,
+      "required_skills": [
+        "machine learning"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 29,
+    "intelligence": {
+      "role": null,
+      "required_skills": [
+        "machine learning"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 30,
+    "intelligence": {
+      "role": "machine learning engineer",
+      "required_skills": [
+        "machine learning"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 31,
+    "intelligence": {
+      "role": null,
+      "required_skills": [
+        "machine learning"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 32,
+    "intelligence": {
+      "role": null,
+      "required_skills": [
+        "machine learning",
+        "gcp"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": 5.0,
+        "min_years": 3.0
+      }
+    }
+  },
+  {
+    "id": 33,
+    "intelligence": {
+      "role": null,
+      "required_skills": [
+        "machine learning"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": 12.0,
+        "min_years": 6.0
+      }
+    }
+  },
+  {
+    "id": 34,
+    "intelligence": {
+      "role": "senior machine learning engineer",
+      "required_skills": [
+        "machine learning"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 35,
+    "intelligence": {
+      "role": "senior machine learning engineer",
+      "required_skills": [
+        "machine learning"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 36,
+    "intelligence": {
+      "role": "senior machine learning engineer",
+      "required_skills": [
+        "machine learning"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 37,
+    "intelligence": {
+      "role": null,
+      "required_skills": [
+        "machine learning"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 38,
+    "intelligence": {
+      "role": null,
+      "required_skills": [
+        "django"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 39,
+    "intelligence": {
+      "role": null,
+      "required_skills": [
+        "django"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 40,
+    "intelligence": {
+      "role": null,
+      "required_skills": [],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 41,
+    "intelligence": {
+      "role": null,
+      "required_skills": [
+        "django",
+        "rest api"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 42,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "python",
+        "django",
+        "django rest framework"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": 3.0,
+        "min_years": 2.0
+      }
+    }
+  },
+  {
+    "id": 43,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "python"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": 4.0,
+        "min_years": 3.0
+      }
+    }
+  },
+  {
+    "id": 44,
+    "intelligence": {
+      "role": null,
+      "required_skills": [
+        "django",
+        "react",
+        "aws"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 45,
+    "intelligence": {
+      "role": "senior python developer",
+      "required_skills": [
+        "python",
+        "django",
+        "django rest framework",
+        "flask",
+        "mysql",
+        "mongodb"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": 6.0,
+        "min_years": 3.0
+      }
+    }
+  },
+  {
+    "id": 46,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [
+        "python"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 47,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [
+        "python",
+        "sql",
+        "java",
+        "aws"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": 10.0,
+        "min_years": 5.0
+      }
+    }
+  },
+  {
+    "id": 48,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [
+        "python",
+        "sql"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 49,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [
+        "python",
+        "sql"
+      ],
+      "experience_level": "junior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 50,
+    "intelligence": {
+      "role": null,
+      "required_skills": [
+        "python",
+        "aws"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": 12.0,
+        "min_years": 8.0
+      }
+    }
+  },
+  {
+    "id": 51,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "python",
+        "java"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": null,
+        "min_years": 3.0
+      }
+    }
+  },
+  {
+    "id": 52,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "python"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": null,
+        "min_years": 20.0
+      }
+    }
+  },
+  {
+    "id": 53,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "python"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": null,
+        "min_years": 7.0
+      }
+    }
+  },
+  {
+    "id": 54,
+    "intelligence": {
+      "role": null,
+      "required_skills": [
+        "python"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": 10.0,
+        "min_years": 5.0
+      }
+    }
+  },
+  {
+    "id": 55,
+    "intelligence": {
+      "role": null,
+      "required_skills": [
+        "python",
+        "fastapi"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 56,
+    "intelligence": {
+      "role": null,
+      "required_skills": [
+        "python",
+        "fastapi",
+        "azure"
+      ],
+      "experience_level": "lead",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 57,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "python"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 58,
+    "intelligence": {
+      "role": "ml engineer",
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": 12.0,
+        "min_years": 7.0
+      }
+    }
+  },
+  {
+    "id": 59,
+    "intelligence": {
+      "role": null,
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": null,
+        "min_years": 5.0
+      }
+    }
+  },
+  {
+    "id": 60,
+    "intelligence": {
+      "role": "machine learning engineer",
+      "required_skills": [
+        "machine learning"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 61,
+    "intelligence": {
+      "role": null,
+      "required_skills": [],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 62,
+    "intelligence": {
+      "role": null,
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 63,
+    "intelligence": {
+      "role": null,
+      "required_skills": [
+        "aws"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 64,
+    "intelligence": {
+      "role": "ml engineer",
+      "required_skills": [
+        "machine learning",
+        "azure",
+        "gcp"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 65,
+    "intelligence": {
+      "role": "data scientist",
+      "required_skills": [],
+      "experience_level": "lead",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 66,
+    "intelligence": {
+      "role": null,
+      "required_skills": [],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 67,
+    "intelligence": {
+      "role": "senior software engineer",
+      "required_skills": [],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 68,
+    "intelligence": {
+      "role": "software engineer",
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 69,
+    "intelligence": {
+      "role": "python developer",
+      "required_skills": [
+        "python"
+      ],
+      "experience_level": "lead",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 70,
+    "intelligence": {
+      "role": "python developer",
+      "required_skills": [
+        "python"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 71,
+    "intelligence": {
+      "role": "python developer",
+      "required_skills": [
+        "python",
+        "aws"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 72,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "python"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 73,
+    "intelligence": {
+      "role": null,
+      "required_skills": [
+        "python",
+        "rest api"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": 12.0,
+        "min_years": 7.0
+      }
+    }
+  },
+  {
+    "id": 74,
+    "intelligence": {
+      "role": null,
+      "required_skills": [
+        "python"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 75,
+    "intelligence": {
+      "role": null,
+      "required_skills": [
+        "python"
+      ],
+      "experience_level": "lead",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 76,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": 5.0,
+        "min_years": 2.0
+      }
+    }
+  },
+  {
+    "id": 77,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 78,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 79,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [
+        "sql"
+      ],
+      "experience_level": null,
+      "preferred_skills": [
+        "gcp"
+      ],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 80,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 81,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 82,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [
+        "sql"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": null,
+        "min_years": 6.0
+      }
+    }
+  },
+  {
+    "id": 83,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [
+        "python",
+        "sql"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": 6.0,
+        "min_years": 2.0
+      }
+    }
+  },
+  {
+    "id": 84,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 85,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [
+        "python"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 86,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [
+        "python"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 87,
+    "intelligence": {
+      "role": "django developer",
+      "required_skills": [
+        "django"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": null,
+        "min_years": 2.0
+      }
+    }
+  },
+  {
+    "id": 88,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "django"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": 3.0,
+        "min_years": 2.0
+      }
+    }
+  },
+  {
+    "id": 89,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "python",
+        "django"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": null,
+        "min_years": 2.0
+      }
+    }
+  },
+  {
+    "id": 90,
+    "intelligence": {
+      "role": "django developer",
+      "required_skills": [
+        "python",
+        "django"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 91,
+    "intelligence": {
+      "role": "software engineer",
+      "required_skills": [
+        "python",
+        "django",
+        "rest apis"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": null,
+        "min_years": 2.0
+      }
+    }
+  },
+  {
+    "id": 92,
+    "intelligence": {
+      "role": "django developer",
+      "required_skills": [
+        "django"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 93,
+    "intelligence": {
+      "role": "django developer",
+      "required_skills": [
+        "django"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 94,
+    "intelligence": {
+      "role": "django developer",
+      "required_skills": [
+        "django"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 95,
+    "intelligence": {
+      "role": "machine learning engineer",
+      "required_skills": [
+        "machine learning"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 96,
+    "intelligence": {
+      "role": "senior machine learning engineer",
+      "required_skills": [
+        "machine learning"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 97,
+    "intelligence": {
+      "role": "software engineer",
+      "required_skills": [
+        "machine learning"
+      ],
+      "experience_level": "junior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 98,
+    "intelligence": {
+      "role": "senior machine learning engineer",
+      "required_skills": [
+        "machine learning"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 99,
+    "intelligence": {
+      "role": "data scientist",
+      "required_skills": [
+        "python",
+        "sql",
+        "machine learning"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": 8.0,
+        "min_years": 5.0
+      }
+    }
+  },
+  {
+    "id": 100,
+    "intelligence": {
+      "role": "ml engineer",
+      "required_skills": [],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 101,
+    "intelligence": {
+      "role": "data scientist",
+      "required_skills": [
+        "deep learning"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 102,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 103,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "java"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 104,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 105,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": null,
+        "min_years": 4.0
+      }
+    }
+  },
+  {
+    "id": 106,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "java"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 107,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 108,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": 8.0,
+        "min_years": 5.0
+      }
+    }
+  },
+  {
+    "id": 109,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "sql",
+        "redis",
+        "java",
+        "kubernetes",
+        "git"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 110,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "rest apis",
+        "java"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 112,
+    "intelligence": {
+      "role": "ml engineer",
+      "required_skills": [
+        "python",
+        "sql",
+        "aws",
+        "docker",
+        "git"
+      ],
+      "experience_level": "management",
+      "preferred_skills": [
+        "javascript",
+        "typescript",
+        "machine learning",
+        "gcp"
+      ],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 113,
+    "intelligence": {
+      "role": null,
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 114,
+    "intelligence": {
+      "role": null,
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 115,
+    "intelligence": {
+      "role": "ml engineer",
+      "required_skills": [
+        "machine learning"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": 15.0,
+        "min_years": 5.0
+      }
+    }
+  },
+  {
+    "id": 116,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [
+        "python",
+        "sql",
+        "azure"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 117,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 118,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 119,
+    "intelligence": {
+      "role": "django developer",
+      "required_skills": [
+        "python",
+        "django"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": 5.0,
+        "min_years": 3.0
+      }
+    }
+  },
+  {
+    "id": 120,
+    "intelligence": {
+      "role": "django developer",
+      "required_skills": [
+        "django"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 121,
+    "intelligence": {
+      "role": "machine learning engineer",
+      "required_skills": [
+        "machine learning"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 122,
+    "intelligence": {
+      "role": "machine learning engineer",
+      "required_skills": [
+        "machine learning"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 123,
+    "intelligence": {
+      "role": "machine learning engineer",
+      "required_skills": [
+        "machine learning"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 124,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "python",
+        "fastapi",
+        "rest api"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 125,
+    "intelligence": {
+      "role": "senior backend developer",
+      "required_skills": [],
+      "experience_level": "junior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 126,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "sql",
+        "redis",
+        "java",
+        "kubernetes",
+        "git"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 127,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "java"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": 8.0,
+        "min_years": 5.0
+      }
+    }
+  },
+  {
+    "id": 128,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "python"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 129,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 130,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "typescript",
+        "node.js"
+      ],
+      "experience_level": "junior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": 2.0,
+        "min_years": 1.0
+      }
+    }
+  },
+  {
+    "id": 131,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "python"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 132,
+    "intelligence": {
+      "role": "software engineer",
+      "required_skills": [
+        "machine learning"
+      ],
+      "experience_level": "lead",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 133,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 134,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [
+        "python"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 135,
+    "intelligence": {
+      "role": "senior data scientist",
+      "required_skills": [
+        "machine learning"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 136,
+    "intelligence": {
+      "role": "machine learning engineer",
+      "required_skills": [
+        "machine learning"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 137,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "python"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 138,
+    "intelligence": {
+      "role": null,
+      "required_skills": [
+        "python",
+        "sql"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 139,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [
+        "machine learning"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 140,
+    "intelligence": {
+      "role": "senior machine learning engineer",
+      "required_skills": [
+        "machine learning"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 141,
+    "intelligence": {
+      "role": "machine learning engineer",
+      "required_skills": [
+        "machine learning"
+      ],
+      "experience_level": "lead",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 142,
+    "intelligence": {
+      "role": "ml engineer",
+      "required_skills": [
+        "machine learning"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 143,
+    "intelligence": {
+      "role": "ml engineer",
+      "required_skills": [],
+      "experience_level": "lead",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 144,
+    "intelligence": {
+      "role": "ml engineer",
+      "required_skills": [],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 145,
+    "intelligence": {
+      "role": "ml engineer",
+      "required_skills": [],
+      "experience_level": "lead",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 146,
+    "intelligence": {
+      "role": "senior backend developer",
+      "required_skills": [],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 147,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [
+        "gcp"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 148,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [
+        "sql"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": null,
+        "min_years": 7.0
+      }
+    }
+  },
+  {
+    "id": 149,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [],
+      "experience_level": "entry",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 150,
+    "intelligence": {
+      "role": "django developer",
+      "required_skills": [
+        "django",
+        "django rest framework"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 151,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "python",
+        "machine learning"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 152,
+    "intelligence": {
+      "role": "ml engineer",
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 153,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [
+        "python"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 154,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [],
+      "experience_level": "lead",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 155,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "python",
+        "rest apis",
+        "postgresql",
+        "mongodb",
+        "node.js"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": null,
+        "min_years": 5.0
+      }
+    }
+  },
+  {
+    "id": 156,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "rest apis"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": 5.0,
+        "min_years": 2.0
+      }
+    }
+  },
+  {
+    "id": 157,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [
+        "python",
+        "sql",
+        "pandas"
+      ],
+      "experience_level": "senior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 158,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 159,
+    "intelligence": {
+      "role": "python developer",
+      "required_skills": [
+        "python",
+        "gcp"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 160,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "python",
+        "node.js"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 161,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [
+        "rest apis",
+        "mongodb",
+        "java"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 162,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 163,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": 4.0,
+        "min_years": 2.0
+      }
+    }
+  },
+  {
+    "id": 164,
+    "intelligence": {
+      "role": "backend developer",
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [
+        "python"
+      ],
+      "skill_experience": {},
+      "total_experience": {
+        "max_years": 3.0,
+        "min_years": 2.0
+      }
+    }
+  },
+  {
+    "id": 165,
+    "intelligence": {
+      "role": "machine learning engineer",
+      "required_skills": [
+        "machine learning",
+        "azure"
+      ],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 166,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 167,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 168,
+    "intelligence": {
+      "role": "software engineer",
+      "required_skills": [
+        "python",
+        "java",
+        "machine learning",
+        "pytorch",
+        "tensorflow"
+      ],
+      "experience_level": "junior",
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  },
+  {
+    "id": 169,
+    "intelligence": {
+      "role": "data analyst",
+      "required_skills": [],
+      "experience_level": null,
+      "preferred_skills": [],
+      "skill_experience": {},
+      "total_experience": null
+    }
+  }
+]
