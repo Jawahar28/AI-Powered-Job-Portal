@@ -1,5 +1,5 @@
 from jobs.services.recommendations import (
-    calculate_job_match_for_user,
+    analyze_job_fit,
     is_experience_eligible,
 )
 
@@ -15,7 +15,7 @@ def analyze_resume_for_job(user, job):
     profile = user.profile
 
     # Existing JOBCode matching logic
-    match_result = calculate_job_match_for_user(user, job)
+    match_result = analyze_job_fit(user, job)
 
     match_score = match_result["match_score"]
     matched_skills = match_result["matched_skills"]
