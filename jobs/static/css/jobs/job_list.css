@@ -1,0 +1,372 @@
+/* ==========================================
+    Hero Section
+========================================== */
+.hero-search-btn {
+
+    width: 100%;
+    height: 58px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background: linear-gradient(135deg, #6C63FF, #8B7DFF);
+
+    color: white;
+
+    font-weight: 600;
+
+    transition: .3s;
+
+}
+
+.hero-search-btn:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 12px 30px rgba(108, 99, 255, .35);
+
+}
+
+
+/* ==========================================
+   Jobs Hero
+========================================== */
+
+.jobs-hero {
+    background: #05070F;
+    padding: 70px 0 120px;
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.jobs-hero::before {
+    content: "";
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: rgba(139, 92, 146, .10);
+    border-radius: 50%;
+    top: -250px;
+    right: -150px;
+}
+
+.jobs-hero::after {
+    content: "";
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    background: rgba(59, 130, 246, .08);
+    border-radius: 50%;
+    bottom: -150px;
+    left: -120px;
+}
+
+.jobs-hero h1 {
+    color: white;
+    font-size: 58px;
+    font-weight: 700;
+}
+
+.jobs-hero p {
+    color: #B7C0D8;
+    max-width: 700px;
+    margin: auto;
+    margin-bottom: 40px;
+}
+
+/* ==========================================
+   Search Panel
+========================================== */
+
+.search-panel {
+    background: rgba(24, 28, 48, .82);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 20px;
+    padding: 25px;
+    margin: 40px auto -70px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, .4);
+}
+
+.search-input {
+    position: relative;
+}
+
+.search-input i {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #8B93A7;
+    font-size: 16px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.search-input .form-control {
+
+    height: 58px;
+
+    border-radius: 14px;
+
+    background: #12192D;
+
+    color: white;
+
+    border: 1px solid #2E3754;
+
+}
+
+.form-select {
+
+    height: 58px;
+
+    border-radius: 14px;
+
+    background-color: #12192D;
+
+    color: #fff;
+
+    border: 1px solid #2E3754;
+
+    padding-right: 45px;
+
+}
+
+.search-input .form-control {
+    padding-left: 48px;
+    padding-right: 18px;
+}
+
+.search-input .form-control::placeholder {
+    color: #8B93A7;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background: #1A2342;
+    color: white;
+    border-color: #8B5CF6;
+    box-shadow: 0 0 18px rgba(139, 92, 246, .35);
+}
+
+.search-panel .btn-warning {
+    background: linear-gradient(90deg, #A855F7, #3B82F6);
+    color: white;
+    border: none;
+}
+
+.search-panel .btn-warning:hover {
+    background: linear-gradient(90deg, #9333EA, #2563EB);
+    box-shadow: 0 12px 28px rgba(104, 90, 255, .45);
+}
+
+/* ==========================================
+   Jobs Section
+========================================== */
+
+.jobs-section {
+    padding: 130px 0 80px;
+    background: radial-gradient(circle at top, #1A2452 0%, #0B1020 45%, #05070F 100%);
+    min-height: calc(100vh - 420px);
+}
+
+/* ==========================================
+   Grid
+========================================== */
+
+.jobs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 30px;
+}
+
+/* ==========================================
+   Job Card
+========================================== */
+
+.job-card {
+    position: relative;
+    background: rgba(24, 28, 48, .82);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 20px;
+    padding: 28px;
+    overflow: hidden;
+    transition: .35s;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, .35);
+}
+
+.job-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 0;
+    background: #6C63FF;
+    transition: .35s;
+}
+
+.job-card:hover::before {
+    height: 100%;
+}
+
+.job-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 45px rgba(108, 99, 255, .18);
+}
+
+.job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+}
+
+.job-header h3 {
+    color: white;
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+
+.company {
+    color: #B7C0D8;
+    font-size: 15px;
+}
+
+.salary {
+    background: rgba(168, 85, 247, .15);
+    color: #C4B5FD;
+    padding: 8px 15px;
+    border-radius: 30px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.job-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.job-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #1A2342;
+    color: #D7DDF0;
+    padding: 8px 14px;
+    border-radius: 30px;
+    font-size: 13px;
+}
+
+
+
+.form-select option {
+    background-color: white !important;
+    color: black !important;
+}
+
+/* ==========================================
+   Footer
+========================================== */
+
+.job-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.job-footer small {
+    color: #888;
+}
+
+.details-btn {
+    min-width: 120px;
+    text-align: center;
+    background: linear-gradient(90deg, #A855F7, #3B82F6);
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.details-btn:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(90deg, #9333EA, #2563EB);
+    color: white;
+}
+
+/* ==========================================
+   Empty State
+========================================== */
+
+.text-center h3 {
+    font-weight: 700;
+    color: #444;
+}
+
+.text-center p {
+    color: #777;
+}
+
+/* ==========================================
+   Job Count
+========================================== */
+.jobs-section h4 {
+    color: white;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.jobs-section .text-muted {
+    color: #AAB2C8 !important;
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media(max-width:768px) {
+
+    .jobs-hero h1 {
+        font-size: 58px;
+    }
+
+    .search-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .search-btn {
+        height: 52px;
+    }
+
+    .job-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .job-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+}
+
+footer {
+    background: #05070F;
+    color: #AAB2C8;
+    border-top: 1px solid rgba(255, 255, 255, .08);
+}
+
+footer small {
+    color: #AAB2C8 !important;
+}

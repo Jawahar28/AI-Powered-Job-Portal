@@ -1,0 +1,1018 @@
+/* ==========================================
+   Applications Header
+========================================== */
+
+.applications-header {
+    background: #05070F;
+    padding: 70px 0 110px;
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.applications-header::before {
+    content: "";
+    position: absolute;
+
+    width: 420px;
+    height: 420px;
+
+    background: rgba(139, 92, 246, 0.12);
+
+    border-radius: 50%;
+
+    top: -220px;
+    left: -150px;
+
+    filter: blur(20px);
+}
+
+.applications-header::after {
+    content: "";
+    position: absolute;
+
+    width: 350px;
+    height: 350px;
+
+    background: rgba(59, 130, 246, 0.10);
+
+    border-radius: 50%;
+
+    bottom: -200px;
+    right: -100px;
+
+    filter: blur(20px);
+}
+
+.applications-header .container {
+    position: relative;
+    z-index: 1;
+}
+
+.applications-header h1 {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.applications-header p {
+    color: #AAB2C8;
+    font-size: 17px;
+    margin-bottom: 0;
+}
+
+
+/* ==========================================
+   Applications Section
+========================================== */
+
+.applications-section {
+    min-height: calc(100vh - 250px);
+
+    background:
+        radial-gradient(circle at top,
+            #1A2452 0%,
+            #0B1020 45%,
+            #05070F 100%);
+
+    padding: 70px 0 50px;
+}
+
+
+/* ==========================================
+   Application Card
+========================================== */
+
+.application-card {
+    position: relative;
+
+    max-width: 900px;
+
+    margin: 0 auto 25px;
+
+    padding: 28px;
+
+    background: rgba(24, 28, 48, 0.82);
+
+    backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 20px;
+
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.30);
+
+    transition: 0.35s ease;
+
+    overflow: hidden;
+}
+
+.application-card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 4px;
+    height: 0;
+
+    background: linear-gradient(180deg,
+            #A855F7,
+            #3B82F6);
+
+    transition: 0.35s ease;
+}
+
+.application-card:hover::before {
+    height: 100%;
+}
+
+.application-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.40),
+        0 10px 30px rgba(108, 99, 255, 0.15);
+}
+
+
+/* ==========================================
+   Card Top
+========================================== */
+
+.application-top {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 20px;
+
+    margin-bottom: 22px;
+}
+
+.application-top h3 {
+    color: white;
+
+    font-size: 24px;
+
+    font-weight: 700;
+
+    margin-bottom: 6px;
+}
+
+.application-top h5 {
+    color: #AAB2C8;
+
+    font-size: 15px;
+
+    margin-bottom: 0;
+}
+
+
+/* ==========================================
+   Status Badge
+========================================== */
+
+.status-badge {
+    padding: 8px 16px;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    background: rgba(108, 99, 255, 0.15);
+
+    color: #C4B5FD;
+}
+
+
+/* ==========================================
+   Application Information
+========================================== */
+
+.application-info {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    margin-bottom: 25px;
+}
+
+.application-info span {
+    display: flex;
+
+    align-items: center;
+
+    background: #1A2342;
+
+    color: #D7DDF0;
+
+    padding: 9px 15px;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+}
+
+
+/* ==========================================
+   AI Match Score
+========================================== */
+
+.ai-match-section {
+    margin-bottom: 25px;
+
+    padding: 22px;
+
+    background: rgba(11, 16, 32, 0.55);
+
+    border: 1px solid rgba(139, 92, 246, 0.18);
+
+    border-radius: 16px;
+}
+
+
+/* AI Header */
+
+.ai-match-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 14px;
+}
+
+.ai-match-header h5 {
+    color: #E5E7FF;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    margin: 0;
+}
+
+.ai-match-header small {
+    color: #7F8AA5;
+
+    font-size: 11px;
+}
+
+
+/* Percentage */
+
+.match-percentage {
+    color: #A78BFA;
+
+    font-size: 20px;
+
+    font-weight: 700;
+}
+
+
+/* Progress Bar */
+
+.match-progress {
+    width: 100%;
+
+    height: 10px;
+
+    background: #111827;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    margin-bottom: 20px;
+}
+
+.match-progress-bar {
+    height: 100%;
+
+    background: linear-gradient(90deg,
+            #A855F7,
+            #3B82F6);
+
+    border-radius: 20px;
+
+    transition: width 0.6s ease;
+}
+
+
+/* ==========================================
+   Skills Section
+========================================== */
+
+.skills-match {
+    margin-top: 15px;
+}
+
+.skills-title {
+    display: block;
+
+    margin-bottom: 10px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.matched-title {
+    color: #86EFAC;
+}
+
+.missing-title {
+    color: #FCA5A5;
+}
+
+
+/* Skills Container */
+
+.ai-skills {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+}
+
+
+/* Matched Skills */
+
+.matched-skill {
+    background: rgba(34, 197, 94, 0.12);
+
+    border: 1px solid rgba(34, 197, 94, 0.25);
+
+    color: #86EFAC;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: 500;
+}
+
+
+/* Missing Skills */
+
+.missing-skill {
+    background: rgba(239, 68, 68, 0.10);
+
+    border: 1px solid rgba(239, 68, 68, 0.20);
+
+    color: #FCA5A5;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: 500;
+}
+
+
+/* ==========================================
+   AI Feedback
+========================================== */
+
+.ai-feedback {
+    margin-top: 18px;
+
+    padding: 14px 16px;
+
+    background: rgba(139, 92, 246, 0.06);
+
+    border-left: 3px solid #A855F7;
+
+    border-radius: 8px;
+}
+
+.ai-feedback h6 {
+    color: #C4B5FD;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    margin-bottom: 6px;
+}
+
+.ai-feedback p {
+    color: #AAB2C8;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    margin: 0;
+}
+
+
+/* ==========================================
+   No AI Data
+========================================== */
+
+.no-ai-data {
+    color: #FCD34D;
+
+    font-size: 13px;
+
+    margin: 15px 0 0;
+}
+
+
+/* ==========================================
+   Application Footer
+========================================== */
+
+.application-footer {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding-top: 20px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.application-footer small {
+    color: #8B93A7;
+}
+
+.view-btn {
+    min-width: 130px;
+
+    text-align: center;
+
+    padding: 11px 20px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(90deg,
+            #A855F7,
+            #3B82F6);
+
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition: 0.3s ease;
+}
+
+.view-btn:hover {
+    color: white;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 10px 25px rgba(104, 90, 255, 0.35);
+}
+
+
+/* ==========================================
+   Better Job Matches Section
+========================================== */
+
+.better-matches-section {
+    padding: 80px 0 100px;
+
+    background:
+        radial-gradient(circle at center top,
+            #151C3B 0%,
+            #0B1020 50%,
+            #05070F 100%);
+
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+
+/* Better Matches Header */
+
+.better-matches-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 30px;
+
+    margin-bottom: 40px;
+}
+
+.better-matches-header h2 {
+    color: white;
+
+    font-size: 32px;
+
+    font-weight: 700;
+
+    margin-bottom: 8px;
+}
+
+.better-matches-header p {
+    color: #AAB2C8;
+
+    margin: 0;
+
+    font-size: 15px;
+}
+
+
+/* View All Button */
+
+.see-all-btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    white-space: nowrap;
+
+    padding: 12px 20px;
+
+    border-radius: 10px;
+
+    border: 1px solid rgba(139, 92, 246, 0.45);
+
+    background: rgba(139, 92, 246, 0.10);
+
+    color: #C4B5FD;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: 0.3s ease;
+}
+
+.see-all-btn:hover {
+    color: white;
+
+    background: linear-gradient(90deg,
+            #A855F7,
+            #3B82F6);
+
+    border-color: transparent;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 10px 25px rgba(104, 90, 255, 0.25);
+}
+
+
+/* ==========================================
+   Better Match Card
+========================================== */
+
+.better-match-card {
+    position: relative;
+
+    height: 100%;
+
+    padding: 25px;
+
+    background: rgba(24, 28, 48, 0.88);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 18px;
+
+    backdrop-filter: blur(15px);
+
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+
+    transition: 0.35s ease;
+
+    overflow: hidden;
+}
+
+.better-match-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 3px;
+
+    background: linear-gradient(90deg,
+            #A855F7,
+            #3B82F6);
+
+    transform: scaleX(0);
+
+    transform-origin: left;
+
+    transition: 0.35s ease;
+}
+
+.better-match-card:hover::before {
+    transform: scaleX(1);
+}
+
+.better-match-card:hover {
+    transform: translateY(-7px);
+
+    border-color: rgba(139, 92, 246, 0.30);
+
+    box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.35),
+        0 10px 30px rgba(108, 99, 255, 0.12);
+}
+
+
+/* ==========================================
+   Better Match Score
+========================================== */
+
+.better-match-score {
+    position: absolute;
+
+    top: 22px;
+
+    right: 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 58px;
+
+    height: 34px;
+
+    padding: 0 10px;
+
+    border-radius: 20px;
+
+    background: rgba(34, 197, 94, 0.12);
+
+    border: 1px solid rgba(34, 197, 94, 0.25);
+
+    color: #86EFAC;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+/* Job Details */
+
+.better-match-card h4 {
+    color: white;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    margin-bottom: 7px;
+
+    padding-right: 65px;
+}
+
+.better-match-company {
+    color: #AAB2C8;
+
+    font-size: 14px;
+
+    margin-bottom: 20px;
+}
+
+
+/* ==========================================
+   Better Match Information
+========================================== */
+
+.better-match-info {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-bottom: 20px;
+}
+
+.better-match-info span {
+    padding: 7px 11px;
+
+    border-radius: 20px;
+
+    background: #1A2342;
+
+    color: #C9D2E8;
+
+    font-size: 12px;
+}
+
+
+/* ==========================================
+   Better Match Skills
+========================================== */
+
+.better-match-skills {
+    margin-bottom: 25px;
+}
+
+.better-match-skills small {
+    display: block;
+
+    color: #AAB2C8;
+
+    font-size: 12px;
+
+    margin-bottom: 10px;
+}
+
+.better-skills-container {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+}
+
+.better-skills-container span {
+    padding: 6px 10px;
+
+    border-radius: 20px;
+
+    background: rgba(34, 197, 94, 0.10);
+
+    border: 1px solid rgba(34, 197, 94, 0.20);
+
+    color: #86EFAC;
+
+    font-size: 11px;
+
+    font-weight: 500;
+}
+
+
+/* ==========================================
+   Better Match Button
+========================================== */
+
+.better-match-btn {
+    display: block;
+
+    width: 100%;
+
+    text-align: center;
+
+    padding: 11px 15px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(90deg,
+            #A855F7,
+            #3B82F6);
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: 0.3s ease;
+}
+
+.better-match-btn:hover {
+    color: white;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 10px 25px rgba(104, 90, 255, 0.35);
+}
+
+
+/* ==========================================
+   No Better Matches
+========================================== */
+
+.no-better-matches {
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    padding: 45px 30px;
+
+    text-align: center;
+
+    background: rgba(24, 28, 48, 0.70);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 18px;
+}
+
+.no-better-matches h3 {
+    color: white;
+
+    font-size: 22px;
+
+    margin-bottom: 12px;
+}
+
+.no-better-matches p {
+    color: #AAB2C8;
+
+    margin: 0;
+}
+
+
+/* ==========================================
+   Empty State
+========================================== */
+
+.empty-state {
+    max-width: 600px;
+
+    margin: 0 auto;
+
+    text-align: center;
+
+    padding: 50px 30px;
+
+    background: rgba(24, 28, 48, 0.82);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 20px;
+
+    backdrop-filter: blur(20px);
+}
+
+.empty-state img {
+    width: 180px;
+
+    margin-bottom: 25px;
+}
+
+.empty-state h2 {
+    color: white;
+
+    font-weight: 700;
+
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    color: #AAB2C8;
+
+    margin-bottom: 25px;
+}
+
+.browse-btn {
+    display: inline-block;
+
+    padding: 12px 25px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(90deg,
+            #A855F7,
+            #3B82F6);
+
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition: 0.3s ease;
+}
+
+.browse-btn:hover {
+    color: white;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 10px 25px rgba(104, 90, 255, 0.35);
+}
+
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media (max-width: 768px) {
+
+    .applications-header {
+        padding: 55px 0 80px;
+    }
+
+    .applications-header h1 {
+        font-size: 36px;
+    }
+
+    .application-card {
+        padding: 22px;
+    }
+
+    .application-top {
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+    .application-footer {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 18px;
+    }
+
+    .view-btn {
+        width: 100%;
+    }
+
+    .better-matches-section {
+        padding: 60px 0 80px;
+    }
+
+    .better-matches-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 18px;
+    }
+
+    .better-matches-header h2 {
+        font-size: 27px;
+    }
+
+    .see-all-btn {
+        width: 100%;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .applications-header h1 {
+        font-size: 30px;
+    }
+
+    .application-card {
+        padding: 18px;
+    }
+
+    .ai-match-section {
+        padding: 16px;
+    }
+
+    .ai-match-header {
+        align-items: flex-start;
+    }
+
+    .match-percentage {
+        font-size: 18px;
+    }
+
+    .better-match-card {
+        padding: 20px;
+    }
+
+    .better-match-score {
+        top: 18px;
+
+        right: 18px;
+    }
+
+}

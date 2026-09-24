@@ -1,0 +1,436 @@
+/* ==========================================
+   Profile Page
+========================================== */
+
+.profile-page {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top left, #1A2452 0%, transparent 35%),
+        radial-gradient(circle at bottom right, #21153D 0%, transparent 35%),
+        #05070F;
+
+    padding-bottom: 80px;
+    color: white;
+}
+
+
+/* ==========================================
+   Profile Hero
+========================================== */
+
+.profile-hero {
+    position: relative;
+    background: #05070F;
+    padding: 100px 0 180px;
+    overflow: hidden;
+}
+
+
+/* Animated Glow */
+
+.profile-hero::before {
+    content: "";
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: rgba(168, 85, 247, .15);
+    border-radius: 50%;
+    top: -220px;
+    left: -150px;
+    filter: blur(40px);
+    animation: profileGlow 8s ease-in-out infinite alternate;
+}
+
+
+.profile-hero::after {
+    content: "";
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    background: rgba(59, 130, 246, .12);
+    border-radius: 50%;
+    bottom: -250px;
+    right: -120px;
+    filter: blur(50px);
+    animation: profileGlow 10s ease-in-out infinite alternate-reverse;
+}
+
+
+/* ==========================================
+   Profile Card
+========================================== */
+
+.profile-card {
+    position: relative;
+    z-index: 2;
+    max-width: 1000px;
+    margin: auto;
+    margin-top: 20px;
+    padding: 45px;
+    text-align: center;
+    background: rgba(24, 28, 48, .88);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 25px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, .45);
+}
+
+
+/* ==========================================
+   Avatar
+========================================== */
+
+.profile-avatar {
+    position: relative;
+    z-index: 3;
+}
+
+
+.avatar-placeholder {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: linear-gradient(135deg,
+            #A855F7,
+            #3B82F6);
+    color: white;
+    font-size: 54px;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: -110px;
+    border: 6px solid #12192D;
+    box-shadow: 0 15px 35px rgba(139, 92, 246, .35);
+}
+
+
+.profile-image {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: -110px;
+    border: 6px solid #12192D;
+    box-shadow: 0 15px 35px rgba(139, 92, 246, .35);
+}
+
+
+/* ==========================================
+   Profile Text
+========================================== */
+
+.profile-card h1 {
+    margin-top: 25px;
+    font-size: 36px;
+    font-weight: 700;
+    color: white;
+}
+
+
+.headline {
+    color: #C4B5FD;
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+
+.location {
+    color: #AAB2C8;
+    margin-top: 10px;
+}
+
+
+/* ==========================================
+   Profile Buttons
+========================================== */
+
+.profile-buttons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+
+.edit-btn,
+.resume-btn {
+    text-decoration: none;
+    padding: 14px 32px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+
+.edit-btn {
+    background: linear-gradient(90deg,
+            #A855F7,
+            #3B82F6);
+    color: white;
+}
+
+
+.resume-btn {
+    background: #1A2342;
+    border: 1px solid #2E3754;
+    color: #D7DDF0;
+}
+
+
+.edit-btn:hover {
+    transform: translateY(-3px);
+    color: white;
+    box-shadow:
+        0 12px 28px rgba(139, 92, 246, .35);
+}
+
+
+.resume-btn:hover {
+    transform: translateY(-3px);
+    background: #222D52;
+    color: white;
+}
+
+
+/* Disabled Resume */
+
+.resume-btn.disabled {
+    opacity: .5;
+    pointer-events: none;
+}
+
+
+/* ==========================================
+   Profile Content
+========================================== */
+
+.profile-content {
+    position: relative;
+    z-index: 2;
+    margin-top: -70px;
+    padding-bottom: 80px;
+}
+
+
+.profile-box {
+    background: rgba(24, 28, 48, .88);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .30);
+    transition: .3s;
+}
+
+
+.profile-box:hover {
+    transform: translateY(-5px);
+    box-shadow:
+        0 20px 45px rgba(139, 92, 246, .15);
+}
+
+
+/* ==========================================
+   Profile Box Text
+========================================== */
+
+.profile-box h3 {
+    margin-bottom: 20px;
+    font-weight: 700;
+    color: white;
+}
+
+
+.profile-box p {
+    color: #B7C0D8;
+    line-height: 1.8;
+}
+
+
+/* Fix Bootstrap text-muted */
+
+.profile-box .text-muted {
+    color: #8B93A7 !important;
+}
+
+
+/* ==========================================
+   Skills
+========================================== */
+
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+
+.skill-badge {
+    background: rgba(168, 85, 247, .15);
+    border: 1px solid rgba(168, 85, 247, .25);
+    color: #C4B5FD;
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+
+.skill-badge:hover {
+    transform: translateY(-3px);
+    background: rgba(168, 85, 247, .25);
+}
+
+
+/* ==========================================
+   Progress Bar
+========================================== */
+
+.progress {
+    height: 14px;
+    border-radius: 20px;
+    background: #12192D;
+    overflow: hidden;
+}
+
+
+.progress-bar {
+    background: linear-gradient(90deg,
+            #A855F7,
+            #3B82F6);
+    font-weight: 600;
+}
+
+
+/* ==========================================
+   Completion List
+========================================== */
+
+.completion-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+.completion-list li {
+    padding: 10px 0;
+    color: #B7C0D8;
+    border-bottom:
+        1px solid rgba(255, 255, 255, .06);
+}
+
+.completion-list li:last-child {
+    border-bottom: none;
+}
+
+
+/* ==========================================
+   Social Links
+========================================== */
+
+.profile-box a {
+    color: #A78BFA;
+    text-decoration: none;
+    word-break: break-word;
+}
+
+
+.profile-box a:hover {
+    color: #60A5FA;
+}
+
+
+.profile-box hr {
+    border-color:
+        rgba(255, 255, 255, .08);
+    opacity: 1;
+}
+
+
+/* ==========================================
+   Resume Button
+========================================== */
+
+.profile-box .btn-primary {
+    border: none;
+    background: linear-gradient(90deg,
+            #A855F7,
+            #3B82F6);
+    padding: 10px 22px;
+    border-radius: 10px;
+}
+
+
+.profile-box .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 10px 25px rgba(139, 92, 246, .30);
+}
+
+/* ==========================================
+   Animations
+========================================== */
+
+@keyframes profileGlow {
+    from {
+        transform:
+            translate(0, 0) scale(1);
+    }
+
+    to {
+
+        transform:
+            translate(70px, 40px) scale(1.15);
+
+    }
+
+}
+
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media (max-width: 992px) {
+    .profile-hero {
+        padding:
+            100px 0 150px;
+    }
+
+}
+
+@media (max-width: 768px) {
+    .profile-card {
+        padding: 35px 20px;
+    }
+
+    .profile-card h1 {
+        font-size: 30px;
+    }
+
+    .profile-buttons {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .edit-btn,
+    .resume-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .profile-content {
+        margin-top: -50px;
+    }
+
+    .avatar-placeholder,
+    .profile-image {
+        width: 120px;
+        height: 120px;
+        margin-top: -90px;
+    }
+}

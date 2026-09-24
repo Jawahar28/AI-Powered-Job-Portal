@@ -1,0 +1,181 @@
+/* ==========================================
+   Background
+========================================== */
+.saved-section {
+    min-height: 100vh;
+    padding: 70px 0;
+    background:
+        radial-gradient(circle at top left, #202859, #0b1022 60%);
+}
+
+/* ==========================================
+   Hero
+========================================== */
+
+.saved-hero {
+    padding: 70px 0 30px;
+    background: #060814;
+    text-align: center;
+}
+
+.saved-hero h1 {
+    color: white;
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.saved-hero p {
+    color: #9ca3af;
+    font-size: 18px;
+}
+
+/* ==========================================
+   Card
+========================================== */
+
+.saved-job-card {
+    background: rgba(24, 28, 48, .75);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 22px;
+    padding: 32px;
+    margin-bottom: 28px;
+    transition: .35s;
+}
+
+.saved-job-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, .45);
+    border-color: #6d5dfc;
+}
+
+/* ==========================================
+   Title
+========================================== */
+
+.job-title {
+    color: white;
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.company-name {
+    color: #b8bfd3;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* ==========================================
+   Meta
+========================================== */
+
+.job-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-bottom: 28px;
+}
+
+.job-meta span {
+    background: #1d233f;
+    color: #d9def3;
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-size: 14px;
+}
+
+.status {
+    font-weight: 600;
+}
+
+/* ==========================================
+   Buttons
+========================================== */
+
+.saved-job-actions {
+    display: flex;
+    gap: 14px;
+}
+
+.saved-job-actions .btn {
+    border-radius: 12px;
+    padding: 11px 24px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.saved-job-actions .btn-primary {
+    border: none;
+    background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+}
+
+.saved-job-actions .btn-primary:hover {
+    transform: translateY(-3px);
+}
+
+.saved-job-actions .btn-outline-danger {
+    border: 1px solid #ff5f7a;
+    color: #ff5f7a;
+    background: transparent;
+}
+
+.saved-job-actions .btn-outline-danger:hover {
+    background: #ff5f7a;
+    color: white;
+}
+
+/* ==========================================
+   Empty State
+========================================== */
+
+.empty-state {
+    text-align: center;
+    padding: 120px 30px;
+}
+
+.empty-state h2 {
+    color: white;
+    margin-top: 20px;
+}
+
+.empty-state p {
+    color: #9ca3af;
+}
+
+/* ==========================================
+   Mobile
+========================================== */
+
+@media(max-width:768px) {
+    .saved-hero h1 {
+        font-size: 36px;
+    }
+
+    .saved-job-card {
+        padding: 22px;
+    }
+
+    .job-title {
+        font-size: 24px;
+    }
+
+    .job-meta {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .saved-job-actions {
+        flex-direction: column;
+    }
+}
+
+footer {
+    background: #05070F;
+    color: #AAB2C8;
+    border-top: 1px solid rgba(255, 255, 255, .08);
+}
+
+footer small {
+    color: #AAB2C8 !important;
+}

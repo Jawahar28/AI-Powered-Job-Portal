@@ -1,0 +1,610 @@
+/* ==========================================
+   Google Font
+========================================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    transition: .25s ease;
+}
+
+/* ==========================================
+   Body
+========================================== */
+
+body {
+    min-height: 100vh;
+
+    background:
+        radial-gradient(circle at 15% 20%, rgba(108, 99, 255, .18), transparent 30%),
+        radial-gradient(circle at 85% 80%, rgba(168, 85, 247, .15), transparent 30%),
+        #05070F;
+
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* ==========================================
+   Animated Background
+========================================== */
+
+body::before {
+    content: "";
+
+    position: fixed;
+
+    width: 600px;
+    height: 600px;
+
+    top: -250px;
+    left: -200px;
+
+    background: rgba(108, 99, 255, .18);
+
+    border-radius: 50%;
+
+    filter: blur(120px);
+
+    z-index: -1;
+
+    animation: glowMove 10s ease-in-out infinite alternate;
+}
+
+
+body::after {
+    content: "";
+
+    position: fixed;
+
+    width: 550px;
+    height: 550px;
+
+    bottom: -250px;
+    right: -200px;
+
+    background: rgba(168, 85, 247, .16);
+
+    border-radius: 50%;
+
+    filter: blur(120px);
+
+    z-index: -1;
+
+    animation: glowMoveReverse 12s ease-in-out infinite alternate;
+}
+
+/* ==========================================
+   Container
+========================================== */
+
+.auth-container {
+    width: 100%;
+    min-height: calc(100vh - 70px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+/* ==========================================
+   Card
+========================================== */
+
+/* ==========================================
+   Card
+========================================== */
+
+.auth-card {
+
+    width: 1150px;
+    max-width: 100%;
+
+    display: flex;
+
+    background: rgba(8, 12, 25, .92);
+
+    backdrop-filter: blur(25px);
+
+    border-radius: 30px;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(167, 139, 250, .35);
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, .65),
+        0 0 50px rgba(108, 99, 255, .15);
+
+    animation: fadeUp .8s ease;
+}
+
+
+/* ==========================================
+   Left Side
+========================================== */
+
+.auth-left {
+
+    width: 50%;
+
+    background:
+        radial-gradient(circle at 85% 15%, rgba(168, 85, 247, .45), transparent 35%),
+        linear-gradient(135deg, #39218F, #17134B);
+
+    color: white;
+
+    padding: 60px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.auth-left::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 400px;
+    height: 400px;
+
+    top: -150px;
+    right: -150px;
+
+    border-radius: 50%;
+
+    background: rgba(168, 85, 247, .25);
+
+    filter: blur(70px);
+}
+
+.brand {
+
+    font-size: 36px;
+
+    font-weight: 700;
+
+    margin-bottom: 15px;
+}
+
+.brand span {
+    color: #FFE082;
+}
+
+.auth-left h2 {
+
+    font-size: 42px;
+
+    line-height: 1.2;
+
+    margin-bottom: 18px;
+}
+
+.auth-left p {
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    opacity: .95;
+
+    margin-bottom: 30px;
+}
+
+.feature-list {
+
+    list-style: none;
+
+    margin-bottom: 40px;
+}
+
+.feature-list li {
+
+    margin-bottom: 15px;
+
+    font-size: 16px;
+
+    color: #F3F4F6;
+}
+
+/* ==========================================
+   Illustration
+========================================== */
+
+.hero-img {
+
+    width: 100%;
+
+    max-width: 360px;
+
+    align-self: center;
+
+    animation: floatImage 4s ease-in-out infinite;
+}
+
+/* ==========================================
+   Right Side
+========================================== */
+
+.auth-right {
+
+    width: 50%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 70px;
+
+    background:
+        radial-gradient(circle at 100% 0%,
+            rgba(108, 99, 255, .10),
+            transparent 35%),
+        #080C18;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.auth-right::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    top: -100px;
+    right: -100px;
+
+    border-radius: 50%;
+
+    background: rgba(139, 92, 246, .12);
+
+    filter: blur(70px);
+}
+
+.form-box {
+
+    width: 100%;
+
+    max-width: 420px;
+}
+
+.form-box h2 {
+
+    font-size: 34px;
+
+    color: white;
+
+    margin-bottom: 10px;
+}
+
+.form-box p {
+
+    color: #AAB2C8;
+
+    margin-bottom: 30px;
+}
+
+/* ==========================================
+   Form
+========================================== */
+
+.form-group {
+
+    margin-bottom: 20px;
+}
+
+.form-group label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-weight: 500;
+
+    color: #E5E7EB;
+}
+
+/* ==========================================
+   Input Icons
+========================================== */
+
+.input-group {
+
+    position: relative;
+}
+
+.input-group i {
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 18px;
+
+    transform: translateY(-50%);
+
+    color: #888;
+
+    font-size: 18px;
+
+    z-index: 2;
+}
+
+.input-group .form-control {
+
+    padding-left: 48px;
+}
+
+.toggle-password {
+
+    left: auto !important;
+
+    right: 18px;
+
+    cursor: pointer;
+}
+
+/* ==========================================
+   Inputs
+========================================== */
+
+.form-control {
+
+    width: 100%;
+
+    border: 1px solid #30384F;
+
+    border-radius: 14px;
+
+    padding: 15px 18px;
+
+    background: #111827;
+
+    color: white;
+
+    font-size: 15px;
+
+    transition: .3s;
+}
+
+.form-control::placeholder {
+
+    color: #7F8AA3;
+}
+
+.form-control:focus {
+
+    border-color: #8B5CF6;
+
+    background: #151B2D;
+
+    color: white;
+
+    box-shadow:
+        0 0 0 3px rgba(139, 92, 246, .12),
+        0 0 25px rgba(139, 92, 246, .18);
+
+    outline: none;
+}
+
+/* ==========================================
+   Button
+========================================== */
+
+.auth-btn {
+
+    width: 100%;
+
+    border: none;
+
+    border-radius: 14px;
+
+    padding: 16px;
+
+    background: linear-gradient(90deg,
+            #6C3BFF,
+            #7C4DFF);
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+    box-shadow:
+        0 10px 25px rgba(108, 59, 255, .25);
+}
+
+.auth-btn:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 15px 35px rgba(108, 59, 255, .45);
+}
+
+/* ==========================================
+   Bottom Link
+========================================== */
+
+.bottom-text {
+
+    text-align: center;
+
+    margin-top: 25px;
+
+    color: #8F99AE;
+}
+
+.bottom-text a {
+
+    color: #A78BFA;
+
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.bottom-text a:hover {
+
+    color: #C4B5FD;
+
+    text-decoration: underline;
+}
+
+/* ==========================================
+   Animations
+========================================== */
+
+@keyframes fadeUp {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(35px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+
+}
+
+@keyframes floatImage {
+
+    0% {
+
+        transform: translateY(0);
+    }
+
+    50% {
+
+        transform: translateY(-15px);
+    }
+
+    100% {
+
+        transform: translateY(0);
+    }
+
+}
+
+
+/* ==========================================
+   Background Animations
+========================================== */
+
+@keyframes backgroundPulse {
+
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+@keyframes glowMove {
+
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(120px, 80px) scale(1.15);
+    }
+
+    100% {
+        transform: translate(40px, 150px) scale(.95);
+    }
+}
+
+
+@keyframes glowMoveReverse {
+
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(-100px, -80px) scale(1.15);
+    }
+
+    100% {
+        transform: translate(-40px, -130px) scale(.95);
+    }
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media(max-width:992px) {
+
+    .auth-card {
+
+        flex-direction: column;
+    }
+
+    .auth-left,
+    .auth-right {
+
+        width: 100%;
+    }
+
+    .auth-left {
+
+        text-align: center;
+
+        padding: 45px 30px;
+    }
+
+    .auth-right {
+
+        padding: 45px 30px;
+    }
+
+    .hero-img {
+
+        max-width: 280px;
+
+        margin-top: 20px;
+    }
+
+    .auth-container {
+
+        padding: 20px;
+    }
+
+}

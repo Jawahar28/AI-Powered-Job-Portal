@@ -1,0 +1,244 @@
+.dashboard-hero {
+    background: linear-gradient(135deg, #6C63FF, #8B7DFF);
+    color: white;
+    padding: 70px 0;
+}
+
+.dashboard-hero h1 {
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.dashboard-hero p {
+    opacity: .9;
+    font-size: 18px;
+}
+
+.dashboard-section {
+    background: #F7F9FC;
+    padding: 70px 0;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin-bottom: 60px;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 20px;
+    padding: 35px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+    transition: .3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 35px rgba(108, 99, 255, .18);
+}
+
+.stat-card h2 {
+    font-size: 42px;
+    color: #6C63FF;
+    margin-bottom: 10px;
+}
+
+.section-title {
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.application-row {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .07);
+}
+
+.application-row h4 {
+    margin-bottom: 6px;
+}
+
+.application-row p {
+    color: #777;
+    margin: 0;
+}
+
+.application-row a {
+    text-decoration: none;
+    color: #6C63FF;
+    font-weight: 600;
+}
+
+.quick-actions {
+    margin-top: 70px;
+}
+
+.action-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+}
+
+.action-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    text-decoration: none;
+    color: #222;
+    font-size: 40px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .08);
+    transition: .3s;
+}
+
+.action-card h4 {
+    margin-top: 15px;
+    font-size: 22px;
+}
+
+.action-card:hover {
+    transform: translateY(-8px);
+    color: #6C63FF;
+    box-shadow: 0 18px 35px rgba(108, 99, 255, .18);
+}
+
+.empty-card {
+    background: white;
+    border-radius: 20px;
+    padding: 60px;
+    text-align: center;
+}
+
+/* ==========================================
+   New Job Recommendations
+========================================== */
+
+.recommendation-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 60px;
+}
+
+.recommendation-card {
+    background: white;
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .07);
+    transition: .3s;
+}
+
+.recommendation-card:hover {
+    transform: translateY(-6px);
+    box-shadow:
+        0 18px 35px rgba(108, 99, 255, .16);
+}
+
+.recommendation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.recommendation-header h3 {
+    margin: 0 0 8px;
+    font-size: 21px;
+}
+
+.recommendation-header p {
+    margin: 0;
+    color: #777;
+}
+
+.match-score {
+    background: #EEF0FF;
+    color: #6C63FF;
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.job-location {
+    margin-top: 20px;
+    color: #666;
+    font-size: 14px;
+}
+
+.matched-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+.skill-tag {
+    background: #F1F3F5;
+    color: #444;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.recommendation-footer {
+    margin-top: 25px;
+}
+
+.apply-btn {
+    display: inline-block;
+    background: #6C63FF;
+    color: white;
+    text-decoration: none;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: .2s;
+}
+
+.apply-btn:hover {
+    background: #564cf0;
+    color: white;
+}
+
+.browse-btn {
+    display: inline-block;
+    margin-top: 25px;
+    background: #6C63FF;
+    color: white;
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 10px;
+}
+
+.browse-btn:hover {
+    color: white;
+    background: #564cf0;
+}
+
+@media(max-width:768px) {
+    .application-row {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .recommendation-header {
+        flex-direction: column;
+    }
+
+    .match-score {
+        align-self: flex-start;
+    }
+}

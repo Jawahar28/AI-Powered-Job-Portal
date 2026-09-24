@@ -1,0 +1,173 @@
+/* ==========================================
+   Hero Section
+========================================== */
+.apply-hero {
+    background: #05070F;
+    padding: 70px 0 40px;
+}
+
+.apply-hero h1 {
+    color: white;
+    font-size: 52px;
+    font-weight: 700;
+}
+
+.apply-hero p {
+    color: #AAB2C8;
+    margin-top: 10px;
+    font-size: 17px;
+}
+
+/* ==========================================
+   Page
+========================================== */
+.apply-section {
+    background:
+        radial-gradient(circle at top, #1A2452 0%, #0B1020 45%, #05070F 100%);
+    min-height: 100vh;
+    padding: 70px 0 90px;
+}
+
+/* ==========================================
+   Main Card
+========================================== */
+.apply-card {
+    max-width: 950px;
+    margin: auto;
+    padding: 50px;
+    border-radius: 28px;
+    background: rgba(18, 22, 38, .82);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, .08);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, .45);
+}
+
+/* ==========================================
+   Glass Sections
+========================================== */
+.glass-section {
+    padding: 30px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, .03);
+    border: 1px solid rgba(255, 255, 255, .08);
+    transition: .35s;
+}
+
+.glass-section:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, .05);
+}
+
+.job-section {
+    border-left: 5px solid #8B5CF6;
+}
+
+.applicant-section {
+    border-left: 5px solid #3B82F6;
+}
+
+.resume-section {
+    border-left: 5px solid #F59E0B;
+}
+
+.cover-section {
+    border-left: 5px solid #22C55E;
+}
+
+.section-title {
+    color: white;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 22px;
+}
+
+.job-title {
+    color: white;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.company-name {
+    color: #B9C3D8;
+    font-size: 18px;
+    margin-bottom: 18px;
+}
+
+.job-meta {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.job-meta span {
+    color: #D6DCEF;
+    background: rgba(255, 255, 255, .05);
+    padding: 8px 14px;
+    border-radius: 10px;
+}
+
+.readonly-box {
+    background: #12192D;
+    color: white;
+    border: 1px solid #2E3754;
+    border-radius: 12px;
+    padding: 14px 18px;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+}
+
+.form-label {
+    color: #D9E1F2;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.form-control,
+textarea {
+    background: #12192D;
+    color: white;
+    border: 1px solid #2E3754;
+    border-radius: 14px;
+    padding: 14px 18px;
+}
+
+.form-control:focus,
+textarea:focus {
+    background: #1A2342;
+    color: white;
+    border-color: #8B5CF6;
+    box-shadow: 0 0 18px rgba(139, 92, 246, .35);
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.apply-btn {
+    background: linear-gradient(90deg, #A855F7, #3B82F6);
+    color: white;
+    border: none;
+    padding: 14px 40px;
+    border-radius: 14px;
+    font-weight: 600;
+    transition: .35s;
+}
+
+.apply-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(104, 90, 255, .45);
+}
+
+footer {
+    background: #05070F;
+    color: #AAB2C8;
+    border-top: 1px solid rgba(255, 255, 255, .08);
+}
+
+footer small {
+    color: #AAB2C8 !important;
+}
