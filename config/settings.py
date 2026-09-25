@@ -163,7 +163,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STORAGES = {
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
@@ -177,7 +177,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # MEDIA URLS
 MEDIA_URL = "/media/" #URL used by the browser
-MEDIA_ROOT = BASE_DIR / "media" # Physical location on disk
+# MEDIA_ROOT = BASE_DIR / "media" # Physical location on disk
 
 # LOGIN URL
 LOGIN_URL = "login"
@@ -191,6 +191,12 @@ CELERY_BEAT_SCHEDULE = {
         "task" : "jobs.tasks.fetch_jobs_task",
         "schedule" : crontab(hour=9,minute=0),
     },
+}
+
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": os.getenv("CLOUDINARY_CLOUD_NAME"),
+    "API_KEY": os.getenv("CLOUDINARY_API_KEY"),
+    "API_SECRET": os.getenv("CLOUDINARY_API_SECRET"),
 }
 
 

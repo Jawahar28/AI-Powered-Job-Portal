@@ -101,6 +101,36 @@ textarea::placeholder {
     color: #8F97B2;
 }
 
+
+/* ==========================================
+   Profile Picture
+========================================== */
+
+.profile-preview {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+    border: 3px solid rgba(139, 92, 246, .5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
+}
+
+.avatar-placeholder {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+    font-weight: 700;
+    color: white;
+    background: #1A2452;
+}
+
 /* ==========================================
    Textarea
 ========================================== */
