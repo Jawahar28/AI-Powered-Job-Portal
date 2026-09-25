@@ -36,3 +36,6 @@ if settings.DEBUG:
         settings.MEDIA_URL,
         document_root = settings.MEDIA_ROOT
     )
+
+handler404 = "config.views.custom_404"
+handler500 = "config.views.custom_500"
