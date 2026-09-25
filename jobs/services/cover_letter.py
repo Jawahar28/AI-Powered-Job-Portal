@@ -5,6 +5,10 @@ from google import genai
 from jobs.services.recommendations import analyze_job_fit
 
 
+PRIMARY_MODEL = "gemini-3.5-flash-lite"
+FALLBACK_MODEL = "gemini-3.5-flash"
+
+
 def generate_cover_letter(user, job):
 
     profile = user.profile
@@ -111,9 +115,30 @@ Gaps:
         api_key=os.getenv("GEMINI_API_KEY")
     )
 
-    response = client.models.generate_content(
-        model="gemini-3.5-flash",
-        contents=prompt
-    )
+    try:
+        response = client.models.generate_content(
+            model=PRIMARY_MODEL,
+            contents=prompt
+        )
 
-    return response.text.strip()
+        return response.text.strip()
+
+    except Exception as primary_error:
+
+        # Only fall back for temporary Gemini availability errors.
+        error_code = getattr(primary_error, "code", None)
+
+        if error_code != 503:
+            raise
+
+        print(
+            f"Primary Gemini model unavailable ({PRIMARY_MODEL}). "
+            f"Trying fallback model ({FALLBACK_MODEL})."
+        )
+
+        response = client.models.generate_content(
+            model=FALLBACK_MODEL,
+            contents=prompt
+        )
+
+        return response.text.strip()
