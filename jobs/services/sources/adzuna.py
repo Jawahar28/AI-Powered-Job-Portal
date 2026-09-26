@@ -6,25 +6,30 @@ from jobs.services.sources.base import JobSource
 
 from datetime import datetime
 
+
 BASE_URL = "https://api.adzuna.com/v1/api"
+
 
 class AdzunaSource(JobSource):
 
-    def fetch_jobs(self,
+    def fetch_jobs(
+        self,
         keyword="",
         location="",
         results_per_page=10,
+        page=1,
     ):
         app_id = os.getenv("ADZUNA_APP_ID")
         app_key = os.getenv("ADZUNA_APP_KEY")
 
-        url = f"{BASE_URL}/jobs/in/search/1"
+        url = f"{BASE_URL}/jobs/in/search/{page}"
 
         params = {
-        "app_id": app_id,
-        "app_key": app_key,
-        "results_per_page": results_per_page,
-        "content-type": "application/json",
+            "app_id": app_id,
+            "app_key": app_key,
+            "results_per_page": results_per_page,
+            "content-type": "application/json",
+            "sort_by": "date",
         }
 
         if keyword:
@@ -33,7 +38,11 @@ class AdzunaSource(JobSource):
         if location and location.lower() != "remote":
             params["where"] = location
 
-        response = requests.get(url, params=params, timeout=10,)
+        response = requests.get(
+            url,
+            params=params,
+            timeout=10,
+        )
 
         response.raise_for_status()
 
@@ -42,22 +51,48 @@ class AdzunaSource(JobSource):
         jobs = []
 
         for item in data.get("results", []):
+
             job = {
                 "external_job_id": str(item["id"]),
 
                 "title": item.get("title", ""),
 
-                "company": item.get("company",{}).get("display_name","Unknown"),
+                "company": item.get(
+                    "company", {}
+                ).get(
+                    "display_name",
+                    "Unknown"
+                ),
 
-                "description": item.get("description",""),
+                "description": item.get(
+                    "description",
+                    ""
+                ),
 
-                "location": item.get("location",{}).get("display_name","India"),
+                "location": item.get(
+                    "location", {}
+                ).get(
+                    "display_name",
+                    "India"
+                ),
 
-                "required_skills": ", ".join(extract_skills_from_resume(item.get("description", ""))),
+                "required_skills": ", ".join(
+                    extract_skills_from_resume(
+                        item.get("description", "")
+                    )
+                ),
 
-                "external_url": item.get("redirect_url",""),
+                "external_url": item.get(
+                    "redirect_url",
+                    ""
+                ),
 
-                "posted_at" : datetime.fromisoformat(item["created"].replace("Z", "+00:00")),
+                "posted_at": datetime.fromisoformat(
+                    item["created"].replace(
+                        "Z",
+                        "+00:00"
+                    )
+                ),
 
                 "job_type": "FT",
 

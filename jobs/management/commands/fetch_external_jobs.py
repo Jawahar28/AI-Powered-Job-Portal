@@ -55,19 +55,41 @@ class Command(BaseCommand):
             source = get_source("Adzuna")
 
             for keyword, location in unique_searches:
+                for page in range(1, 4):
 
-                self.stdout.write(
-                    f"Searching: {keyword} in {location}"
-                )
+                    self.stdout.write(
+                        f"Searching: {keyword} in {location} "
+                        f"(page {page})"
+                    )
 
-                jobs = source.fetch_jobs(
-                    keyword=keyword,
-                    location=location,
-                    results_per_page=10,
-                )
+                    jobs = source.fetch_jobs(
+                        keyword=keyword,
+                        location=location,
+                        results_per_page=10,
+                        page=page,
+                    )
 
-                jobs_found += len(jobs)
+                    jobs_found += len(jobs)
 
+                    for job_data in jobs:
+
+                        job, created = import_job(
+                            job_data,
+                            source="Adzuna",
+                            fetch_run=fetch_run
+                        )
+
+                        if created:
+
+                            imported_count += 1
+
+                            self.stdout.write(
+                                self.style.SUCCESS(
+                                    f"Imported: {job.title}"
+                                )
+                            )
+                        else:
+                            skipped_count += 1
                 for job_data in jobs:
 
                     job, created = import_job(
