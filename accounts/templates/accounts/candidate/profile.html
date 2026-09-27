@@ -37,7 +37,11 @@ My Profile
                 </h1>
 
                 <p class="headline">
-                    {{ profile.headline|default:"Backend Python Developer" }}
+                    {% if profile.headline %}
+                        {{ profile.headline }}
+                    {% else %}
+                        Headline not added
+                    {% endif %}
                 </p>
 
                 <p class="location">
@@ -83,18 +87,11 @@ My Profile
                     <h3>About Me</h3>
 
                     <p>
-
                         {% if profile.bio %}
-
                             {{ profile.bio }}
-
                         {% else %}
-
-                            Passionate Python Backend Developer with interest in Django,
-                            REST APIs, AI-powered applications and scalable backend systems.
-
+                            <span class="text-muted">No bio added yet.</span>
                         {% endif %}
-
                     </p>
 
                 </div>
@@ -107,13 +104,17 @@ My Profile
 
                     <div class="skills-list">
 
-                            <span class="skill-badge">Python</span>
+                        {% if profile.skills %}
 
-                            <span class="skill-badge">Django</span>
+                            {% for skill in profile.skills.split %}
+                                <span class="skill-badge">{{ skill }}</span>
+                            {% endfor %}
 
-                            <span class="skill-badge">REST API</span>
+                        {% else %}
 
-                            <span class="skill-badge">MySQL</span>
+                            <span class="text-muted">No skills added yet.</span>
+
+                        {% endif %}
 
                     </div>
 
