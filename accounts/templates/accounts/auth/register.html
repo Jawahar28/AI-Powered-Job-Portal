@@ -69,25 +69,41 @@ Register
                     <div class="form-group">
                         <label>Username</label>
                         {{ form.username }}
-                        {{ form.username.errors }}
+                        {% if form.username.errors %}
+                            <div class="field-error">
+                                {{ form.username.errors }}
+                            </div>
+                        {% endif %}
                     </div>
 
                     <div class="form-group">
                         <label>Email</label>
                         {{ form.email }}
-                        {{ form.email.errors }}
+                        {% if form.email.errors %}
+                            <div class="field-error">
+                                {{ form.email.errors }}
+                            </div>
+                        {% endif %}
                     </div>
 
                     <div class="form-group">
                         <label>Password</label>
                         {{ form.password1 }}
-                        {{ form.password1.errors }}
+                        {% if form.password1.errors %}
+                            <div class="field-error">
+                                {{ form.password1.errors }}
+                            </div>
+                        {% endif %}
                     </div>
 
                     <div class="form-group">
                         <label>Confirm Password</label>
                         {{ form.password2 }}
-                        {{ form.password2.errors }}
+                        {% if form.password2.errors %}
+                            <div class="field-error">
+                                {{ form.password2.errors }}
+                            </div>
+                        {% endif %}
                     </div>
 
                     <button class="auth-btn" type="submit">

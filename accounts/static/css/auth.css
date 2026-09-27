@@ -8,7 +8,6 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
-    transition: .25s ease;
 }
 
 /* ==========================================
@@ -607,4 +606,52 @@ body::after {
         padding: 20px;
     }
 
+}
+
+/* ==========================================
+   Form Validation Errors
+========================================== */
+
+.field-error {
+    margin-top: 7px;
+    padding: 8px 12px;
+
+    border-radius: 8px;
+
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+
+    color: #ff7b7b;
+
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.field-error ul {
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.field-error li {
+    margin: 0;
+}
+
+/* ==========================================
+   Invalid Form Fields
+========================================== */
+
+.form-control.is-invalid,
+.form-control:has(+ .field-error) {
+    border-color: #ef4444;
+}
+
+.form-control.is-invalid:focus,
+.form-control:has(+ .field-error):focus {
+    border-color: #f87171;
+
+    box-shadow:
+        0 0 0 3px rgba(239, 68, 68, 0.12),
+        0 0 20px rgba(239, 68, 68, 0.12);
 }
