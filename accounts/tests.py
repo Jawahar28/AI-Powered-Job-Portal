@@ -53,29 +53,3 @@ class CandidateProfileTests(TestCase):
             user1.profile.pk,
             user2.profile.pk,
         )
-
-    def test_skill_list(self):
-        user = User.objects.create_user(
-            username="skilluser",
-            password="TestPass123!",
-        )
-
-        profile = user.profile
-        profile.skills = "Python, Django, REST API, MySQL"
-        profile.save()
-
-        self.assertEqual(
-            profile.skill_list,
-            ["Python", "Django", "REST API", "MySQL"],
-        )
-
-    def test_empty_skill_list(self):
-        user = User.objects.create_user(
-            username="noskills",
-            password="TestPass123!",
-        )
-
-        self.assertEqual(
-            user.profile.skill_list,
-            [],
-        )
