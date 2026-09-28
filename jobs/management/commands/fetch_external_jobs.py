@@ -9,6 +9,10 @@ from jobs.services.job_importer import import_job
 from jobs.services.job_intelligence import analyze_candidate
 from jobs.services.job_matching import match_new_jobs_to_candidates
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 class Command(BaseCommand):
 
@@ -19,6 +23,8 @@ class Command(BaseCommand):
         fetch_run = JobFetchRun.objects.create(
             source="Adzuna"
         )
+
+        logger.info("JOBCode daily job fetch started")
 
         jobs_found = 0
         imported_count = 0
@@ -52,6 +58,11 @@ class Command(BaseCommand):
                 f"Unique searches: {len(unique_searches)}"
             )
 
+            logger.info(
+                "JOBCode generated %d unique job searches",
+                len(unique_searches),
+            )
+
             source = get_source("Adzuna")
 
             for keyword, location in unique_searches:
@@ -83,6 +94,11 @@ class Command(BaseCommand):
 
                             imported_count += 1
 
+                            logger.info(
+                                "Imported job: %s",
+                                job.title,
+                            )
+
                             self.stdout.write(
                                 self.style.SUCCESS(
                                     f"Imported: {job.title}"
@@ -90,27 +106,6 @@ class Command(BaseCommand):
                             )
                         else:
                             skipped_count += 1
-                for job_data in jobs:
-
-                    job, created = import_job(
-                        job_data,
-                        source="Adzuna",
-                        fetch_run=fetch_run
-                    )
-
-                    if created:
-
-                        imported_count += 1
-
-                        self.stdout.write(
-                            self.style.SUCCESS(
-                                f"Imported: {job.title}"
-                            )
-                        )
-
-                    else:
-
-                        skipped_count += 1
 
             matches = match_new_jobs_to_candidates(fetch_run)
 
@@ -128,6 +123,15 @@ class Command(BaseCommand):
                         f"Score: {match['match_score']}"
                     )
                 )
+            logger.info("Candidate matching completed: %d matches",len(matches))
+            logger.info(
+                "JOBCode job fetch completed successfully | "
+                "searches=%d found=%d imported=%d skipped=%d",
+                len(unique_searches),
+                jobs_found,
+                imported_count,
+                skipped_count,
+            )
 
             # SUCCESS
             fetch_run.finished_at = timezone.now()
@@ -176,6 +180,10 @@ class Command(BaseCommand):
             )
 
         except Exception as e:
+
+            logger.exception(
+                "JOBCode daily job fetch failed"
+            )
 
             # FAILED
             fetch_run.finished_at = timezone.now()
