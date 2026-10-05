@@ -438,7 +438,7 @@ def get_recommended_jobs(user):
             recommendations.append(job)
 
     recommendations.sort(
-        key=lambda job: job.match_score,
+        key=lambda job: (job.posted_at,job.match_score),
         reverse=True
     )
 
